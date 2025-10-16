@@ -1,0 +1,75 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-08T16:45:42.733Z",
+  "id": "pMeAKRfBhZk7hF3C",
+  "isArchived": true,
+  "meta": null,
+  "name": "My workflow 3",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -496,
+        -80
+      ],
+      "id": "44117b9d-f0f5-4a62-bffe-990b4477dc8f",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "384867c7-552d-4662-8361-8f21074c2ba3",
+              "name": "topic",
+              "value": "The Benefits of Agentic Workflow Automation for Small & Medium Businesses",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -288,
+        -80
+      ],
+      "id": "d28d0529-93c5-494c-b5e5-bff7b0aea1be",
+      "name": "Edit Fields"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-08T16:45:42.735Z",
+      "updatedAt": "2025-10-08T16:45:42.735Z",
+      "role": "workflow:owner",
+      "workflowId": "pMeAKRfBhZk7hF3C",
+      "projectId": "QNfIJ0xZgM3QlqN4"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-08T17:20:27.000Z",
+  "versionId": "a56c51b3-42a1-4f73-a77a-c41040294a1a"
+}
