@@ -1,0 +1,28 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2025-10-10T14:45:21.996Z",
+  "id": "UxFlFNdJAGGz2YTP",
+  "isArchived": false,
+  "meta": null,
+  "name": "Long Term Memory",
+  "nodes": [],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-10T14:45:22.005Z",
+      "updatedAt": "2025-10-10T14:45:22.005Z",
+      "role": "workflow:owner",
+      "workflowId": "UxFlFNdJAGGz2YTP",
+      "projectId": "QNfIJ0xZgM3QlqN4"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-10T14:45:21.996Z",
+  "versionId": "490afae0-261a-4d56-aece-6bdf29c534de"
+}
