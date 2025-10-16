@@ -1,0 +1,303 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Create chat message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-10T18:42:37.843Z",
+  "id": "nwh1VULNKElYeG3W",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "My workflow 5",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -48,
+        0
+      ],
+      "id": "5d5adaa1-73e1-4454-aea7-d8aaf50c20fd",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1nQMBCyQ35PGVQVXEOTEu3KtD_PmGndbaIRaCntgMEbc",
+          "mode": "list",
+          "cachedResultName": "Roofing_Companies_Plantation",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1nQMBCyQ35PGVQVXEOTEu3KtD_PmGndbaIRaCntgMEbc/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 966119519,
+          "mode": "list",
+          "cachedResultName": "Roofing_Companies_Plantation.csv",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1nQMBCyQ35PGVQVXEOTEu3KtD_PmGndbaIRaCntgMEbc/edit#gid=966119519"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        224,
+        0
+      ],
+      "id": "d2b75088-9434-4d32-9526-796b0431f8d1",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "WoXbHPbfFs6I4Nyw",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "bbe290a6-f131-425a-a4a8-becabe91b1e9",
+              "leftValue": "={{ $json.Review_Count }}",
+              "rightValue": 10,
+              "operator": {
+                "type": "number",
+                "operation": "lte"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        432,
+        0
+      ],
+      "id": "0db0a450-2ea5-4752-bbe1-7c897e9063ba",
+      "name": "Filter"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "0a2338ba-d664-442a-a154-91edc459c2e6",
+              "name": "company_name",
+              "value": "={{ $json.Title }}",
+              "type": "string"
+            },
+            {
+              "id": "93556a4c-7bd1-45b9-9033-d31c7ba16c28",
+              "name": "company_rating",
+              "value": "={{ $json.Rating }}",
+              "type": "string"
+            },
+            {
+              "id": "660017af-3517-430e-9781-53d78e936b23",
+              "name": "company_review_count",
+              "value": "={{ $json.Review_Count }}",
+              "type": "string"
+            },
+            {
+              "id": "54ba683b-c6bb-4d64-9c2d-04e0beab5042",
+              "name": "company_address",
+              "value": "={{ $json.Address }}",
+              "type": "string"
+            },
+            {
+              "id": "5d4ee0f7-3942-4e43-9f52-384b66dd58d7",
+              "name": "company_website",
+              "value": "={{ $json.Website }}",
+              "type": "string"
+            },
+            {
+              "id": "a92ad45a-23f0-451c-83c6-cc7c98eeee67",
+              "name": "company_phone_number",
+              "value": "={{ $json.Phone_Number }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        640,
+        0
+      ],
+      "id": "40753685-cfef-4930-84d4-7371452ceec3",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "bad525dc-e54c-41a4-a56f-9aec55d50d80",
+              "leftValue": "",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        848,
+        0
+      ],
+      "id": "3833283c-8fcd-43c5-83cc-f2d72be86531",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {
+              "fieldToAggregate": "company_name"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        1088,
+        -58.5
+      ],
+      "id": "3f206668-de98-488a-bcc7-9eaa3465460f",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "resource": "chatMessage",
+        "chatId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.microsoftTeams",
+      "typeVersion": 2,
+      "position": [
+        1296,
+        -58.5
+      ],
+      "id": "c7d3b4be-64e6-4562-9dae-37a48622b092",
+      "name": "Create chat message",
+      "webhookId": "c63d694e-0b1e-4876-9ec2-2f81bea4521f"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-10T18:42:37.856Z",
+      "updatedAt": "2025-10-10T18:42:37.856Z",
+      "role": "workflow:owner",
+      "workflowId": "nwh1VULNKElYeG3W",
+      "projectId": "QNfIJ0xZgM3QlqN4"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-10T20:44:47.000Z",
+  "versionId": "8eaed7af-24fa-430e-8082-249a35fe9ba4"
+}
