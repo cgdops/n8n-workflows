@@ -1,0 +1,493 @@
+{
+  "active": false,
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Orchestrator",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Orchestrator",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Structured Output Parser",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Orchestrator",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Orchestrator": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Orchestrator",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Research Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Writer Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Editor Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI o3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Research Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI 4.1mini": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Writer Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Research Agent": {
+      "main": [
+        [
+          {
+            "node": "Writer Agent",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Writer Agent": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Editor Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Editor Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-08T15:05:57.933Z",
+  "id": "hfoXXCEso79Wrp4D",
+  "isArchived": true,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Content Orchestration",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -208,
+        -64
+      ],
+      "id": "76e322fc-4162-45a3-9f92-828f65942d98",
+      "name": "When chat message received",
+      "webhookId": "4b6d2fc7-8be3-4cd0-905c-32548bd3997c"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a Master Project Manager. Your only job is to analyze the user's request and output a precise JSON array of tasks for the specialized workers. Do not write any other text. Each task must include 'task_id', 'worker_agent', and 'details'.\n\nUser chat input:\n{{ $json.chatInput }}\n\nOutput a strict JSON schema, see an example below:\n{\"tasks\": [{\"task_id\": 1, \"worker_agent\": \"ResearchAgent\", \"details\": \"Identify 3-5 key benefits and find one supporting source for each.\"}, {\"task_id\": 2, \"worker_agent\": \"WriterAgent\", \"details\": \"Draft the body content based on the research.\"}, ...]}.",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        -64
+      ],
+      "id": "2b7c18a7-65d6-46dc-ac82-398af0d9dbd2",
+      "name": "Orchestrator"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -128,
+        320
+      ],
+      "id": "c849ad92-003b-4bb7-9a59-f16a8d8b0cce",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "PgqwHquDEYK6dlgo",
+          "name": "XIX OpenAI"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        16,
+        144
+      ],
+      "id": "52e93eef-fc63-4868-8808-53e4c2f3f010",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\"tasks\": [{\"task_id\": 1, \"worker_agent\": \"ResearchAgent\", \"details\": \"Identify 3-5 key benefits of multi-agent systems in n8n and find supporting sources for each.\"}, {\"task_id\": 2, \"worker_agent\": \"WriterAgent\", \"details\": \"Write a draft blog post explaining the benefits of multi-agent systems in n8n using the research findings.\"}, {\"task_id\": 3, \"worker_agent\": \"EditorAgent\", \"details\": \"Review and refine the drafted blog post for clarity, accuracy, and engagement.\"}]}",
+        "autoFix": true
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        176,
+        144
+      ],
+      "id": "237bab73-31d5-43f7-8fa3-91774e233692",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.output.tasks[0].worker_agent }}",
+                    "rightValue": "ResearchAgent",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "08d287e2-fd99-4503-83a2-03d54f54d852"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "8ddf0a9c-c40c-4a28-bb22-ead2b350a358",
+                    "leftValue": "={{ $json.output.tasks[1].worker_agent }}",
+                    "rightValue": "WriterAgent",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "71f436a7-1f24-407a-b277-2716098f48b8",
+                    "leftValue": "={{ $json.output.tasks[2].worker_agent }}",
+                    "rightValue": "EditorAgent",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {
+          "allMatchingOutputs": true
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        352,
+        -64
+      ],
+      "id": "dfe4a411-290a-4819-a671-4059e322a819",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a meticulous Research Assistant. Your sole purpose is to execute the given task by only using your available tools. You must return the most relevant factual information and its sources in a clear, bulleted format.\n\nYour task: {{ $json.output.tasks[0].details }}\n",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        736,
+        -160
+      ],
+      "id": "17a6af87-f256-453a-8882-4441c6e6674e",
+      "name": "Research Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "o3",
+          "mode": "list",
+          "cachedResultName": "o3"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        736,
+        16
+      ],
+      "id": "8204baaf-1301-4537-a84d-12fc94078520",
+      "name": "OpenAI o3",
+      "credentials": {
+        "openAiApi": {
+          "id": "PgqwHquDEYK6dlgo",
+          "name": "XIX OpenAI"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1104,
+        352
+      ],
+      "id": "a32a9086-487c-4d08-a917-b7c8cb8d6768",
+      "name": "OpenAI 4.1mini",
+      "credentials": {
+        "openAiApi": {
+          "id": "PgqwHquDEYK6dlgo",
+          "name": "XIX OpenAI"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a professional Content Writer. Use the provided research to write a high-quality, engaging 400-word article section in a friendly, expert tone. Do not add titles or intros; just the body text.\n\nYour task: \n {{ $json.output.tasks[1].details }}\n\nProvided research: \n{{ $json.output }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        1168,
+        160
+      ],
+      "id": "37b71ff2-47ca-478b-9dcc-909ac16277bd",
+      "name": "Writer Agent"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are the Final Content Editor. You have received raw, segmented outputs from a team of specialists. Your job is to stitch this information together into a single, polished, and professional final article. Ensure proper flow and formatting.\n\nRaw output:\n{{ $json.output }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        1472,
+        656
+      ],
+      "id": "e13d7c0f-ea8e-416f-9c3a-5b5556383c5b",
+      "name": "Editor Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1440,
+        880
+      ],
+      "id": "6b3a85ac-3c51-4d83-9eef-965c6e4cc90b",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "PgqwHquDEYK6dlgo",
+          "name": "XIX OpenAI"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1584,
+        64
+      ],
+      "id": "89a31217-e44d-48db-ae8d-26eee308d510",
+      "name": "Merge"
+    }
+  ],
+  "pinData": {
+    "When chat message received": [
+      {
+        "json": {
+          "sessionId": "7a14c077313644718bd57e98831f0be7",
+          "action": "sendMessage",
+          "chatInput": "Write a blog post about the benefits of multi-agent systems in n8n."
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-08T15:05:57.934Z",
+      "updatedAt": "2025-10-08T15:05:57.934Z",
+      "role": "workflow:owner",
+      "workflowId": "hfoXXCEso79Wrp4D",
+      "projectId": "QNfIJ0xZgM3QlqN4"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-08T17:20:54.000Z",
+  "versionId": "5b31ede5-c23b-4bb9-a632-29c98c742621"
+}
