@@ -1,0 +1,92 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get a file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-09T20:19:00.453Z",
+  "id": "PgAra4pNJ1KRyln9",
+  "isArchived": true,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "CSS Designer",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "031d7df0-ae10-47f2-9d7b-dd28bf46c0f5",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "get",
+        "owner": {
+          "__rl": true,
+          "value": "cgdops",
+          "mode": "list",
+          "cachedResultName": "cgdops",
+          "cachedResultUrl": "https://github.com/cgdops"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "cgdops",
+          "mode": "list",
+          "cachedResultName": "cgdops",
+          "cachedResultUrl": "https://github.com/cgdops/cgdops"
+        },
+        "filePath": "styles.css",
+        "asBinaryProperty": false,
+        "additionalParameters": {}
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "8e773a6b-0ecd-46af-82fa-5e9a76747d85",
+      "name": "Get a file",
+      "webhookId": "c1a9ca24-00fd-4657-8743-2868b2859ff2",
+      "credentials": {
+        "githubApi": {
+          "id": "jlKEAYuzj6zEc5Hl",
+          "name": "GitHub account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-09T20:19:00.457Z",
+      "updatedAt": "2025-10-09T20:19:00.457Z",
+      "role": "workflow:owner",
+      "workflowId": "PgAra4pNJ1KRyln9",
+      "projectId": "QNfIJ0xZgM3QlqN4"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-09T22:20:34.000Z",
+  "versionId": "073e3d70-8825-44d8-8a18-f37a4f17c941"
+}
