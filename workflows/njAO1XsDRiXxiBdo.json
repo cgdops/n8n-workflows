@@ -1,0 +1,40 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2025-10-08T20:29:33.951Z",
+  "id": "njAO1XsDRiXxiBdo",
+  "isArchived": false,
+  "meta": null,
+  "name": "Nathan's Workflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "efe298c7-b6ab-447a-837c-fe65a52706cf",
+      "name": "When clicking ‘Execute workflow’"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-08T20:29:33.953Z",
+      "updatedAt": "2025-10-08T20:29:33.953Z",
+      "role": "workflow:owner",
+      "workflowId": "njAO1XsDRiXxiBdo",
+      "projectId": "QNfIJ0xZgM3QlqN4"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-08T20:29:33.951Z",
+  "versionId": "3f4448af-b7c4-4b17-88c2-29b788520fce"
+}
