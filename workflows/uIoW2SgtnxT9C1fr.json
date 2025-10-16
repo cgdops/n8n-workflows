@@ -1,0 +1,77 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-09T15:27:56.111Z",
+  "id": "uIoW2SgtnxT9C1fr",
+  "isArchived": true,
+  "meta": null,
+  "name": "My workflow 4",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "b5fde31c-4b13-4988-afd9-40641d753380",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "webflowOAuth2Api",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "c89d8989-7b4d-4b75-96a1-8a3b9ce563c1",
+      "name": "HTTP Request",
+      "credentials": {
+        "webflowApi": {
+          "id": "NF2Sqq8uZ87fPLnW",
+          "name": "Webflow account"
+        },
+        "webflowOAuth2Api": {
+          "id": "bNmb1jb39vmaaMj6",
+          "name": "Webflow account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-09T15:27:56.113Z",
+      "updatedAt": "2025-10-09T15:27:56.113Z",
+      "role": "workflow:owner",
+      "workflowId": "uIoW2SgtnxT9C1fr",
+      "projectId": "QNfIJ0xZgM3QlqN4"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-09T15:28:03.000Z",
+  "versionId": "612097ba-5e15-4b1c-8e6a-2f96480ed683"
+}
