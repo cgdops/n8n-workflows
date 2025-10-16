@@ -1,0 +1,346 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "topic",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Create a file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a file": {
+      "main": [
+        []
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Article Writer",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Markdown Editor",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Markdown Editor": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Article Writer": {
+      "main": [
+        [
+          {
+            "node": "Markdown Editor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "topic": {
+      "main": [
+        [
+          {
+            "node": "Article Writer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Article Writer",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser1": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Markdown Editor",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-09T15:45:42.136Z",
+  "id": "FoPSp4AK37CCXA6U",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "AI Blog",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -288,
+        -16
+      ],
+      "id": "31d616ec-bacb-4641-bd8a-45659152bc9b",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "38d480a5-1b54-422a-87ff-285d2585e537",
+              "name": "filePath",
+              "value": "=_posts/{{ $json.output.slug }}",
+              "type": "string"
+            },
+            {
+              "id": "0f218c37-1bc1-4218-998a-e663ce7360a9",
+              "name": "fileContent",
+              "value": "=---\ntitle: \"{{ $('Article Writer').item.json.output.title }}\"\ndate: \"{{ $now.toFormat('yyyy-MM-dd') }}\"\n---\n{{ $json.output.markdown }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1376,
+        -16
+      ],
+      "id": "1586d8f5-6aa8-423d-a508-fe4223e2e5cc",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "owner": {
+          "__rl": true,
+          "value": "cgdops",
+          "mode": "name"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "cgdops",
+          "mode": "list",
+          "cachedResultName": "cgdops",
+          "cachedResultUrl": "https://github.com/cgdops/cgdops"
+        },
+        "filePath": "={{ $json.filePath }}",
+        "fileContent": "={{ $json.fileContent }}",
+        "commitMessage": "=New post: {{ $('Article Writer').item.json.output.title }}"
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        1584,
+        -16
+      ],
+      "id": "ef2439fe-924b-4f29-8644-e99178b6480e",
+      "name": "Create a file",
+      "webhookId": "4e8d7922-9fc9-439c-bcf0-cc48544cc079",
+      "credentials": {
+        "githubApi": {
+          "id": "jlKEAYuzj6zEc5Hl",
+          "name": "GitHub account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-5",
+          "mode": "list",
+          "cachedResultName": "gpt-5"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        528,
+        208
+      ],
+      "id": "95b2a7bd-cbbe-49d1-abaa-2947dde5e66a",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "PgqwHquDEYK6dlgo",
+          "name": "XIX OpenAI"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-5",
+          "mode": "list",
+          "cachedResultName": "gpt-5"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1024,
+        224
+      ],
+      "id": "11f71d9a-927b-4f64-9537-8467c68fa7d1",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "PgqwHquDEYK6dlgo",
+          "name": "XIX OpenAI"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Take this plain text content, edit it and format it in markdown for easy readability.\n\n{{ $json.output.body }}\n\nAlso, create a url safe slug for the article based on the articles title for example \"article-title.md\"\n\nHere's the articles title: {{ $json.output.title }}\n\nStructure your response in JSON.\n\n",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are a master digital copy writer. You take plain text data and utilize markdown formatting techniques to create a clear text hierarchy and comfortable spacing. Use markdown link formatting for any citations or inline links."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        1024,
+        -16
+      ],
+      "id": "2423f928-51c5-44d3-9c9d-27484ebce3a1",
+      "name": "Markdown Editor"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.topic }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are an expert writer. Briefly research the topic you are given and write up an article based on it. Make sure your key points and concepts are based in reality, include a citation where possible. Prioritize fresh sources over stale, older sources.\n\nAfter writing the article, give it an SEO friendly title.\n\nFormat your response in JSON."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        528,
+        -16
+      ],
+      "id": "aa40efe8-9deb-4304-9df3-cfd98d01b7fa",
+      "name": "Article Writer"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "aa11721b-c70c-498d-88f7-be5a4acb6eb8",
+              "name": "topic",
+              "value": "Write a 500 word (minimum) article on the benefits of AI empowered automation for small businesses.",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        64,
+        -16
+      ],
+      "id": "9114a497-003c-44a6-ade1-77482dedc397",
+      "name": "topic"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n\t\"title\": \"blog title\",\n\t\"body\": \"blog body\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        704,
+        192
+      ],
+      "id": "70eced25-8b01-4b34-b030-001e529aa74a",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n\t\"markdown\": \"markdown text\",\n    \"slug\":\"url-safe-slud.md\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        1216,
+        224
+      ],
+      "id": "c93d2bf8-26d6-4f49-8656-892b16295be8",
+      "name": "Structured Output Parser1"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-09T15:45:42.137Z",
+      "updatedAt": "2025-10-09T15:45:42.137Z",
+      "role": "workflow:owner",
+      "workflowId": "FoPSp4AK37CCXA6U",
+      "projectId": "QNfIJ0xZgM3QlqN4"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-09T20:18:23.000Z",
+  "versionId": "71ba27b3-e82e-4b5e-8cab-3d9f304ed25e"
+}
