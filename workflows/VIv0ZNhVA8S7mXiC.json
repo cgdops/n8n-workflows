@@ -1,0 +1,275 @@
+{
+  "active": true,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2025-10-14T15:34:14.409Z",
+  "id": "VIv0ZNhVA8S7mXiC",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "1) Build an Email List",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "7c7c3a5f-978d-43ae-bb5b-b3fbe0ec6e3e",
+        "options": {
+          "responseCode": {
+            "values": {
+              "responseCode": 301
+            }
+          },
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "location",
+                "value": "https://remembermeseries.com/thank-you"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -48,
+        0
+      ],
+      "id": "0e9a29db-479a-46ed-81d6-14a10b3cbac5",
+      "name": "Webhook",
+      "webhookId": "7c7c3a5f-978d-43ae-bb5b-b3fbe0ec6e3e"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1556b525-7a65-4c5f-bd65-a8c28bce03d3",
+              "name": "origin",
+              "value": "={{ $json.headers.origin }}",
+              "type": "string"
+            },
+            {
+              "id": "5ad76577-1824-4325-9fde-317929046e40",
+              "name": "email",
+              "value": "={{ $json.body.EMAIL }}",
+              "type": "string"
+            },
+            {
+              "id": "61b03c25-3ce3-4297-a095-723eb2413e4e",
+              "name": "firstName",
+              "value": "={{ $json.body.FNAME }}",
+              "type": "string"
+            },
+            {
+              "id": "71d523d9-6d1d-4b6b-87f9-97e082a324ab",
+              "name": "lastName",
+              "value": "={{ $json.body.LNAME }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "8dab595b-5acf-4266-95b6-5238c115fac6",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1o-lo-Kc6Eh2hyv29PRb1Sjij_U92wGkQoh12DB9lX40",
+          "mode": "list",
+          "cachedResultName": "Remember Me Email List",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1o-lo-Kc6Eh2hyv29PRb1Sjij_U92wGkQoh12DB9lX40/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1o-lo-Kc6Eh2hyv29PRb1Sjij_U92wGkQoh12DB9lX40/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Email": "={{ $('Webhook').item.json.body.EMAIL }}",
+            "Source": "={{ $('Webhook').item.json.headers.origin }}",
+            "First Name": "={{ $('Webhook').item.json.body.FNAME }}",
+            "Last Name": "={{ $('Webhook').item.json.body.LNAME }}",
+            "SequenceDay": "={{ $json.sequenceDay }}"
+          },
+          "matchingColumns": [
+            "Email"
+          ],
+          "schema": [
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Source",
+              "displayName": "Source",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "First Name",
+              "displayName": "First Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Last Name",
+              "displayName": "Last Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "SequenceDay",
+              "displayName": "SequenceDay",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        416,
+        0
+      ],
+      "id": "523b7b33-ba8a-464c-8841-b8e21cb92e7b",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "WoXbHPbfFs6I4Nyw",
+          "name": "RememberMe Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.srv1051492.hstgr.cloud",
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+            "content-length": "97",
+            "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+            "accept-encoding": "gzip, deflate, br, zstd",
+            "accept-language": "en-US,en;q=0.9",
+            "cache-control": "max-age=0",
+            "content-type": "application/x-www-form-urlencoded",
+            "dnt": "1",
+            "origin": "https://remembermeseries.webflow.io",
+            "priority": "u=0, i",
+            "referer": "https://remembermeseries.webflow.io/",
+            "sec-ch-ua": "\"Google Chrome\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": "\"Windows\"",
+            "sec-fetch-dest": "document",
+            "sec-fetch-mode": "navigate",
+            "sec-fetch-site": "cross-site",
+            "sec-fetch-user": "?1",
+            "upgrade-insecure-requests": "1",
+            "x-forwarded-for": "172.18.0.1",
+            "x-forwarded-host": "n8n.srv1051492.hstgr.cloud",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "cfd3624e111f",
+            "x-real-ip": "172.18.0.1"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "FNAME": "Christian",
+            "LNAME": "Gomez",
+            "EMAIL": "chris@g3zcreative.com",
+            "b_ab9363cefad9227bcca6421f3_3c3eba4461": ""
+          },
+          "webhookUrl": "https://n8n.srv1051492.hstgr.cloud/webhook-test/7c7c3a5f-978d-43ae-bb5b-b3fbe0ec6e3e",
+          "executionMode": "test"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-14T15:34:14.412Z",
+      "updatedAt": "2025-10-14T15:34:14.412Z",
+      "role": "workflow:owner",
+      "workflowId": "VIv0ZNhVA8S7mXiC",
+      "projectId": "QNfIJ0xZgM3QlqN4"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-10-14T21:47:10.000Z",
+  "versionId": "b2068ef7-d00c-4f00-8704-0301a0a7db51"
+}
