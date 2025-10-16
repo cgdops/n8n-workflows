@@ -1,0 +1,1251 @@
+{
+  "active": false,
+  "connections": {
+    "RAG Chatbot": {
+      "main": [
+        [
+          {
+            "node": "n8n Docs AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "n8n Docs AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Start Indexing": {
+      "main": [
+        [
+          {
+            "node": "Get All n8n Documentation Links",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ingest Web Page": {
+      "main": [
+        [
+          {
+            "node": "Get Documentation Page",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out Links": {
+      "main": [
+        [
+          {
+            "node": "Remove Duplicate Links",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini 2.5 Flash": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "n8n Docs AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clean Documentation": {
+      "main": [
+        [
+          {
+            "node": "Remove Duplicate Documentation Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Simple Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Only Keep Doc Paths": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Documentation Pages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini Chunk Embedding": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Simple Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini Query Embedding": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Official World of Tanks Documentation",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Documentation Page": {
+      "main": [
+        [
+          {
+            "node": "Extract Documentation Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Remove Duplicate Links": {
+      "main": [
+        [
+          {
+            "node": "Only Keep Doc Paths",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Links from HTML": {
+      "main": [
+        [
+          {
+            "node": "Split Out Links",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Documentation Content": {
+      "main": [
+        [
+          {
+            "node": "Clean Documentation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Documentation Pages": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Add Documentation Page to Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get All n8n Documentation Links": {
+      "main": [
+        [
+          {
+            "node": "Extract Links from HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add Documentation Page to Vector Store": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Documentation Pages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Remove Duplicate Documentation Content": {
+      "main": [
+        [
+          {
+            "node": "Simple Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Official World of Tanks Documentation": {
+      "ai_tool": [
+        [
+          {
+            "node": "n8n Docs AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-16T14:38:14.124Z",
+  "id": "uOEJzXlFvk0Ufm7J",
+  "isArchived": false,
+  "meta": {
+    "templateId": "6137",
+    "templateCredsSetupCompleted": true
+  },
+  "name": "World of Tanks Guide",
+  "nodes": [
+    {
+      "parameters": {
+        "contextWindowLength": 10
+      },
+      "id": "91f6290b-46c6-46d5-91a7-ba3bbbbac662",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Simple Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "creator": "Lucas Peyrin",
+      "position": [
+        1856,
+        3424
+      ],
+      "typeVersion": 1.3,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "jsonMode": "expressionData",
+        "jsonData": "={{ $json.documentation }}",
+        "textSplittingMode": "custom",
+        "options": {}
+      },
+      "id": "35cf83a8-1849-4902-ab4a-0658456a308f",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Default Data Loader",
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "creator": "Lucas Peyrin",
+      "position": [
+        3568,
+        1904
+      ],
+      "typeVersion": 1.1,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "chunkSize": 1500,
+        "chunkOverlap": 200,
+        "options": {
+          "splitCode": "markdown"
+        }
+      },
+      "id": "40baa824-d7ba-4dd1-9260-2eed4f65b238",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Recursive Character Text Splitter",
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "creator": "Lucas Peyrin",
+      "position": [
+        3664,
+        2112
+      ],
+      "typeVersion": 1,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "operation": "removeItemsSeenInPreviousExecutions",
+        "dedupeValue": "={{ $json.documentation }}",
+        "options": {
+          "scope": "node",
+          "historySize": 10000
+        }
+      },
+      "id": "5a21ed14-6895-44a5-b8a8-2d4fcf1b6dc2",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Remove Duplicate Documentation Content",
+      "type": "n8n-nodes-base.removeDuplicates",
+      "creator": "Lucas Peyrin",
+      "position": [
+        2944,
+        1680
+      ],
+      "typeVersion": 2,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "version": 2,
+            "leftValue": "",
+            "caseSensitive": true,
+            "typeValidation": "strict"
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "52b8b89a-30cd-4a0d-a428-e5d341bcebbf",
+              "operator": {
+                "type": "string",
+                "operation": "endsWith"
+              },
+              "leftValue": "={{ $json.link }}",
+              "rightValue": "/"
+            },
+            {
+              "id": "d8019c4e-e1a1-43ec-93a8-dac3d8c083b6",
+              "operator": {
+                "type": "string",
+                "operation": "notStartsWith"
+              },
+              "leftValue": "={{ $json.link }}",
+              "rightValue": "https://"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "39ad1b29-4d3e-4847-895a-85a6e6c1c1d6",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Only Keep Doc Paths",
+      "type": "n8n-nodes-base.filter",
+      "creator": "Lucas Peyrin",
+      "position": [
+        3072,
+        912
+      ],
+      "typeVersion": 2.2,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5ed964a6-5200-454c-b983-f3dc7c8c7a48",
+              "name": "documentation",
+              "type": "string",
+              "value": "={{ $json.data.replace(/([^#\\n]+)\\s*#/g, '# $1').trim().replace(/^\\s*https?:\\/\\/\\S+\\s*/, '') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "7e13e6fc-d89c-4f3f-b622-d2ab49290bf0",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Clean Documentation",
+      "type": "n8n-nodes-base.set",
+      "creator": "Lucas Peyrin",
+      "position": [
+        2512,
+        1680
+      ],
+      "typeVersion": 3.4,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "options": {
+          "temperature": 0
+        }
+      },
+      "id": "ba063d7d-2e56-47b1-afae-df0a4fb7babd",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Gemini 2.5 Flash",
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "creator": "Lucas Peyrin",
+      "position": [
+        1504,
+        3424
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "googlePalmApi": {
+          "id": "NF7SyR12WXtvl3s7",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      },
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "url": "https://worldoftanks.com/en/content/guide/",
+        "options": {}
+      },
+      "id": "b1be8f19-9c80-4fb8-9d96-52d82cc844e6",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Get All n8n Documentation Links",
+      "type": "n8n-nodes-base.httpRequest",
+      "creator": "Lucas Peyrin",
+      "position": [
+        1920,
+        912
+      ],
+      "typeVersion": 4.2,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "operation": "extractHtmlContent",
+        "extractionValues": {
+          "values": [
+            {
+              "key": "links",
+              "cssSelector": "a",
+              "returnValue": "attribute",
+              "attribute": "href",
+              "returnArray": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c101803d-c955-4f9c-baba-f17939775330",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Extract Links from HTML",
+      "type": "n8n-nodes-base.html",
+      "creator": "Lucas Peyrin",
+      "position": [
+        2208,
+        912
+      ],
+      "typeVersion": 1.2,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "links",
+        "options": {
+          "destinationFieldName": "link"
+        }
+      },
+      "id": "588e0ede-e9bb-48fd-81ab-e9c5a1c6324c",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Split Out Links",
+      "type": "n8n-nodes-base.splitOut",
+      "creator": "Lucas Peyrin",
+      "position": [
+        2544,
+        912
+      ],
+      "typeVersion": 1,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "operation": "removeItemsSeenInPreviousExecutions",
+        "dedupeValue": "={{ $json.link }}",
+        "options": {}
+      },
+      "id": "2eb0b861-c66a-4229-9939-b3cab896e299",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Remove Duplicate Links",
+      "type": "n8n-nodes-base.removeDuplicates",
+      "creator": "Lucas Peyrin",
+      "position": [
+        2848,
+        912
+      ],
+      "typeVersion": 2,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $workflow.id }}"
+        },
+        "workflowInputs": {
+          "value": {},
+          "schema": [
+            {
+              "id": "path",
+              "type": "string",
+              "display": true,
+              "removed": true,
+              "required": false,
+              "displayName": "path",
+              "defaultMatch": false,
+              "canBeUsedToMatch": true
+            }
+          ],
+          "mappingMode": "defineBelow",
+          "matchingColumns": [
+            "data"
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "id": "b76b907d-a2b7-4f83-b45c-1324e4f08e4d",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Add Documentation Page to Vector Store",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "creator": "Lucas Peyrin",
+      "position": [
+        3584,
+        944
+      ],
+      "typeVersion": 1.2,
+      "alwaysOutputData": true,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "url": "=https://worldoftanks.com/en/content/guide/{{ $json.link }}",
+        "options": {}
+      },
+      "id": "05f97019-e37f-489c-a140-f6c5088e2652",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Get Documentation Page",
+      "type": "n8n-nodes-base.httpRequest",
+      "creator": "Lucas Peyrin",
+      "position": [
+        1984,
+        1680
+      ],
+      "typeVersion": 4.2,
+      "onError": "continueErrorOutput",
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "operation": "extractHtmlContent",
+        "extractionValues": {
+          "values": [
+            {
+              "key": "data",
+              "cssSelector": "article",
+              "skipSelectors": "img, footer, form"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "e2c63374-531e-4b18-a3ed-810acc0a995d",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Extract Documentation Content",
+      "type": "n8n-nodes-base.html",
+      "creator": "Lucas Peyrin",
+      "position": [
+        2288,
+        1680
+      ],
+      "typeVersion": 1.2,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {},
+      "id": "70c87f3e-06f3-4157-bf3f-693bacd4ae24",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Gemini Query Embedding",
+      "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+      "creator": "Lucas Peyrin",
+      "position": [
+        2224,
+        3616
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "googlePalmApi": {
+          "id": "NF7SyR12WXtvl3s7",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      },
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {},
+      "id": "aa96d280-4918-4235-9c17-56d100cd7b17",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Gemini Chunk Embedding",
+      "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+      "creator": "Lucas Peyrin",
+      "position": [
+        3440,
+        1904
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "googlePalmApi": {
+          "id": "NF7SyR12WXtvl3s7",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      },
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "content": "## Part 1: Building the Knowledge Base (The Library)\n\n**Goal:** To read all n8n documentation, break it into small pieces, and store it in n8n's **in-memory vector store**.\n**Action:** You only need to run this part **ONCE** per n8n session by clicking the \"Execute workflow\" button on the `Start Indexing` trigger.\n**Time:** This will take several minutes to complete (~15 to 20).\n\n**Important:** The in-memory store is not permanent. If you restart n8n, you must run this indexing flow again to rebuild the knowledge base.",
+        "height": 1792,
+        "width": 2640,
+        "color": 7
+      },
+      "id": "71c40191-7f60-418e-8704-74eae72ab259",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "creator": "Lucas Peyrin",
+      "position": [
+        1328,
+        528
+      ],
+      "typeVersion": 1,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "batchSize": 10,
+        "options": {}
+      },
+      "id": "8f056612-66c9-44ae-932d-d15acbd41d63",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Loop Over Documentation Pages",
+      "type": "n8n-nodes-base.splitInBatches",
+      "creator": "Lucas Peyrin",
+      "position": [
+        3360,
+        912
+      ],
+      "typeVersion": 3,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "content": "# Tutorial: Build an AI Expert with RAG\n\nWelcome! This workflow teaches you **RAG (Retrieval-Augmented Generation)** using n8n's built-in tools.\n\n**The Goal:** To create an AI chatbot that is an expert on a specific topic (the n8n docs) and *never* makes up answers.\n\n**It has two parts:**\n1.  **TOP FLOW (Indexing):** You run this once manually to build the AI's knowledge base. It reads the n8n docs and stores them in n8n's **in-memory vector store**.\n2.  **BOTTOM FLOW (Chat):** This is the live chatbot. It retrieves relevant info from the knowledge base to answer your questions accurately.",
+        "height": 296,
+        "width": 1064,
+        "color": 6
+      },
+      "id": "00c7afb6-bd8e-448e-bc5c-754801aad022",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "creator": "Lucas Peyrin",
+      "position": [
+        368,
+        240
+      ],
+      "typeVersion": 1,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "content": "# Workflow Setup",
+        "height": 1392,
+        "width": 924,
+        "color": 7
+      },
+      "id": "ace7bb2b-f9cd-4f2d-9214-d12924bd4349",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Sticky Note5",
+      "type": "n8n-nodes-base.stickyNote",
+      "creator": "Lucas Peyrin",
+      "position": [
+        368,
+        560
+      ],
+      "typeVersion": 1,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "=<role>\nYou are a specialized AI assistant, an expert in World of Tanks official documentation and player guides. Your sole mission is to help users by providing accurate and factual information extracted exclusively from this documentation. You are meticulous, factual, and never deviate from your knowledge scope.\n</role>\n\n<instructions>\n<goal>\nYour primary goal is to provide precise and factual answers to user questions about World of Tanks, based **exclusively** on the excerpts from the official guides provided in the context.\n</goal>\n\n<context>\nYou operate according to a RAG (Retrieval-Augmented Generation) model. For each user question, use the appropriate tool to retrieve the necessary information from the World of Tanks vector database.\n\n**Mandatory rules:**\n\n1.  **Single source of truth:** Your answer MUST be entirely and solely derived from the information present in the provided documentation.\n2.  **Accuracy and implicit citation:** Base your answer as literally as possible on the documentation text. Rephrase for clarity and conciseness, but do not add any information not found there. Act as if the documentation is your only knowledge in the world.\n3.  **Do not mention the process:** Never mention your tool or the fact that you are a RAG system in your answer to the user. Respond as an expert who directly consults their documentation.\n</context>\n\n<output_format>\n*   **Clarity:** Provide a clear, concise, and direct answer.\n*   **Structuring:** If the context contains steps, lists, or code examples, use Markdown syntax to format them legibly (bullet points, numbered lists, code blocks for code snippets, JSON, etc.).\n*   **Tone:** Adopt a professional, helpful, and confident tone, that of a World of Tanks expert.\n</output_format>\n</instructions>"
+        }
+      },
+      "id": "c248094a-90b0-4fef-8e49-7dc461975aeb",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "n8n Docs AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "creator": "Lucas Peyrin",
+      "position": [
+        1872,
+        2816
+      ],
+      "typeVersion": 2.1,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "content": "### Step 1.1: Find All the 'Books'\n\n**What it does:** This node visits the main n8n documentation page.\n**Analogy:** We're asking the library's front desk for a complete list of every single book they have.",
+        "height": 400,
+        "width": 288,
+        "color": 7
+      },
+      "id": "50431822-2688-45b5-b785-87b3c5319f56",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Sticky Note6",
+      "type": "n8n-nodes-base.stickyNote",
+      "creator": "Lucas Peyrin",
+      "position": [
+        1824,
+        704
+      ],
+      "typeVersion": 1,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "content": "### Step 1.2: Read the List of Books\n\n**What it does:** It takes the HTML from the previous step and extracts every single link (`<a>` tag).\n**Analogy:** We're reading the list from the front desk and pulling out just the titles of the books (the links).",
+        "height": 400,
+        "width": 272,
+        "color": 7
+      },
+      "id": "d76779e6-19d8-4b5a-a82f-aac343c48dc7",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Sticky Note7",
+      "type": "n8n-nodes-base.stickyNote",
+      "creator": "Lucas Peyrin",
+      "position": [
+        2128,
+        704
+      ],
+      "typeVersion": 1,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "content": "### Step 1.3: Process One Book at a Time\n\n**What it does:** It takes the big list of links and turns each link into a separate item for n8n to process.\n**Analogy:** Instead of trying to read all the books at once, we're creating a separate to-do item for each book.",
+        "height": 400,
+        "width": 336,
+        "color": 7
+      },
+      "id": "248132a1-568f-4ee2-a158-15882664ae2e",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Sticky Note8",
+      "type": "n8n-nodes-base.stickyNote",
+      "creator": "Lucas Peyrin",
+      "position": [
+        2416,
+        704
+      ],
+      "typeVersion": 1,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "content": "### Step 1.4: Tidy Up the To-Do List\n\n**What it does:** First, it removes any duplicate links. Then, it filters out any links that don't point to an actual documentation page (e.g., links to the homepage or external sites).\n**Analogy:** We're throwing away duplicate to-do items and any notes that aren't actually books.",
+        "height": 400,
+        "width": 480,
+        "color": 7
+      },
+      "id": "6efef9b4-f9e2-4b52-b33b-2b73c5ac5b6b",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Sticky Note9",
+      "type": "n8n-nodes-base.stickyNote",
+      "creator": "Lucas Peyrin",
+      "position": [
+        2768,
+        704
+      ],
+      "typeVersion": 1,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "content": "### Step 1.5: The Librarian's Reading Loop\n\n**What it does:** This is the engine of the indexing process. It takes our clean list of pages and processes them one by one. The `Execute Workflow` node calls the \"sub-workflow\" below for each and every page.\n**Analogy:** This loop tells our librarian to pick up one book (link) at a time and go through the full process of reading and indexing it.",
+        "height": 464,
+        "width": 512,
+        "color": 4
+      },
+      "id": "dd9c022c-aed5-4115-aed1-d2e311bf2715",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Sticky Note10",
+      "type": "n8n-nodes-base.stickyNote",
+      "creator": "Lucas Peyrin",
+      "position": [
+        3264,
+        704
+      ],
+      "typeVersion": 1,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "content": "### Step 1.5.1: Read a Single Page\n\n**What it does:** This node takes a single URL from the loop and fetches the HTML content of that page.\n**Analogy:** The librarian opens one book to the first page.",
+        "height": 384,
+        "width": 288,
+        "color": 7
+      },
+      "id": "66846657-147d-4058-b2e0-065ce7163a60",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Sticky Note11",
+      "type": "n8n-nodes-base.stickyNote",
+      "creator": "Lucas Peyrin",
+      "position": [
+        1888,
+        1472
+      ],
+      "typeVersion": 1,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "content": "### Why Use a Sub-Workflow?\n\nThe main reason is **memory management**.\n\nProcessing a single web page, especially creating vector embeddings for all its chunks, uses a lot of memory (RAM). The n8n documentation has over 1,000 pages. If we tried to process all of them in a single, linear run, the memory usage would build up with each page and would likely crash your n8n instance.\n\nWhen a sub-workflow finishes its run for one item (one page), n8n **clears out the memory** (RAM) it used before starting the next one.\n\nBy using a sub-workflow, we process pages one-by-one in a memory-efficient loop, making the entire indexing process stable and reliable, even on a massive scale.",
+        "height": 528,
+        "width": 512,
+        "color": 5
+      },
+      "id": "c07b550f-ea42-45af-929f-0eab7cb882b8",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Sticky Note12",
+      "type": "n8n-nodes-base.stickyNote",
+      "creator": "Lucas Peyrin",
+      "position": [
+        1360,
+        1328
+      ],
+      "typeVersion": 1,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "content": "### Step 1.5.2: Get the Good Stuff\n\n**What it does:** It extracts only the main text from the article on the page, ignoring menus, footers, and images. Then, it cleans up the formatting.\n**Analogy:** The librarian tears out only the useful pages from the book and cleans up any smudges or messy handwriting.",
+        "height": 384,
+        "width": 512,
+        "color": 7
+      },
+      "id": "dcac3cdc-9853-4640-aea0-cc8e53240c89",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Sticky Note13",
+      "type": "n8n-nodes-base.stickyNote",
+      "creator": "Lucas Peyrin",
+      "position": [
+        2192,
+        1472
+      ],
+      "typeVersion": 1,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "content": "### Step 1.5.3: Avoid Re-reading\n\n**What it does:** It checks if we have already processed this exact page content in a previous run. If so, it stops here to save time and resources.\n**Analogy:** The librarian checks their \"already read\" pile to avoid reading the same book twice.\n\n**A Powerful Feature Explained:**\n\nUsually, the \"Remove Duplicates\" node only looks at the items in the *current* execution. But here, it's set to **\"Remove items seen in previous executions.\"**\n\nThis is incredibly powerful in a sub-workflow. Even though our sub-workflow only sees one page at a time, this node has a long-term memory. It remembers every single page it has *ever* processed across all previous runs.\n\nThis makes the workflow robust. You can run the indexing process again and again to update the knowledge base with new documentation, and it will never waste resources re-processing old pages or creating duplicate chunks in the in-memory store.",
+        "height": 608,
+        "width": 544,
+        "color": 5
+      },
+      "id": "a14c4fa5-5a74-44cf-9f86-be002b6047bc",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Sticky Note14",
+      "type": "n8n-nodes-base.stickyNote",
+      "creator": "Lucas Peyrin",
+      "position": [
+        2720,
+        1248
+      ],
+      "typeVersion": 1,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "content": "### Step 1.5.4: Create & Store the 'Magic Index Cards'\n\nThis is the most important step of indexing!\n\n1.  **`Recursive Character Text Splitter`:** The text is broken down into small, overlapping paragraphs (\"chunks\").\n    *   **Analogy:** The librarian breaks the book down into small, meaningful paragraphs. This is vital for finding very specific answers later.\n\n2.  **`Gemini Chunk Embedding`:** An AI model converts each chunk of text into a list of numbers (a \"vector\" or \"embedding\").\n    *   **Analogy:** The librarian uses a 'magic pen' to turn each paragraph into a unique set of numbers. Paragraphs with similar meanings get similar numbers.\n\n3.  **`Simple Vector Store (Insert)`:** The original text chunk and its new vector are saved together in n8n's in-memory vector store.\n    *   **Analogy:** The librarian files the original paragraph along with its magic number on an index card and puts it in a special filing cabinet (the in-memory vector store).\n    *   **The `Memory Key`** in this node acts as a label for the filing cabinet, ensuring the chat flow can find it later.",
+        "height": 1040,
+        "width": 656,
+        "color": 6
+      },
+      "id": "68c805de-ac3e-4cc7-996c-93bf4ed7c614",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Sticky Note15",
+      "type": "n8n-nodes-base.stickyNote",
+      "creator": "Lucas Peyrin",
+      "position": [
+        3280,
+        1248
+      ],
+      "typeVersion": 1,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "content": "## Part 2: The Chatbot (Talking to the Expert Librarian)\n\n**Goal:** To provide an interface where a user can ask a question, have the system find relevant information from the knowledge base, and get an accurate, AI-generated answer.\n**Action:** After running the Indexing flow, **Activate** this workflow. Then, open the `When chat message received` node and use its Public URL to chat.",
+        "height": 1456,
+        "width": 1200,
+        "color": 7
+      },
+      "id": "1616b3cf-3940-4096-b9aa-3198e11ff4b5",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Sticky Note16",
+      "type": "n8n-nodes-base.stickyNote",
+      "creator": "Lucas Peyrin",
+      "position": [
+        1328,
+        2352
+      ],
+      "typeVersion": 1,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "content": "### The Front Desk: Ask Your Question Here\n\n**What it does:** This is the public-facing chat interface. When you send a message here, the entire RAG process begins.\n\n**Action:**\n1.  **Activate** the entire workflow.\n2.  To test directly inside n8n, click the **\"Open Chat\"** button in this node's parameter panel.\n3.  To chat publicly, copy the **Public URL** from this node and open it in a new browser tab.",
+        "height": 448,
+        "width": 368,
+        "color": 4
+      },
+      "id": "78f0eb3c-a974-4ab0-881e-e7ee623a7911",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Sticky Note17",
+      "type": "n8n-nodes-base.stickyNote",
+      "creator": "Lucas Peyrin",
+      "position": [
+        1360,
+        2512
+      ],
+      "typeVersion": 1,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "content": "### The Brains: The Expert Librarian\n\n**What it does:** This is the AI agent that orchestrates the entire response. It understands your question, decides which tools to use, and formulates the final answer.\n**System Prompt:** Its instructions (in the System Message) are very strict: **\"Only use the provided documents to answer. Do not make things up.\"**",
+        "height": 400,
+        "width": 560,
+        "color": 5
+      },
+      "id": "f770111a-9ef7-4dfb-ae30-0e297e30846e",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Sticky Note18",
+      "type": "n8n-nodes-base.stickyNote",
+      "creator": "Lucas Peyrin",
+      "position": [
+        1744,
+        2624
+      ],
+      "typeVersion": 1,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "content": "### The 'Synthesizer' & 'Strategist'\n\n**What it does:** This is the Large Language Model (LLM). It has two critical jobs:\n\n1.  **The Strategist:** Based on your question and the conversation history, it decides *what information to look for* in the knowledge base (the library).\n2.  **The Synthesizer:** After getting the relevant documents, it generates the final, human-readable answer based *only* on that context.\n\n\n**Analogy:** This is the part of the librarian's brain that first decides which section of the library to search, and then reads the specific index cards to write a clear, helpful response.\n\nThe model used here is **Gemini 2.5 Flash**.",
+        "height": 592,
+        "width": 368,
+        "color": 7
+      },
+      "id": "305537f7-f1fc-417f-8493-fd2e1f24bd24",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Sticky Note19",
+      "type": "n8n-nodes-base.stickyNote",
+      "creator": "Lucas Peyrin",
+      "position": [
+        1360,
+        2976
+      ],
+      "typeVersion": 1,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "content": "### Short-Term Memory\n\n**What it does:** This node stores the last few messages of your conversation.\n**Analogy:** This helps the librarian remember what you just talked about, so you can ask follow-up questions without having to repeat yourself.",
+        "height": 528,
+        "width": 288,
+        "color": 7
+      },
+      "id": "770dced1-80e7-4ab8-a61d-49cfc826f69a",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Sticky Note20",
+      "type": "n8n-nodes-base.stickyNote",
+      "creator": "Lucas Peyrin",
+      "position": [
+        1744,
+        3040
+      ],
+      "typeVersion": 1,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "content": "### The Tool: The 'Magic Filing Cabinet' Retriever\n\nThis is the \"Retrieval\" part of RAG. When the agent gets your question, it uses this tool to find the most relevant information.\n\n1.  **`Gemini Query Embedding`:** Your question is converted into its own 'magic number' (vector).\n\n2.  **`Official n8n Documentation (Vector Store Retrieve)`:** It searches the in-memory vector store for the document chunks with the most similar 'magic numbers' to your question's number.\n\n\n**Analogy:** The librarian takes your question, finds the most relevant index cards from the filing cabinet, and hands them over to the 'Synthesizer' to formulate the answer.",
+        "height": 736,
+        "width": 448,
+        "color": 6
+      },
+      "id": "2a166ca4-bc92-4457-884f-5b132534088f",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Sticky Note21",
+      "type": "n8n-nodes-base.stickyNote",
+      "creator": "Lucas Peyrin",
+      "position": [
+        2048,
+        3040
+      ],
+      "typeVersion": 1,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {},
+      "id": "82f8d1bd-e714-45a6-959b-46949f500e3e",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Start Indexing",
+      "type": "n8n-nodes-base.manualTrigger",
+      "creator": "Lucas Peyrin",
+      "position": [
+        1680,
+        912
+      ],
+      "typeVersion": 1,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "public": true,
+        "initialMessages": "Hello! I'm an AI assistant trained on the official n8n documentation.\nYou can ask me anything about n8n nodes, workflows, or concepts. For example:\n\"How does the IF node work?\"\n\"What is a sub-workflow?\"",
+        "options": {
+          "inputPlaceholder": "Type your n8n related question..",
+          "subtitle": "",
+          "title": "",
+          "customCss": "/* === THEME OVERRIDE: n8n Glass & Glow (Revised) === */\n\n/*\n  This theme is built upon the default n8n chat CSS variables.\n  We'll use your desired branding and layout, and then add\n  the \"glass\" effect using a semi-transparent background\n  and a backdrop-filter on the main window class.\n*/\n\n:root {\n  /* --- 1. CORE BRANDING & FONTS --- */\n  /* Your choices for font and primary color are applied here. */\n  --chat--font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;\n  --chat--color-primary: #EA4B71; /* n8n Red */\n  --chat--color-primary-shade-50: #D93A60;\n  --chat--color-primary-shade-100: #C82A50;\n  --chat--color-secondary: #20b69e; /* Kept default secondary for things like file uploads */\n  --chat--color-secondary-shade-50: #1ca08a;\n  --chat--color-white: #ffffff;\n  --chat--color-light: #f2f4f8;\n  --chat--color-dark: #1F2937; /* Darker, more modern text color */\n  --chat--color-disabled: #9CA3AF;\n  --chat--color-typing: #404040;\n\n  /* --- 2. WINDOW & LAYOUT --- */\n  /* Your dimensions and rounded corners. The actual glass effect is handled in the class override below. */\n  --chat--window--width: 430px;\n  --chat--window--height: 80vh;\n  --chat--window--border-radius: 16px;\n  --chat--window--border: 1px solid rgba(255, 255, 255, 0.3);\n  --chat--spacing: 1rem; /* 16px base spacing */\n  --chat--window--z-index: 9999;\n  --chat--window--bottom: var(--chat--spacing);\n  --chat--window--right: var(--chat--spacing);\n  --chat--window--margin-bottom: var(--chat--spacing);\n\n  /* --- 3. GLASSMORPHISM BACKGROUNDS --- */\n  /* We make the main sections transparent to let the glass window show through. */\n  --chat--header--background: transparent;\n  --chat--body--background: transparent;\n  --chat--footer--background: transparent;\n\n  /* --- 4. HEADER STYLING (REMOVED) --- */\n  /* The header is removed by setting its height, padding, and border to 0/none. */\n  --chat--header-height: 0;\n  --chat--header--padding: 0;\n  --chat--header--border-bottom: none;\n  /* The rest of the header variables are now irrelevant. */\n  --chat--header--color: var(--chat--color-dark);\n  --chat--heading--font-size: 1.5rem;\n  --chat--subtitle--font-size: 0.875rem;\n  --chat--subtitle--line-height: 1.4;\n  --chat--close--button--color-hover: var(--chat--color-primary);\n\n  /* --- 5. MESSAGE BUBBLES --- */\n  --chat--message--font-size: 0.875rem;\n  --chat--message--padding: 12px 16px;\n  --chat--message--border-radius: 12px;\n  --chat--message-line-height: 1.6;\n  --chat--message--margin-bottom: calc(var(--chat--spacing) * 0.75);\n  /* Adjusted padding: Top is 0, sides and bottom use the base spacing. */\n  --chat--messages-list--padding: 0 var(--chat--spacing) var(--chat--spacing);\n  --chat--message--bot--background: var(--chat--color-white);\n  --chat--message--bot--color: #111827;\n  --chat--message--bot--border: none;\n  --chat--message--user--background: var(--chat--color-primary);\n  --chat--message--user--color: var(--chat--color-white);\n  --chat--message--user--border: none;\n\n  /* --- 6. INPUT AREA --- */\n  --chat--textarea--height: 50px;\n  --chat--textarea--max-height: 10rem;\n  --chat--input--font-size: 0.9rem;\n  --chat--input--border: 0;\n  --chat--input--border-radius: 12px; /* Rounded input field */\n  --chat--input--padding: 12px 16px;\n  --chat--input--background: rgba(255, 255, 255, 0.5); /* Semi-transparent input */\n  --chat--input--text-color: #111827;\n  --chat--input--line-height: 1.5;\n  --chat--input--border-active: 0;\n\n  /* --- 7. SEND & FILE BUTTONS --- */\n  --chat--input--send--button--background: transparent;\n  --chat--input--send--button--color: var(--chat--color-primary);\n  --chat--input--send--button--background-hover: transparent;\n  --chat--input--send--button--color-hover: var(--chat--color-primary-shade-50);\n  --chat--input--file--button--background: transparent;\n  --chat--input--file--button--color: var(--chat--color-secondary);\n  --chat--input--file--button--background-hover: transparent;\n  --chat--input--file--button--color-hover: var(--chat--color-secondary-shade-50);\n\n  /* --- 8. TOGGLE BUTTON & OTHERS --- */\n  /* Using your primary brand color for the main toggle button */\n  --chat--toggle--size: 64px;\n  --chat--toggle--width: var(--chat--toggle--size);\n  --chat--toggle--height: var(--chat--toggle--size);\n  --chat--toggle--border-radius: 50%;\n  --chat--toggle--background: var(--chat--color-primary);\n  --chat--toggle--hover--background: var(--chat--color-primary-shade-50);\n  --chat--toggle--active--background: var(--chat--color-primary-shade-100);\n  --chat--toggle--color: var(--chat--color-white);\n}\n\n/* === CLASS OVERRIDES === */\n/*\n  These are essential for effects that CSS variables can't control,\n  like the glass blur, shadows, and max-height.\n*/\n\n.chat-window {\n  /* This is the magic for the glass effect! */\n  background-color: rgba(249, 243, 245, 0.6); /* A semi-transparent background color */\n  backdrop-filter: blur(20px);\n  -webkit-backdrop-filter: blur(20px); /* For Safari compatibility */\n\n  /* A subtle shadow helps lift the window off the page */\n  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);\n\n  /* Here we apply the max-height you wanted */\n  max-height: 750px;\n}\n\n/* Add top margin to the first message only for initial spacing */\n.chat-messages-list .chat-message:first-child {\n  margin-top: var(--chat--spacing);\n}\n\n/* Make user messages slightly wider for better balance */\n.chat-message.is-user {\n\tmax-width: 70%;\n}\n\n.chat-message.is-bot {\n\tmax-width: 80%;\n}\n\n/* Add a subtle glow to messages on hover */\n.chat-message {\n    transition: transform 0.2s ease, box-shadow 0.2s ease;\n}\n.chat-message:hover {\n    transform: translateY(-2px);\n    box-shadow: 0 0 25px 0 rgba(234, 75, 113, 0.2);\n}\n\n/* === PAGE BACKGROUND === */\n/* Your dotted background to simulate the n8n canvas. Perfect as is! */\nbody {\n    background-color: #FDFBFF;\n    background-image:\n        radial-gradient(circle at 1px 1px, rgba(0,0,0,0.07) 1px, transparent 0),\n        linear-gradient(135deg, #F9F3F5 0%, #EFF3FB 100%);\n    background-size: 25px 25px, 100% 100%;\n}"
+        }
+      },
+      "id": "8f1bf2b0-4ccc-4903-b0c3-105d373b5f7c",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "RAG Chatbot",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "creator": "Lucas Peyrin",
+      "position": [
+        1520,
+        2816
+      ],
+      "webhookId": "e247d3ba-54f0-4f86-b9ab-1374b6b08465",
+      "typeVersion": 1.1,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "content": "## Setup Step 4: Chat with Your Expert!\n\nCongratulations, the knowledge base is built! Now it's time to ask the expert a question.\n\n**Action:**\n1.  **Activate** the entire workflow using the toggle switch at the top of the screen.\n2.  Open the **`RAG Chatbot`** chat trigger node (bottom-left).\n3.  To chat:\n    *   Copy its **Public URL** and open it in a new browser tab.\n    *   OR, click the **\"Open Chat\"** button in the node's panel to test it directly inside n8n.\n\n\n**Try asking:** \"How does the IF node work?\" or \"What is a sub-workflow?\"",
+        "height": 320,
+        "width": 624
+      },
+      "id": "1d82d34b-691b-4c63-91c2-709d6fe8d7cb",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "creator": "Lucas Peyrin",
+      "position": [
+        400,
+        1600
+      ],
+      "typeVersion": 1,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "content": "## Setup Step 1: Connect Your Google AI Credentials\n\nThis workflow uses Google's Gemini models for generating embeddings and chat responses. You'll need a Google AI API key.\n\n**Action:**\n1.  Go to any of the Gemini nodes (e.g., **`Gemini 2.5 Flash`**).\n2.  Click the **Credential** dropdown and select **`+ Create New Credential`**.\n3.  In the window that opens, paste your **Google AI API Key**.\n4.  Click **Save**. Your new credential will be created and automatically selected for this node.",
+        "height": 272,
+        "width": 656
+      },
+      "id": "31a40449-572b-4a93-bdeb-d4527e0d6a9a",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Sticky Note24",
+      "type": "n8n-nodes-base.stickyNote",
+      "creator": "Lucas Peyrin",
+      "position": [
+        400,
+        640
+      ],
+      "typeVersion": 1,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "content": "## Setup Step 2: Apply Credentials to All Gemini Nodes\n\nYour new Google AI credential is now saved. Let's make sure all the other Gemini nodes are using it.\n\n**Action:**\nGo to the remaining Gemini nodes on the canvas. Your new credential will now be available in their **Credential** dropdown lists. Simply select it for each one.\n\n**Nodes to check:**\n*   `Gemini 2.5 Flash`\n*   `Gemini Chunk Embedding`\n*   `Gemini Query Embedding`",
+        "height": 304,
+        "width": 864
+      },
+      "id": "3ba43747-b1cc-4275-a922-c5a9934b4445",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Sticky Note27",
+      "type": "n8n-nodes-base.stickyNote",
+      "creator": "Lucas Peyrin",
+      "position": [
+        400,
+        928
+      ],
+      "typeVersion": 1,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "content": "## Setup Step 3: Build the Knowledge Base (Indexing)\n\nThis is the one-time step where the AI \"reads\" all the documentation.\n\n**Action:**\n1.  Find the **`Start Indexing`** manual trigger node at the top-left of the canvas.\n2.  Click its **\"Execute workflow\"** button.\n\n\n**⚠️ IMPORTANT:**\n*   **Be Patient!** This process will take **15-20 minutes** to scrape, process, and store the entire n8n documentation in memory.\n*   **The knowledge base is temporary.** It is stored in n8n's memory and will be **erased if you restart your n8n instance**. If that happens, you must run this indexing step again.",
+        "height": 336,
+        "width": 784
+      },
+      "id": "1ec28db9-6e1c-44c4-9b8d-9a7a30a2a157",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Sticky Note28",
+      "type": "n8n-nodes-base.stickyNote",
+      "creator": "Lucas Peyrin",
+      "position": [
+        400,
+        1248
+      ],
+      "typeVersion": 1,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "id": "e7d06904-46e7-4664-9af2-a40f229ecf04",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Ingest Web Page",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "creator": "Lucas Peyrin",
+      "position": [
+        1680,
+        1680
+      ],
+      "typeVersion": 1.1,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "content": "## Was this helpful? Let me know!\n\nI really hope this template helped you understand RAG better. Your feedback is incredibly valuable and helps me create better resources for the n8n community.\n\n### **Share Your Thoughts & Ideas**\n\nWhether you have a suggestion, found a typo, or just want to say thanks, I'd love to hear from you!\nHere's a simple n8n form built for this purpose:\n\n#### ➡️ **[Click here to give feedback](https://api.ia2s.app/form/templates/feedback?template=n8n%20Simple%20RAG)**\n\n### **Ready to Build Something Great?**\n\nIf you're looking to take your n8n skills or business automation to the next level, I can help.\n\n**🎓 n8n Coaching:** Want to become an n8n pro? I offer one-on-one coaching sessions to help you master workflows, tackle specific problems, and build with confidence.\n#### ➡️ **[Book a Coaching Session](https://api.ia2s.app/form/templates/coaching?template=n8n%20Simple%20RAG)**\n\n**💼 n8n Consulting:** Have a complex project, an integration challenge, or need a custom workflow built for your business? Let's work together to create a powerful automation solution.\n#### ➡️ **[Inquire About Consulting Services](https://api.ia2s.app/form/templates/consulting?template=n8n%20Simple%20RAG)**\n\n---\n\nHappy Automating!\nLucas Peyrin",
+        "height": 768,
+        "width": 544,
+        "color": 3
+      },
+      "id": "9f32600a-1666-438b-aefa-6e7cfde6b7f9",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Sticky Note29",
+      "type": "n8n-nodes-base.stickyNote",
+      "creator": "Lucas Peyrin",
+      "position": [
+        2560,
+        2352
+      ],
+      "typeVersion": 1,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "content": "## Video Tutorial\n\nA full video tutorial about RAG will be shown here in a future version of this template !",
+        "height": 544,
+        "width": 832,
+        "color": 2
+      },
+      "id": "0ccd0498-b66e-4a96-957e-b822f53050ef",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "creator": "Lucas Peyrin",
+      "position": [
+        3136,
+        2352
+      ],
+      "typeVersion": 1,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "memoryKey": {
+          "__rl": true,
+          "value": "world_of_tanks_documentation_vector_store",
+          "mode": "id"
+        },
+        "embeddingBatchSize": 30
+      },
+      "id": "2ca99e45-3e25-4f60-962c-3f805cd36deb",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Simple Vector Store",
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+      "creator": "Lucas Peyrin",
+      "position": [
+        3472,
+        1680
+      ],
+      "typeVersion": 1.3,
+      "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "Get related chunks of the official World of Tanks documentation.",
+        "memoryKey": {
+          "__rl": true,
+          "value": "=world_of_tanks_documentation_vector_store",
+          "mode": "id"
+        },
+        "topK": 10,
+        "includeDocumentMetadata": false
+      },
+      "id": "652df3c8-54e7-4a4b-87a9-db9276298d3f",
+      "cid": "Ikx1Y2FzIFBleXJpbiI",
+      "name": "Official World of Tanks Documentation",
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+      "creator": "Lucas Peyrin",
+      "position": [
+        2128,
+        3424
+      ],
+      "typeVersion": 1.3,
+      "notes": "© 2025 Lucas Peyrin"
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "shared": [
+    {
+      "createdAt": "2025-10-16T14:38:14.131Z",
+      "updatedAt": "2025-10-16T14:38:14.131Z",
+      "role": "workflow:owner",
+      "workflowId": "uOEJzXlFvk0Ufm7J",
+      "projectId": "QNfIJ0xZgM3QlqN4"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-10-16T19:55:06.000Z",
+  "versionId": "48a4e473-d3d4-4b57-b041-dcc4c7e1e19d"
+}
