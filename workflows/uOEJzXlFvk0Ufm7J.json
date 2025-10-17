@@ -236,7 +236,7 @@
   },
   "createdAt": "2025-10-16T14:38:14.124Z",
   "id": "uOEJzXlFvk0Ufm7J",
-  "isArchived": false,
+  "isArchived": true,
   "meta": {
     "templateId": "6137",
     "templateCredsSetupCompleted": true
@@ -1246,6 +1246,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-10-16T19:55:06.000Z",
-  "versionId": "48a4e473-d3d4-4b57-b041-dcc4c7e1e19d"
+  "updatedAt": "2025-10-17T14:15:04.000Z",
+  "versionId": "97b04101-3289-4a5a-8c18-e9b1864dcdcb"
 }
