@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "RAG Chatbot": {
       "main": [
@@ -1245,6 +1245,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-10-14T21:27:01.000Z",
+  "updatedAt": "2025-10-17T14:15:08.000Z",
   "versionId": "aab8038d-8c6e-417f-9b24-d0cc1309f291"
 }
