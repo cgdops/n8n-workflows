@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "n8n": {
       "main": [
@@ -533,10 +533,7 @@
       "parameters": {
         "rule": {
           "interval": [
-            {
-              "field": "hours",
-              "hoursInterval": 2
-            }
+            {}
           ]
         }
       },
@@ -737,9 +734,13 @@
       "projectId": "QNfIJ0xZgM3QlqN4"
     }
   ],
-  "staticData": null,
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": []
+    }
+  },
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2025-10-16T20:37:31.000Z",
-  "versionId": "19c99602-a5d0-49b5-b22d-b29d4ce54b41"
+  "triggerCount": 1,
+  "updatedAt": "2025-10-16T22:12:49.000Z",
+  "versionId": "093820b3-ae7d-4492-9210-7e1a623ddc58"
 }
