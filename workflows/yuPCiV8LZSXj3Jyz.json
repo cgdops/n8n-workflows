@@ -1,0 +1,182 @@
+{
+  "active": true,
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Insert row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-19T18:41:40.995Z",
+  "id": "yuPCiV8LZSXj3Jyz",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Les appetite Leads",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Les Petite Desserts",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Name",
+              "placeholder": "Enter your name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Email",
+              "fieldType": "email",
+              "placeholder": "Enter your email…",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Wedding date",
+              "fieldType": "date"
+            },
+            {
+              "fieldLabel": "Favorite dessert what’s your favorite..",
+              "placeholder": "What’s your favorite flavor?"
+            },
+            {
+              "fieldLabel": "Wedding location"
+            }
+          ]
+        },
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.3,
+      "position": [
+        0,
+        0
+      ],
+      "id": "63e26b0d-3f9c-4d82-ab14-bf6f984b96f3",
+      "name": "On form submission",
+      "webhookId": "ff3a3275-ee1e-453d-8a08-7ff5154c2d02"
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "value": "EJwx0uEA5hy31DsS",
+          "mode": "list",
+          "cachedResultName": "Sweet leads",
+          "cachedResultUrl": "/projects/QNfIJ0xZgM3QlqN4/datatables/EJwx0uEA5hy31DsS"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Date",
+              "displayName": "Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Location",
+              "displayName": "Location",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Dessert",
+              "displayName": "Dessert",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {
+          "optimizeBulk": false
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        224,
+        0
+      ],
+      "id": "c9c1be69-fdb2-47bb-8387-5a3e08f10317",
+      "name": "Insert row"
+    }
+  ],
+  "pinData": {
+    "On form submission": [
+      {
+        "json": {
+          "name": "First item",
+          "code": 1
+        }
+      },
+      {
+        "json": {
+          "name": "Second item",
+          "code": 2
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-19T18:41:40.998Z",
+      "updatedAt": "2025-10-19T18:41:40.998Z",
+      "role": "workflow:owner",
+      "workflowId": "yuPCiV8LZSXj3Jyz",
+      "projectId": "QNfIJ0xZgM3QlqN4"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-10-19T19:00:25.000Z",
+  "versionId": "af72b56b-63cf-4724-9379-7cec284d054d"
+}
