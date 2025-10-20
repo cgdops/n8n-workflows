@@ -132,8 +132,7 @@
             "Email": "={{ $('Webhook').item.json.body.EMAIL }}",
             "Source": "={{ $('Webhook').item.json.headers.origin }}",
             "First Name": "={{ $('Webhook').item.json.body.FNAME }}",
-            "Last Name": "={{ $('Webhook').item.json.body.LNAME }}",
-            "SequenceDay": "={{ $json.sequenceDay }}"
+            "Last Name": "={{ $('Webhook').item.json.body.LNAME }}"
           },
           "matchingColumns": [
             "Email"
@@ -178,8 +177,8 @@
               "canBeUsedToMatch": true
             },
             {
-              "id": "SequenceDay",
-              "displayName": "SequenceDay",
+              "id": "Sequence Day",
+              "displayName": "Sequence Day",
               "required": false,
               "defaultMatch": false,
               "display": true,
@@ -270,6 +269,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-10-14T21:47:10.000Z",
-  "versionId": "b2068ef7-d00c-4f00-8704-0301a0a7db51"
+  "updatedAt": "2025-10-20T13:53:17.000Z",
+  "versionId": "ba6c4502-9281-476f-88ed-6ee17af86f41"
 }
