@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
     "On form submission": {
       "main": [
@@ -15,7 +15,7 @@
   },
   "createdAt": "2025-10-19T18:41:40.995Z",
   "id": "yuPCiV8LZSXj3Jyz",
-  "isArchived": false,
+  "isArchived": true,
   "meta": {
     "templateCredsSetupCompleted": true
   },
@@ -177,6 +177,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-10-19T19:00:25.000Z",
-  "versionId": "af72b56b-63cf-4724-9379-7cec284d054d"
+  "updatedAt": "2025-10-20T15:00:03.000Z",
+  "versionId": "4293fe64-32d6-47df-9a94-2b257f36b1c1"
 }
