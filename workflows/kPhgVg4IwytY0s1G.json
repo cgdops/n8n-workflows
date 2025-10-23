@@ -192,8 +192,8 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.1,
       "position": [
-        192,
-        -1408
+        480,
+        -1584
       ],
       "id": "3bb76ee9-f7b1-4870-8365-738d249b7e33",
       "name": "Welcome email",
@@ -217,8 +217,8 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.1,
       "position": [
-        192,
-        -1024
+        480,
+        -1136
       ],
       "id": "0249b873-c513-4d9a-96e8-b23b4866165a",
       "name": "Day 2",
@@ -242,8 +242,8 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.1,
       "position": [
-        192,
-        -1216
+        480,
+        -1312
       ],
       "id": "d4b03250-6c8a-4464-beb6-650050d6e220",
       "name": "Day 1",
@@ -268,8 +268,8 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.1,
       "position": [
-        192,
-        -832
+        480,
+        -960
       ],
       "id": "77b2d352-3693-4ac0-947a-65cf8cec2834",
       "name": "Day 3",
@@ -293,8 +293,8 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.1,
       "position": [
-        192,
-        -640
+        480,
+        -784
       ],
       "id": "71d081af-7801-43bd-81e4-e2e9b003a83a",
       "name": "Day 4",
@@ -312,14 +312,19 @@
         "subject": "Day 5: A Changed Story",
         "message": "=<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Day 5: A Changed Story</title>\n</head>\n<body style=\"margin: 0; padding: 0; background-color: #f7f7f7; font-family: Arial, sans-serif;\">\n    <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff;\">\n        \n        <tr>\n            <td align=\"center\" style=\"padding: 20px 0 20px 0;\">\n                <img src=\"https://remembermeseries.com/images/remember-me-web-logo.png\" alt=\"Remember Me Logo\" width=\"180\" style=\"display: block; width: 180px; max-width: 100%; height: auto;\">\n            </td>\n        </tr>\n        \n        <tr>\n            <td style=\"padding: 20px 30px 40px 30px; color: #333333; font-size: 16px; line-height: 1.6;\">\n                \n                <h2 style=\"font-size: 24px; color: #222222; margin-top: 0;\">Day 5: A Changed Story</h2>\n                \n                <p style=\"border-top: 1px solid #dddddd; padding-top: 15px;\">\n                    <strong>Scripture:</strong> <em>John 4:28–30, 39</em>\n                </p>\n\n                <p>After her encounter with Jesus, the woman left her water jar behind. The very thing she came for no longer mattered. She ran into the town — the same people she once avoided — and declared, “Come, see a man who told me everything I ever did.” Her shame became her testimony. Because of her, many in that town believed in Jesus.</p>\n                \n                <p>When Jesus rewrites our story, the parts we once hid can become the very places He uses to draw others to Himself.</p>\n\n                <p style=\"background-color: #f7f7f7; padding: 15px; border-left: 4px solid #007bff; font-style: italic; margin: 25px 0;\">\n                    <strong>Key Takeaway:</strong>When Jesus changes your story, your shame becomes your testimony.\n                </p>\n\n                <h3 style=\"font-size: 18px; color: #222222; margin-top: 30px; border-bottom: 1px solid #eeeeee; padding-bottom: 5px;\">Questions for Reflection</h3>\n                <ul style=\"padding-left: 20px; margin-top: 10px;\">\n                    <li style=\"margin-bottom: 10px;\">What “water jar” might Jesus be asking you to leave behind?</li>\n                    <li>How could your story encourage someone else to believe?</li>\n                </ul>\n\n                <h3 style=\"font-size: 18px; color: #222222; margin-top: 30px; border-bottom: 1px solid #eeeeee; padding-bottom: 5px;\">Prayer</h3>\n                <p style=\"font-style: italic;\">Jesus, thank You for rewriting my story. Use even my past to bring hope to others.</p>\n\n            </td>\n        </tr>\n        \n        <tr>\n            <td align=\"center\" style=\"padding: 20px 30px; background-color: #eeeeee; color: #888888; font-family: Arial, sans-serif; font-size: 12px;\">\n                <p>You are receiving this email as part of the 5-day devotional journey from Remember Me.</p>\n            </td>\n        </tr>\n\n    </table>\n</body>\n</html>",
         "options": {
-          "appendAttribution": false
+          "appendAttribution": false,
+          "attachmentsUi": {
+            "attachmentsBinary": [
+              {}
+            ]
+          }
         }
       },
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.1,
       "position": [
-        192,
-        -448
+        480,
+        -608
       ],
       "id": "9375bd09-0fd7-4e94-92d9-9efef937d0ef",
       "name": "Day 5",
@@ -335,7 +340,7 @@
       "parameters": {
         "sendTo": "={{ $json.Email }}",
         "subject": "Your Free Verse Art",
-        "message": "=<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Welcome to Remember Me</title>\n</head>\n<body style=\"margin: 0; padding: 0; background-color: #f4f4f4;\">\n    <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff;\">\n        \n        <tr>\n            <td align=\"center\" style=\"padding: 20px 0 20px 0;\">\n                <img src=\"https://remembermeseries.com/images/remember-me-web-logo.png\" alt=\"Remember Me Logo\" width=\"180\" style=\"display: block; width: 180px; max-width: 100%; height: auto;\">\n            </td>\n        </tr>\n        \n        <tr>\n            <td style=\"padding: 20px 30px 40px 30px; color: #333333; font-family: Arial, sans-serif; font-size: 16px; line-height: 1.6;\">\n                <p>Hi {{ $json['First Name'] }},</p>\n                <p>We’re so grateful you’ve walked through these first five days with us.</p>\n<p>Here’s your gift — a verse art design to inspire you daily:</p>\n<p>We encourage you to set it as your wallpaper or share it with a friend.</p>\n\n                <p style=\"margin-top: 25px;\">— The Remember Me Team</p>\n                <p style=\"margin-top: 15px;\">\n                    <a href=\"https://remembermeseries.com\" style=\"color: #007bff; text-decoration: underline;\">remembermeseries.com</a>\n                </p>\n            </td>\n        </tr>\n        \n        <tr>\n            <td align=\"center\" style=\"padding: 20px 30px; background-color: #eeeeee; color: #888888; font-family: Arial, sans-serif; font-size: 12px;\">\n                <p>You are receiving this email because you signed up on our website.</p>\n            </td>\n        </tr>\n\n    </table>\n</body>\n</html>",
+        "message": "=<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Welcome to Remember Me</title>\n</head>\n<body style=\"margin: 0; padding: 0; background-color: #f4f4f4;\">\n    <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff;\">\n        \n        <tr>\n            <td align=\"center\" style=\"padding: 20px 0 20px 0;\">\n                <img src=\"https://remembermeseries.com/images/remember-me-web-logo.png\" alt=\"Remember Me Logo\" width=\"180\" style=\"display: block; width: 180px; max-width: 100%; height: auto;\">\n            </td>\n        </tr>\n        \n        <tr>\n            <td style=\"padding: 20px 30px 40px 30px; color: #333333; font-family: Arial, sans-serif; font-size: 16px; line-height: 1.6;\">\n                <p>Hi {{ $json['First Name'] }},</p>\n                <p>We’re so grateful you’ve walked through these first five days with us.</p>\n<p>Here’s your gift — a verse art design to inspire you daily:</p>\n<p><a href=\"https://cdn.prod.website-files.com/686e85303107e21980ac84f4/68f95dd3fb6d580445285075_001%20Identity%20%26%20Worth.png\" style=\"color: #007bff; text-decoration: underline;\">Download your verse art</a></p>\n<p>We encourage you to set it as your wallpaper or share it with a friend.</p>\n\n                <p style=\"margin-top: 25px;\">— The Remember Me Team</p>\n                <p style=\"margin-top: 15px;\">\n                    <a href=\"https://remembermeseries.com\" style=\"color: #007bff; text-decoration: underline;\">remembermeseries.com</a>\n                </p>\n            </td>\n        </tr>\n        \n        <tr>\n            <td align=\"center\" style=\"padding: 20px 30px; background-color: #eeeeee; color: #888888; font-family: Arial, sans-serif; font-size: 12px;\">\n                <p>You are receiving this email because you signed up on our website.</p>\n            </td>\n        </tr>\n\n    </table>\n</body>\n</html>",
         "options": {
           "appendAttribution": false
         }
@@ -343,8 +348,8 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.1,
       "position": [
-        192,
-        -256
+        480,
+        -432
       ],
       "id": "f4c49b1c-1c9a-4083-b596-85a3d06e8d52",
       "name": "Verse Art Gift",
@@ -360,7 +365,7 @@
       "parameters": {
         "sendTo": "={{ $json.Email }}",
         "subject": "Why Remember Me Exists + A Gift",
-        "message": "=<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Welcome to Remember Me</title>\n</head>\n<body style=\"margin: 0; padding: 0; background-color: #f4f4f4;\">\n    <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff;\">\n        \n        <tr>\n            <td align=\"center\" style=\"padding: 20px 0 20px 0;\">\n                <img src=\"https://remembermeseries.com/images/remember-me-web-logo.png\" alt=\"Remember Me Logo\" width=\"180\" style=\"display: block; width: 180px; max-width: 100%; height: auto;\">\n            </td>\n        </tr>\n        \n        <tr>\n            <td style=\"padding: 20px 30px 40px 30px; color: #333333; font-family: Arial, sans-serif; font-size: 16px; line-height: 1.6;\">\n                <p>Hi {{ $json['First Name'] }},</p>\n                <p>At Remember Me, our mission is simple:</p>\n                <p><em>To bring the voices of women in the Bible to life through short, powerful stories — reminding us that Jesus is never far away.</em></p>\n                <p>We want these stories to spread far and wide, and you can help.</p>\n                <p>Know 3 friends who would be encouraged by these devotionals? Share this link with them: </p>\n                <p><a href=\"https://remembermeseries.com/refer-a-friend\" style=\"color: #007bff; text-decoration: underline;\">remembermeseries.com/refer-a-friend</a></p>\n<p>As a thank-you, we’ll send you an exclusive behind-the-scenes video clip (30–45 seconds) when they sign up.</p>\n                <p>Thank you for being part of this journey — together, we’re sharing stories that still speak.</p>\n                <p style=\"margin-top: 25px;\">— The Remember Me Team</p>\n                <p style=\"margin-top: 15px;\">\n                    <a href=\"https://remembermeseries.com\" style=\"color: #007bff; text-decoration: underline;\">remembermeseries.com</a>\n                </p>\n            </td>\n        </tr>\n        \n        <tr>\n            <td align=\"center\" style=\"padding: 20px 30px; background-color: #eeeeee; color: #888888; font-family: Arial, sans-serif; font-size: 12px;\">\n                <p>You are receiving this email because you signed up on our website.</p>\n            </td>\n        </tr>\n\n    </table>\n</body>\n</html>",
+        "message": "=<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Welcome to Remember Me</title>\n</head>\n<body style=\"margin: 0; padding: 0; background-color: #f4f4f4;\">\n    <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff;\">\n        \n        <tr>\n            <td align=\"center\" style=\"padding: 20px 0 20px 0;\">\n                <img src=\"https://remembermeseries.com/images/remember-me-web-logo.png\" alt=\"Remember Me Logo\" width=\"180\" style=\"display: block; width: 180px; max-width: 100%; height: auto;\">\n            </td>\n        </tr>\n        \n        <tr>\n            <td style=\"padding: 20px 30px 40px 30px; color: #333333; font-family: Arial, sans-serif; font-size: 16px; line-height: 1.6;\">\n                <p>Hi {{ $json['First Name'] }},</p>\n                <p>At Remember Me, our mission is simple:</p>\n                <p><em>To bring the voices of women in the Bible to life through short, powerful stories — reminding us that Jesus is never far away.</em></p>\n                <p>We want these stories to spread far and wide, and you can help.</p>\n                <p>Know 3 friends who would be encouraged by these devotionals? Share this link with them: </p>\n                <p><a href=\"https://n8n.srv1051492.hstgr.cloud/form/fbd98f8c-bc1c-4703-8c0c-5ebb11ceff98\" style=\"color: #007bff; text-decoration: underline;\">Refer a friend</a></p>\n<p>As a thank-you, we’ll send you an exclusive behind-the-scenes video clip (30–45 seconds) when they sign up.</p>\n                <p>Thank you for being part of this journey — together, we’re sharing stories that still speak.</p>\n                <p style=\"margin-top: 25px;\">— The Remember Me Team</p>\n                <p style=\"margin-top: 15px;\">\n                    <a href=\"https://remembermeseries.com\" style=\"color: #007bff; text-decoration: underline;\">remembermeseries.com</a>\n                </p>\n            </td>\n        </tr>\n        \n        <tr>\n            <td align=\"center\" style=\"padding: 20px 30px; background-color: #eeeeee; color: #888888; font-family: Arial, sans-serif; font-size: 12px;\">\n                <p>You are receiving this email because you signed up on our website.</p>\n            </td>\n        </tr>\n\n    </table>\n</body>\n</html>",
         "options": {
           "appendAttribution": false
         }
@@ -368,8 +373,8 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.1,
       "position": [
-        192,
-        -80
+        480,
+        -256
       ],
       "id": "c4cb8534-a6b4-400c-a83f-900231cbfcd1",
       "name": "Referral Ask",
@@ -394,8 +399,8 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.2,
       "position": [
-        -544,
-        -736
+        -880,
+        -800
       ],
       "id": "c561c006-273b-41da-8258-f6b131314d8b",
       "name": "Schedule Trigger"
@@ -421,8 +426,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -336,
-        -736
+        -624,
+        -800
       ],
       "id": "4ccb5b29-e4a6-4114-8efc-6781fa5830bc",
       "name": "Get row(s) in sheet",
@@ -647,8 +652,8 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.3,
       "position": [
-        -128,
-        -736
+        -144,
+        -896
       ],
       "id": "737da0e6-21f8-4c75-bd78-6818e8f45314",
       "name": "Switch"
@@ -746,8 +751,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        528,
-        -1408
+        1232,
+        -1584
       ],
       "id": "0d8fd92c-57c7-4331-b8df-1bddafdd6c7d",
       "name": "Update row in sheet",
@@ -851,8 +856,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        928,
-        -720
+        1232,
+        -784
       ],
       "id": "245f5e49-8332-45cb-a605-ffc14e9f5f19",
       "name": "Update row in sheet1",
@@ -922,6 +927,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-10-17T12:48:08.000Z",
-  "versionId": "1cdf8e70-6b6e-49a7-8ff1-1d4b1c71d58c"
+  "updatedAt": "2025-10-23T21:30:39.000Z",
+  "versionId": "a756e64f-f12b-4762-9c12-85d47043fcb2"
 }
