@@ -1,0 +1,144 @@
+{
+  "active": true,
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-23T21:24:46.196Z",
+  "id": "m3dmQiqrQ5ALMutE",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "RememberMe Referrals",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Refer a Friend to Remember Me Series",
+        "formDescription": "Enter the emails of up to 3 friends you think would love to follow the Remember Me series.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Friend 1",
+              "fieldType": "email",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Friend 2",
+              "fieldType": "email"
+            },
+            {
+              "fieldLabel": "Friend 3",
+              "fieldType": "email"
+            }
+          ]
+        },
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.3,
+      "position": [
+        0,
+        0
+      ],
+      "id": "cab55875-aaca-4750-863c-45481ec55d30",
+      "name": "On form submission",
+      "webhookId": "fbd98f8c-bc1c-4703-8c0c-5ebb11ceff98"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1o-lo-Kc6Eh2hyv29PRb1Sjij_U92wGkQoh12DB9lX40",
+          "mode": "list",
+          "cachedResultName": "Remember Me Email List",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1o-lo-Kc6Eh2hyv29PRb1Sjij_U92wGkQoh12DB9lX40/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 48466779,
+          "mode": "list",
+          "cachedResultName": "referrals",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1o-lo-Kc6Eh2hyv29PRb1Sjij_U92wGkQoh12DB9lX40/edit#gid=48466779"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "date time": "={{ $json.submittedAt }}",
+            "email": "={{ $json['Friend 1'] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "date time",
+              "displayName": "date time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        208,
+        0
+      ],
+      "id": "46334939-f462-4e66-bb04-53870fcbef57",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "WoXbHPbfFs6I4Nyw",
+          "name": "RememberMe Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-23T21:24:46.199Z",
+      "updatedAt": "2025-10-23T21:24:46.199Z",
+      "role": "workflow:owner",
+      "workflowId": "m3dmQiqrQ5ALMutE",
+      "projectId": "QNfIJ0xZgM3QlqN4"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-10-23T21:29:23.000Z",
+  "versionId": "e3bde8ee-639a-48fd-9779-c841b1a5bd98"
+}
