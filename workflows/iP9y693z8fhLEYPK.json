@@ -1,0 +1,80 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-27T15:35:34.505Z",
+  "id": "iP9y693z8fhLEYPK",
+  "isArchived": true,
+  "meta": null,
+  "name": "My workflow 6",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -224,
+        -48
+      ],
+      "id": "e790bd2f-1336-4aa7-b47e-2fa0af5da5b4",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "url": "https://www.googleapis.com/pagespeedonline/v5/runPagespeed",
+        "authentication": "predefinedCredentialType",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "url",
+              "value": "https://g3zcreative.com/"
+            },
+            {
+              "name": "key",
+              "value": "AIzaSyDzJ3CGy7lb-_R5xizevVJzxeff7VQDVQg"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -16,
+        -48
+      ],
+      "id": "711d8aaa-ae2c-49bb-b5c4-bc71ac7f3157",
+      "name": "HTTP Request"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-27T15:35:34.514Z",
+      "updatedAt": "2025-10-27T15:35:34.514Z",
+      "role": "workflow:owner",
+      "workflowId": "iP9y693z8fhLEYPK",
+      "projectId": "QNfIJ0xZgM3QlqN4"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-27T16:04:59.000Z",
+  "versionId": "8cede438-a352-4963-94d7-81d44db315d2"
+}
