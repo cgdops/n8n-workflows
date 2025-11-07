@@ -5,7 +5,7 @@
       "main": [
         [
           {
-            "node": "Edit Fields",
+            "node": "If",
             "type": "main",
             "index": 0
           }
@@ -27,6 +27,17 @@
     "Append row in sheet": {
       "main": [
         []
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
@@ -61,8 +72,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -48,
-        0
+        -304,
+        16
       ],
       "id": "0e9a29db-479a-46ed-81d6-14a10b3cbac5",
       "name": "Webhook",
@@ -103,7 +114,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        208,
+        416,
         0
       ],
       "id": "8dab595b-5acf-4266-95b6-5238c115fac6",
@@ -195,7 +206,7 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        416,
+        624,
         0
       ],
       "id": "523b7b33-ba8a-464c-8841-b8e21cb92e7b",
@@ -206,6 +217,40 @@
           "name": "RememberMe Google Sheets account"
         }
       }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "ca7157ef-6c18-48ed-ab63-24ba3c85499c",
+              "leftValue": "={{ $json.body.website_field }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        16
+      ],
+      "id": "03fd5ba3-4d5b-4883-962a-5a7c864aa38f",
+      "name": "If"
     }
   ],
   "pinData": {
@@ -214,42 +259,29 @@
         "json": {
           "headers": {
             "host": "n8n.srv1051492.hstgr.cloud",
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
-            "content-length": "97",
-            "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
-            "accept-encoding": "gzip, deflate, br, zstd",
-            "accept-language": "en-US,en;q=0.9",
-            "cache-control": "max-age=0",
-            "content-type": "application/x-www-form-urlencoded",
-            "dnt": "1",
-            "origin": "https://remembermeseries.webflow.io",
-            "priority": "u=0, i",
-            "referer": "https://remembermeseries.webflow.io/",
-            "sec-ch-ua": "\"Google Chrome\";v=\"141\", \"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"141\"",
-            "sec-ch-ua-mobile": "?0",
-            "sec-ch-ua-platform": "\"Windows\"",
-            "sec-fetch-dest": "document",
-            "sec-fetch-mode": "navigate",
-            "sec-fetch-site": "cross-site",
-            "sec-fetch-user": "?1",
-            "upgrade-insecure-requests": "1",
-            "x-forwarded-for": "172.18.0.1",
+            "user-agent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36 Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36",
+            "content-length": "578",
+            "accept": "*/*",
+            "content-type": "multipart/form-data; boundary=------------------------d8773e5bcafa6e61",
+            "referer": "https://n8n.srv1051492.hstgr.cloud/webhook/7c7c3a5f-978d-43ae-bb5b-b3fbe0ec6e3e",
+            "x-forwarded-for": "192.42.116.173",
             "x-forwarded-host": "n8n.srv1051492.hstgr.cloud",
             "x-forwarded-port": "443",
             "x-forwarded-proto": "https",
             "x-forwarded-server": "cfd3624e111f",
-            "x-real-ip": "172.18.0.1"
+            "x-real-ip": "192.42.116.173",
+            "accept-encoding": "gzip"
           },
           "params": {},
           "query": {},
           "body": {
-            "FNAME": "Christian",
-            "LNAME": "Gomez",
-            "EMAIL": "chris@g3zcreative.com",
-            "b_ab9363cefad9227bcca6421f3_3c3eba4461": ""
+            "website_field": "🔌 2 Messages from Alina. Open - https://yandex.ru/poll/enter/4z8E1bgxisTqVomi4XX2LR?i3y Message № 2463 🔌",
+            "FNAME": "frwsrt",
+            "LNAME": "toh0ro",
+            "EMAIL": "Mopar392dodgem@gmail.com"
           },
-          "webhookUrl": "https://n8n.srv1051492.hstgr.cloud/webhook-test/7c7c3a5f-978d-43ae-bb5b-b3fbe0ec6e3e",
-          "executionMode": "test"
+          "webhookUrl": "https://n8n.srv1051492.hstgr.cloud/webhook/7c7c3a5f-978d-43ae-bb5b-b3fbe0ec6e3e",
+          "executionMode": "production"
         }
       }
     ]
@@ -269,6 +301,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-10-20T13:53:17.000Z",
-  "versionId": "ba6c4502-9281-476f-88ed-6ee17af86f41"
+  "updatedAt": "2025-11-07T16:32:39.000Z",
+  "versionId": "5b33ad09-00f8-4662-960c-c8976d7f5157"
 }
