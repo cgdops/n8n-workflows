@@ -1,0 +1,317 @@
+{
+  "active": true,
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Copy file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update a document": {
+      "main": [
+        [
+          {
+            "node": "Share file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Copy file": {
+      "main": [
+        [
+          {
+            "node": "Update a document",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-11-09T15:19:04.967Z",
+  "id": "b9aAxcI9FU15VTei",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Summit Visa Letters",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Request a Letter",
+        "formDescription": "Fill out the fields below to request a letter. NAME MUST MATCH NAME ON PASSPORT.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "First Name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Last Name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Date of Birth",
+              "fieldType": "date",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Passport Number",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Email",
+              "fieldType": "email",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {
+          "appendAttribution": false,
+          "respondWithOptions": {
+            "values": {
+              "formSubmittedText": "Your response has been recorded. The letter will be sent to your email."
+            }
+          },
+          "ignoreBots": true
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.3,
+      "position": [
+        0,
+        0
+      ],
+      "id": "4dc1fceb-8a3f-4b8a-8b2f-40b0c7a37cd4",
+      "name": "On form submission",
+      "webhookId": "bfee382d-1cd9-4c0c-af77-706c67214d6b"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fced9652-9413-48f1-8275-e858faa2f6a9",
+              "name": "First Name",
+              "value": "={{ $json['First Name'] }}",
+              "type": "string"
+            },
+            {
+              "id": "069d00c6-51df-4d6e-a990-8f4f9fd5c0d1",
+              "name": "Last Name",
+              "value": "={{ $json['Last Name'] }}",
+              "type": "string"
+            },
+            {
+              "id": "00274e89-882e-4530-9514-15556f249101",
+              "name": "full_name",
+              "value": "={{ $json['First Name'] }} {{ $json['Last Name'] }}",
+              "type": "string"
+            },
+            {
+              "id": "7ea0515b-7f7d-4507-99b2-09b56049bf69",
+              "name": "Date of Birth",
+              "value": "={{ $json['Date of Birth'] }}",
+              "type": "string"
+            },
+            {
+              "id": "75144ddc-243e-4bb9-b0f2-08f9897758f5",
+              "name": "Passport Number",
+              "value": "={{ $json['Passport Number'] }}",
+              "type": "string"
+            },
+            {
+              "id": "3a9bbe20-24c0-4eeb-aee3-243e9e2793d3",
+              "name": "Email",
+              "value": "={{ $json.Email }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "75db1c66-6093-4fdf-bb01-2865b5339504",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentURL": "={{ $json.id }}",
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "replaceAll",
+              "text": "{{fullName}}",
+              "replaceText": "={{ $('Edit Fields').item.json.full_name }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{dob}}",
+              "replaceText": "={{ $('Edit Fields').item.json['Date of Birth'] }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{firstName}}",
+              "replaceText": "={{ $('Edit Fields').item.json['First Name'] }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{lastName}}",
+              "replaceText": "={{ $('Edit Fields').item.json['Last Name'] }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{passportNumber}}",
+              "replaceText": "={{ $('Edit Fields').item.json['Passport Number'] }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        592,
+        0
+      ],
+      "id": "55a75cbe-a143-4ffd-b116-d84647f0810d",
+      "name": "Update a document",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "HHIwz4p3ZRjj3zGo",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "copy",
+        "fileId": {
+          "__rl": true,
+          "value": "12lSyTzjyNEvkAeE9Qg8GkD5cQg6Jb7SiT7BknPp8Tns",
+          "mode": "list",
+          "cachedResultName": "Visa_letter_template",
+          "cachedResultUrl": "https://docs.google.com/document/d/12lSyTzjyNEvkAeE9Qg8GkD5cQg6Jb7SiT7BknPp8Tns/edit?usp=drivesdk"
+        },
+        "name": "={{ $json.full_name }} Visa Letter ",
+        "sameFolder": false,
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1cYvo2Hlhe_ATPYSDxBRW4bgKKCaOGMEr",
+          "mode": "list",
+          "cachedResultName": "Visa Letters",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1cYvo2Hlhe_ATPYSDxBRW4bgKKCaOGMEr"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        416,
+        0
+      ],
+      "id": "c97e8ba5-c3cd-4d71-a8c2-eb9cce85c6c5",
+      "name": "Copy file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "mLd7eDEex8YmpblV",
+          "name": "Google Drive account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "share",
+        "fileId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $('Copy file').item.json.id }}"
+        },
+        "permissionsUi": {
+          "permissionsValues": {
+            "role": "reader",
+            "type": "user",
+            "emailAddress": "={{ $('Edit Fields').item.json.Email }}"
+          }
+        },
+        "options": {
+          "emailMessage": "Attached is your visa letter."
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        800,
+        0
+      ],
+      "id": "34f7dbaf-ee48-4fa9-8298-d0dbf8c86a28",
+      "name": "Share file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "mLd7eDEex8YmpblV",
+          "name": "Google Drive account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "On form submission": [
+      {
+        "json": {
+          "First Name": "Christian",
+          "Last Name": "Gomez",
+          "Date of Birth": "1990-02-12",
+          "Passport Number": "0123456789",
+          "Email": "chris.smply.me@gmail.com",
+          "submittedAt": "2025-11-09T16:19:32.640+01:00",
+          "formMode": "test"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-11-09T15:19:04.970Z",
+      "updatedAt": "2025-11-09T15:19:04.970Z",
+      "role": "workflow:owner",
+      "workflowId": "b9aAxcI9FU15VTei",
+      "projectId": "QNfIJ0xZgM3QlqN4"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-11-09T18:01:17.000Z",
+  "versionId": "22b97de6-9434-4530-b967-5512b580e160"
+}
