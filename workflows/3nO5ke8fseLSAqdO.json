@@ -1,0 +1,251 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTML": {
+      "main": [
+        [
+          {
+            "node": "HTTP POST to ET",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-11-15T13:42:54.532Z",
+  "id": "3nO5ke8fseLSAqdO",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Event Tabs Form Fill (12 hours)",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "ba4c63d5-7525-41d8-a1c2-c63fea3bca05",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1m6T4enKpz1UkubRfGPiYY3QpYB-qfJXKBFg_vpCXuxE",
+          "mode": "list",
+          "cachedResultName": "RLDC 2026",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1m6T4enKpz1UkubRfGPiYY3QpYB-qfJXKBFg_vpCXuxE/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1m6T4enKpz1UkubRfGPiYY3QpYB-qfJXKBFg_vpCXuxE/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        208,
+        0
+      ],
+      "id": "d16bd4f8-9139-49c1-b61d-54fe99544784",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "h35AaTyWKINQe0bE",
+          "name": "chris.smply.me@gmail.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://eventtabs.com/events/51/admin/products",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "response": {
+            "response": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        416,
+        0
+      ],
+      "id": "33783411-afb5-4dae-9a2e-18bb3edac9ee",
+      "name": "HTTP Request",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "j7JZGIIB33MmbfSQ",
+          "name": "eventtabs cookie"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "extractHtmlContent",
+        "extractionValues": {
+          "values": [
+            {
+              "key": "authToken",
+              "cssSelector": "input[name=\"authenticity_token\"]",
+              "returnValue": "attribute",
+              "attribute": "value"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        624,
+        0
+      ],
+      "id": "b69b3097-b555-41b7-83dd-ea4124176414",
+      "name": "HTML"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://eventtabs.com/events/51/admin/products",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "contentType": "form-urlencoded",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "utf8",
+              "value": "✓"
+            },
+            {
+              "name": "authenticity_token",
+              "value": "={{ $json.authToken }}"
+            },
+            {
+              "name": "product[name]",
+              "value": "={{ $('Get row(s) in sheet').item.json.name }}"
+            },
+            {
+              "name": "product[category_id]",
+              "value": "={{ $('Get row(s) in sheet').item.json.category_id }}"
+            },
+            {
+              "name": "product[early_price]",
+              "value": "={{ $('Get row(s) in sheet').item.json.early_price }}"
+            },
+            {
+              "name": "product[regular_price]",
+              "value": "={{ $('Get row(s) in sheet').item.json.regular_price }}"
+            },
+            {
+              "name": "product[late_price]",
+              "value": "={{ $('Get row(s) in sheet').item.json.late_price }}"
+            },
+            {
+              "name": "product[judge_form]",
+              "value": "={{ $('Get row(s) in sheet').item.json.judge_form }}"
+            },
+            {
+              "name": "product[room_id]",
+              "value": "={{ $('Get row(s) in sheet').item.json['58'] }}"
+            },
+            {
+              "name": "product[customer_form]",
+              "value": "={{ $('Get row(s) in sheet').item.json.customer_form }}"
+            },
+            {
+              "name": "product[store_order]",
+              "value": "={{ $('Get row(s) in sheet').item.json.store_order }}"
+            },
+            {
+              "name": "product[division]",
+              "value": "={{ $('Get row(s) in sheet').item.json.division }}"
+            },
+            {
+              "name": "product[active]",
+              "value": "={{ $('Get row(s) in sheet').item.json.active }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        832,
+        0
+      ],
+      "id": "47f7b808-8ddb-4140-aafd-22e9cd330986",
+      "name": "HTTP POST to ET",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "j7JZGIIB33MmbfSQ",
+          "name": "eventtabs cookie"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-11-15T13:42:54.535Z",
+      "createdAt": "2025-11-15T13:42:54.535Z",
+      "role": "workflow:owner",
+      "workflowId": "3nO5ke8fseLSAqdO",
+      "projectId": "QNfIJ0xZgM3QlqN4"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-11-15T14:44:49.000Z",
+  "versionId": "067054a5-fa88-4f4b-b880-8b61b3159e5f"
+}
