@@ -182,7 +182,7 @@
   "nodes": [
     {
       "parameters": {
-        "sendTo": "={{ $json.Email }}",
+        "sendTo": "={{ $('Get row(s) in sheet').item.json.Email }}",
         "subject": "Welcome to Remember Me ✨",
         "message": "=<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Welcome to Remember Me</title>\n</head>\n<body style=\"margin: 0; padding: 0; background-color: #f4f4f4;\">\n    <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff;\">\n        \n        <tr>\n            <td align=\"center\" style=\"padding: 20px 0 20px 0;\">\n                <img src=\"https://remembermeseries.com/images/remember-me-web-logo.png\" alt=\"Remember Me Logo\" width=\"180\" style=\"display: block; width: 180px; max-width: 100%; height: auto;\">\n            </td>\n        </tr>\n        \n        <tr>\n            <td style=\"padding: 20px 30px 40px 30px; color: #333333; font-family: Arial, sans-serif; font-size: 16px; line-height: 1.6;\">\n                <p>Hi {{ $json['First Name'] }},</p>\n                <p>Thank you for joining the Remember Me community!</p>\n                <p>Starting tomorrow, you’ll receive your first devotional in our 5-day journey — designed to encourage you, inspire you, and remind you that Jesus is never far away.</p>\n                <p>We’re so glad you’re here.</p>\n                <p style=\"margin-top: 25px;\">— The Remember Me Team</p>\n                <p style=\"margin-top: 15px;\">\n                    <a href=\"https://remembermeseries.com\" style=\"color: #007bff; text-decoration: underline;\">remembermeseries.com</a>\n                </p>\n            </td>\n        </tr>\n        \n        <tr>\n            <td align=\"center\" style=\"padding: 20px 30px; background-color: #eeeeee; color: #888888; font-family: Arial, sans-serif; font-size: 12px;\">\n                <p>You are receiving this email because you signed up on our website.</p>\n            </td>\n        </tr>\n\n    </table>\n</body>\n</html>",
         "options": {
@@ -927,6 +927,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-10-23T21:30:39.000Z",
-  "versionId": "a756e64f-f12b-4762-9c12-85d47043fcb2"
+  "updatedAt": "2025-11-18T16:08:43.000Z",
+  "versionId": "f328711a-fbb2-4ece-aa18-c3cf953c7cd5"
 }
