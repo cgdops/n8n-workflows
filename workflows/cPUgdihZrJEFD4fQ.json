@@ -36,13 +36,7 @@
     },
     "Ingest Web Page": {
       "main": [
-        [
-          {
-            "node": "Get Documentation Page",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Split Out Links": {
@@ -67,28 +61,6 @@
         ]
       ]
     },
-    "Clean Documentation": {
-      "main": [
-        [
-          {
-            "node": "Remove Duplicate Documentation Content",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Default Data Loader": {
-      "ai_document": [
-        [
-          {
-            "node": "Simple Vector Store",
-            "type": "ai_document",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Only Keep Doc Paths": {
       "main": [
         [
@@ -100,34 +72,12 @@
         ]
       ]
     },
-    "Gemini Chunk Embedding": {
-      "ai_embedding": [
-        [
-          {
-            "node": "Simple Vector Store",
-            "type": "ai_embedding",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Gemini Query Embedding": {
       "ai_embedding": [
         [
           {
             "node": "Official n8n Documentation",
             "type": "ai_embedding",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Get Documentation Page": {
-      "main": [
-        [
-          {
-            "node": "Extract Documentation Content",
-            "type": "main",
             "index": 0
           }
         ]
@@ -166,17 +116,6 @@
         ]
       ]
     },
-    "Extract Documentation Content": {
-      "main": [
-        [
-          {
-            "node": "Clean Documentation",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Loop Over Documentation Pages": {
       "main": [
         [],
@@ -200,33 +139,11 @@
         ]
       ]
     },
-    "Recursive Character Text Splitter": {
-      "ai_textSplitter": [
-        [
-          {
-            "node": "Default Data Loader",
-            "type": "ai_textSplitter",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Add Documentation Page to Vector Store": {
       "main": [
         [
           {
             "node": "Loop Over Documentation Pages",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Remove Duplicate Documentation Content": {
-      "main": [
-        [
-          {
-            "node": "Simple Vector Store",
             "type": "main",
             "index": 0
           }
@@ -256,66 +173,6 @@
         3424
       ],
       "typeVersion": 1.3,
-      "notes": "© 2025 Lucas Peyrin"
-    },
-    {
-      "parameters": {
-        "jsonMode": "expressionData",
-        "jsonData": "={{ $json.documentation }}",
-        "textSplittingMode": "custom",
-        "options": {}
-      },
-      "id": "2916c373-0c6b-4315-a14d-481d674a324f",
-      "cid": "Ikx1Y2FzIFBleXJpbiI",
-      "name": "Default Data Loader",
-      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
-      "creator": "Lucas Peyrin",
-      "position": [
-        3568,
-        1904
-      ],
-      "typeVersion": 1.1,
-      "notes": "© 2025 Lucas Peyrin"
-    },
-    {
-      "parameters": {
-        "chunkSize": 1500,
-        "chunkOverlap": 200,
-        "options": {
-          "splitCode": "markdown"
-        }
-      },
-      "id": "8b411025-ad1f-4656-84d7-902ced049923",
-      "cid": "Ikx1Y2FzIFBleXJpbiI",
-      "name": "Recursive Character Text Splitter",
-      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
-      "creator": "Lucas Peyrin",
-      "position": [
-        3664,
-        2112
-      ],
-      "typeVersion": 1,
-      "notes": "© 2025 Lucas Peyrin"
-    },
-    {
-      "parameters": {
-        "operation": "removeItemsSeenInPreviousExecutions",
-        "dedupeValue": "={{ $json.documentation }}",
-        "options": {
-          "scope": "node",
-          "historySize": 10000
-        }
-      },
-      "id": "4855516e-4a0d-4881-8dc4-592cf8b133a9",
-      "cid": "Ikx1Y2FzIFBleXJpbiI",
-      "name": "Remove Duplicate Documentation Content",
-      "type": "n8n-nodes-base.removeDuplicates",
-      "creator": "Lucas Peyrin",
-      "position": [
-        2944,
-        1680
-      ],
-      "typeVersion": 2,
       "notes": "© 2025 Lucas Peyrin"
     },
     {
@@ -361,32 +218,6 @@
         912
       ],
       "typeVersion": 2.2,
-      "notes": "© 2025 Lucas Peyrin"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "5ed964a6-5200-454c-b983-f3dc7c8c7a48",
-              "name": "documentation",
-              "type": "string",
-              "value": "={{ $json.data.replace(/([^#\\n]+)\\s*#/g, '# $1').trim().replace(/^\\s*https?:\\/\\/\\S+\\s*/, '') }}"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "b07b416b-f5cd-439a-b935-ce58c2a2f180",
-      "cid": "Ikx1Y2FzIFBleXJpbiI",
-      "name": "Clean Documentation",
-      "type": "n8n-nodes-base.set",
-      "creator": "Lucas Peyrin",
-      "position": [
-        2512,
-        1680
-      ],
-      "typeVersion": 3.4,
       "notes": "© 2025 Lucas Peyrin"
     },
     {
@@ -541,50 +372,6 @@
       "notes": "© 2025 Lucas Peyrin"
     },
     {
-      "parameters": {
-        "url": "=https://docs.n8n.io/{{ $json.link }}",
-        "options": {}
-      },
-      "id": "1c772047-a2f9-427a-b090-dbf00a257c9c",
-      "cid": "Ikx1Y2FzIFBleXJpbiI",
-      "name": "Get Documentation Page",
-      "type": "n8n-nodes-base.httpRequest",
-      "creator": "Lucas Peyrin",
-      "position": [
-        1984,
-        1680
-      ],
-      "typeVersion": 4.2,
-      "onError": "continueErrorOutput",
-      "notes": "© 2025 Lucas Peyrin"
-    },
-    {
-      "parameters": {
-        "operation": "extractHtmlContent",
-        "extractionValues": {
-          "values": [
-            {
-              "key": "data",
-              "cssSelector": "article",
-              "skipSelectors": "img, footer, form"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "d7cd75ad-e76d-45c7-8791-e6b9cf0e2106",
-      "cid": "Ikx1Y2FzIFBleXJpbiI",
-      "name": "Extract Documentation Content",
-      "type": "n8n-nodes-base.html",
-      "creator": "Lucas Peyrin",
-      "position": [
-        2288,
-        1680
-      ],
-      "typeVersion": 1.2,
-      "notes": "© 2025 Lucas Peyrin"
-    },
-    {
       "parameters": {},
       "id": "5ac3f64f-0340-4a98-bace-1c156021a919",
       "cid": "Ikx1Y2FzIFBleXJpbiI",
@@ -602,45 +389,6 @@
           "name": "Google Gemini(PaLM) Api account"
         }
       },
-      "notes": "© 2025 Lucas Peyrin"
-    },
-    {
-      "parameters": {},
-      "id": "cbcc6097-c4a7-45d4-a852-5ab69d8f1e14",
-      "cid": "Ikx1Y2FzIFBleXJpbiI",
-      "name": "Gemini Chunk Embedding",
-      "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
-      "creator": "Lucas Peyrin",
-      "position": [
-        3440,
-        1904
-      ],
-      "typeVersion": 1,
-      "credentials": {
-        "googlePalmApi": {
-          "id": "NF7SyR12WXtvl3s7",
-          "name": "Google Gemini(PaLM) Api account"
-        }
-      },
-      "notes": "© 2025 Lucas Peyrin"
-    },
-    {
-      "parameters": {
-        "content": "## Part 1: Building the Knowledge Base (The Library)\n\n**Goal:** To read all n8n documentation, break it into small pieces, and store it in n8n's **in-memory vector store**.\n**Action:** You only need to run this part **ONCE** per n8n session by clicking the \"Execute workflow\" button on the `Start Indexing` trigger.\n**Time:** This will take several minutes to complete (~15 to 20).\n\n**Important:** The in-memory store is not permanent. If you restart n8n, you must run this indexing flow again to rebuild the knowledge base.",
-        "height": 1792,
-        "width": 2640,
-        "color": 7
-      },
-      "id": "ba1f2848-bd94-4180-8edd-38150cda7f0b",
-      "cid": "Ikx1Y2FzIFBleXJpbiI",
-      "name": "Sticky Note2",
-      "type": "n8n-nodes-base.stickyNote",
-      "creator": "Lucas Peyrin",
-      "position": [
-        1328,
-        528
-      ],
-      "typeVersion": 1,
       "notes": "© 2025 Lucas Peyrin"
     },
     {
@@ -1168,7 +916,7 @@
     {
       "parameters": {
         "content": "## Video Tutorial\n\nA full video tutorial about RAG will be shown here in a future version of this template !",
-        "height": 544,
+        "height": 80,
         "width": 832,
         "color": 2
       },
@@ -1179,31 +927,9 @@
       "creator": "Lucas Peyrin",
       "position": [
         3136,
-        2352
+        2816
       ],
       "typeVersion": 1,
-      "notes": "© 2025 Lucas Peyrin"
-    },
-    {
-      "parameters": {
-        "mode": "insert",
-        "memoryKey": {
-          "__rl": true,
-          "mode": "id",
-          "value": "n8n_documentation_vector_store"
-        },
-        "embeddingBatchSize": 30
-      },
-      "id": "85ff7226-9931-41d7-9ca5-c9a6f153fe26",
-      "cid": "Ikx1Y2FzIFBleXJpbiI",
-      "name": "Simple Vector Store",
-      "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
-      "creator": "Lucas Peyrin",
-      "position": [
-        3472,
-        1680
-      ],
-      "typeVersion": 1.3,
       "notes": "© 2025 Lucas Peyrin"
     },
     {
@@ -1229,6 +955,32 @@
       ],
       "typeVersion": 1.3,
       "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "uI5M32id196ZfNRP",
+          "mode": "list"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        3824,
+        1088
+      ],
+      "name": "Call My Sub-workflow",
+      "id": "b3e712d9-9074-4e94-9cb7-761e107a68aa"
     }
   ],
   "pinData": {},
@@ -1245,6 +997,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-10-17T14:15:08.000Z",
-  "versionId": "aab8038d-8c6e-417f-9b24-d0cc1309f291"
+  "updatedAt": "2025-11-19T17:21:59.000Z",
+  "versionId": "2c975a06-051c-46a9-a674-39c882b3df74"
 }
