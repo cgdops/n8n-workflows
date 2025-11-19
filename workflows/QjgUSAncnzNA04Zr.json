@@ -1,0 +1,205 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTML": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-11-19T19:12:39.030Z",
+  "id": "QjgUSAncnzNA04Zr",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Scrape an Article and give me a tldr",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -480,
+        -80
+      ],
+      "id": "38c55512-dbe8-4cae-9235-fcd2859e9105",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "9c753819-058c-437a-a0a8-abf36c8440dc",
+              "name": "article_url",
+              "value": "https://www.forrester.com/blogs/announcing-the-forrester-wave-digital-experience-platforms-q4-2025/",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -272,
+        -80
+      ],
+      "id": "d6000f3e-ad41-471f-b1ea-98dcacacdaff",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.article_url }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -64,
+        -80
+      ],
+      "id": "9032939f-c41d-4fd2-bdd5-58cc75ac956b",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "operation": "extractHtmlContent",
+        "extractionValues": {
+          "values": [
+            {
+              "key": "post_header",
+              "cssSelector": ".post-header"
+            },
+            {
+              "key": "post_content",
+              "cssSelector": ".post-content"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        144,
+        -80
+      ],
+      "id": "83d04884-f78e-484c-a2fb-80ad465e3666",
+      "name": "HTML"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.post_header }}\n{{ $json.post_content }}",
+        "options": {
+          "systemMessage": "Analyze the content sent by the user, and generate a tl;dr summary including key points and important information."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        352,
+        -80
+      ],
+      "id": "d06084b6-cf84-43a7-bf6d-d9d1d6cf115b",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        224,
+        128
+      ],
+      "id": "d39ec7c7-9db2-438a-a51a-6cb2bc3eed2c",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "NF7SyR12WXtvl3s7",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Edit Fields": [
+      {
+        "json": {
+          "article_url": "https://www.forrester.com/blogs/announcing-the-forrester-wave-digital-experience-platforms-q4-2025/"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-11-19T19:12:39.032Z",
+      "createdAt": "2025-11-19T19:12:39.032Z",
+      "role": "workflow:owner",
+      "workflowId": "QjgUSAncnzNA04Zr",
+      "projectId": "QNfIJ0xZgM3QlqN4"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-11-19T19:25:25.000Z",
+  "versionId": "494c6bda-e34f-440b-a78a-74495dccd173"
+}
