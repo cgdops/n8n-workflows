@@ -170,7 +170,7 @@
   },
   "createdAt": "2025-11-19T15:29:21.890Z",
   "id": "81vAbtTWAxCoa2RM",
-  "isArchived": false,
+  "isArchived": true,
   "meta": null,
   "name": "My workflow 7",
   "nodes": [
@@ -553,6 +553,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-11-19T18:24:39.000Z",
-  "versionId": "66a837d9-d36a-4724-aae6-6055141e5fb0"
+  "updatedAt": "2025-11-20T01:58:29.000Z",
+  "versionId": "1b70ba91-f028-421d-9e55-a130764cb4c3"
 }
