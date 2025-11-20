@@ -75,7 +75,7 @@
   },
   "createdAt": "2025-11-19T15:34:06.260Z",
   "id": "jkBhNoH8zjFEOHoI",
-  "isArchived": false,
+  "isArchived": true,
   "meta": {
     "templateId": "rag-starter-template"
   },
@@ -310,6 +310,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-11-19T15:34:06.260Z",
-  "versionId": "126952ac-ad00-46e9-ab27-e07765c1d2b1"
+  "updatedAt": "2025-11-20T01:58:28.000Z",
+  "versionId": "ccb7990d-d483-44ea-b979-4249d64b2a2a"
 }
