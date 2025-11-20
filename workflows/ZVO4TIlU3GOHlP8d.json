@@ -312,7 +312,8 @@
           "id": "Fyv1gAhmWw0x1HOY",
           "name": "Todoist account"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -484,6 +485,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-11-19T18:45:12.000Z",
-  "versionId": "ee97a295-6db8-4693-bbdf-7e49e794f49e"
+  "updatedAt": "2025-11-20T02:03:56.000Z",
+  "versionId": "ce396d5b-3629-4845-99eb-2e39fda54c0d"
 }
