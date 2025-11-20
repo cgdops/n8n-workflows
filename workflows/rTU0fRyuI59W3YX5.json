@@ -1,0 +1,28 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2025-11-20T22:15:19.405Z",
+  "id": "rTU0fRyuI59W3YX5",
+  "isArchived": false,
+  "meta": null,
+  "name": "Weekly Pagespeed Insights",
+  "nodes": [],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-11-20T22:15:19.407Z",
+      "createdAt": "2025-11-20T22:15:19.407Z",
+      "role": "workflow:owner",
+      "workflowId": "rTU0fRyuI59W3YX5",
+      "projectId": "QNfIJ0xZgM3QlqN4"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-11-20T22:15:19.405Z",
+  "versionId": "b1fc1f84-6f73-4378-89c2-f65ea3ff851d"
+}
