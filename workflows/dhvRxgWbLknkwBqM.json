@@ -1,0 +1,217 @@
+{
+  "active": true,
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-11-20T02:04:26.673Z",
+  "id": "dhvRxgWbLknkwBqM",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Collect feedback",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Leave us your feedback!",
+        "formDescription": "You're honest feedback is very important to us. Your submissions are completely anonymous and solely serve to help us improve our product. Thank you!\n\n- Remember Me Content Team",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Did you enjoy the video you just watched?",
+              "fieldType": "radio",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Yes"
+                  },
+                  {
+                    "option": "No"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "In your own words, what did you like best?",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "What did you like least?",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Would you recommend Remember Me to a friend?",
+              "fieldType": "radio",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Yes"
+                  },
+                  {
+                    "option": "No"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Is there any other feedback you'd like to share with us?"
+            }
+          ]
+        },
+        "options": {
+          "appendAttribution": false,
+          "ignoreBots": true
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.3,
+      "position": [
+        -144,
+        0
+      ],
+      "id": "eb91186b-ca31-4b2d-843a-9885edc43db0",
+      "name": "On form submission",
+      "webhookId": "68d06ffc-e4e0-44c9-a911-f634948a99e5"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1yy0n29gw6QRQpQiyyYA3Fv2QUY57LQ5A7jgv3VaGugk",
+          "mode": "list",
+          "cachedResultName": "Remember Me Feedback",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1yy0n29gw6QRQpQiyyYA3Fv2QUY57LQ5A7jgv3VaGugk/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1yy0n29gw6QRQpQiyyYA3Fv2QUY57LQ5A7jgv3VaGugk/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "DateTime": "={{ $json.submittedAt }}",
+            "Enjoyed?": "={{ $json['Did you enjoy the video you just watched?'] }}",
+            "The Good": "={{ $json['In your own words, what did you like best?'] }}",
+            "The Bad": "={{ $json['What did you like least?'] }}",
+            "Recommend?": "={{ $json['Would you recommend Remember Me to a friend?'] }}",
+            "Addtl. Feedback": "={{ $json['Is there any other feedback you\\'d like to share with us?'] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "DateTime",
+              "displayName": "DateTime",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Enjoyed?",
+              "displayName": "Enjoyed?",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "The Good",
+              "displayName": "The Good",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "The Bad",
+              "displayName": "The Bad",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Recommend?",
+              "displayName": "Recommend?",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Addtl. Feedback",
+              "displayName": "Addtl. Feedback",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        208,
+        0
+      ],
+      "id": "f043d20f-bfde-4b4a-900f-86a5fc7b77a7",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "WoXbHPbfFs6I4Nyw",
+          "name": "RememberMe Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-11-20T02:04:26.677Z",
+      "createdAt": "2025-11-20T02:04:26.677Z",
+      "role": "workflow:owner",
+      "workflowId": "dhvRxgWbLknkwBqM",
+      "projectId": "QNfIJ0xZgM3QlqN4"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-11-20T22:15:04.000Z",
+  "versionId": "1f1d00fc-0341-4bf2-8f99-20849903249e"
+}
