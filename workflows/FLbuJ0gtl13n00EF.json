@@ -1,0 +1,44 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2025-11-20T01:16:48.657Z",
+  "id": "FLbuJ0gtl13n00EF",
+  "isArchived": false,
+  "meta": null,
+  "name": "Send client summary when work done",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "- GET todoist items daily at 8am\n- if new item in status done\n- log the done item \n- add what was done to an email\n- send the email to the client",
+        "height": 128,
+        "width": 288
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -848,
+        -192
+      ],
+      "id": "8dde7e75-8771-4457-b887-8006463e5377",
+      "name": "Sticky Note"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-11-20T01:16:48.659Z",
+      "createdAt": "2025-11-20T01:16:48.659Z",
+      "role": "workflow:owner",
+      "workflowId": "FLbuJ0gtl13n00EF",
+      "projectId": "QNfIJ0xZgM3QlqN4"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-11-20T01:57:36.000Z",
+  "versionId": "756df33e-12fb-4e8a-9947-54fd3f38480d"
+}
