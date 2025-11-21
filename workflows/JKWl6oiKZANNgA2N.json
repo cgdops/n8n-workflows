@@ -1,0 +1,360 @@
+{
+  "active": true,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Orchestrator Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook1": {
+      "main": [
+        [
+          {
+            "node": "Orchestrator Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Orchestrator Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Call 'Website Builder Agent'",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [],
+        []
+      ]
+    },
+    "Orchestrator Agent": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-11-21T13:36:58.034Z",
+  "id": "JKWl6oiKZANNgA2N",
+  "isArchived": false,
+  "meta": null,
+  "name": "Chat Orchestrator",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "web",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        -16
+      ],
+      "id": "6d3ea975-33f4-4655-a58d-5cb4d012d9e9",
+      "name": "Webhook",
+      "webhookId": "7b9d708b-b3d6-4401-b84c-c77036dfae8b"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "=<!DOCTYPE html>\n<html lang=\"en\" data-theme=\"dark\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>n8n AI Assistant</title>\n    <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css\">\n    <style>\n        /* Custom Overrides for a Sleek Chat UI */\n        :root {\n            --primary: #f42564; /* G3Z Pink for user */\n            --background: #11191f;\n            --surface: #1f2937;\n            --spacing: 1rem;\n        }\n\n        body {\n            display: flex;\n            flex-direction: column;\n            height: 100dvh; /* Dynamic viewport height for mobile */\n            margin: 0;\n            background-color: var(--background);\n            overflow: hidden; /* Prevent body scroll, handle in chat box */\n        }\n\n        /* Header */\n        header {\n            padding: var(--spacing);\n            background-color: var(--surface);\n            border-bottom: 1px solid #374151;\n            display: flex;\n            align-items: center;\n            justify-content: space-between;\n            height: 60px;\n            flex-shrink: 0;\n        }\n\n        header h1 {\n            margin: 0;\n            font-size: 1.25rem;\n            font-weight: 600;\n            color: #fff;\n        }\n\n        /* Chat Area */\n        #chat-container {\n            flex-grow: 1;\n            overflow-y: auto;\n            padding: var(--spacing);\n            display: flex;\n            flex-direction: column;\n            gap: 1rem;\n            scroll-behavior: smooth;\n        }\n\n        /* Message Bubbles */\n        .message {\n            max-width: 80%;\n            padding: 0.75rem 1rem;\n            border-radius: 1rem;\n            font-size: 0.95rem;\n            line-height: 1.5;\n            position: relative;\n            word-wrap: break-word;\n            animation: fadeIn 0.3s ease;\n        }\n\n        @keyframes fadeIn {\n            from { opacity: 0; transform: translateY(10px); }\n            to { opacity: 1; transform: translateY(0); }\n        }\n\n        /* Bot Message Styling */\n        .message.bot {\n            align-self: flex-start;\n            background-color: var(--surface);\n            color: #e5e7eb;\n            border-bottom-left-radius: 0;\n        }\n\n        /* User Message Styling */\n        .message.user {\n            align-self: flex-end;\n            background-color: var(--primary);\n            color: #fff;\n            border-bottom-right-radius: 0;\n        }\n\n        /* Typing Indicator */\n        .typing {\n            font-style: italic;\n            font-size: 0.8rem;\n            color: #9ca3af;\n            margin-left: 0.5rem;\n            display: none; /* Hidden by default */\n        }\n\n        /* Input Area */\n        footer {\n            padding: var(--spacing);\n            background-color: var(--surface);\n            border-top: 1px solid #374151;\n            flex-shrink: 0;\n        }\n\n        form {\n            display: flex;\n            gap: 0.5rem;\n            margin: 0;\n        }\n\n        input[type=\"text\"] {\n            margin-bottom: 0;\n            background-color: var(--background);\n            border: 1px solid #374151;\n            color: white;\n            border-radius: 999px; /* Pill shape */\n            padding-left: 1.25rem;\n        }\n\n        input[type=\"text\"]:focus {\n            border-color: var(--primary);\n            box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);\n        }\n\n        button {\n            width: auto;\n            margin-bottom: 0;\n            border-radius: 999px;\n            background-color: var(--primary);\n            border: none;\n            padding: 0 1.5rem;\n        }\n        \n        button:hover {\n            background-color: #059669;\n        }\n\n        /* Custom Scrollbar */\n        #chat-container::-webkit-scrollbar {\n            width: 6px;\n        }\n        #chat-container::-webkit-scrollbar-track {\n            background: var(--background);\n        }\n        #chat-container::-webkit-scrollbar-thumb {\n            background: #374151;\n            border-radius: 3px;\n        }\n    </style>\n</head>\n<body>\n\n    <header>\n        <h1>AI Assistant</h1>\n        <small style=\"color: #9ca3af;\">n8n Powered</small>\n    </header>\n\n    <div id=\"chat-container\">\n        <div class=\"message bot\">\n            Hello! I am your n8n assistant. How can I help you today?\n        </div>\n    </div>\n    <div id=\"typing-indicator\" class=\"typing\">AI is typing...</div>\n\n    <footer>\n        <form id=\"chat-form\">\n            <input type=\"text\" id=\"user-input\" placeholder=\"Type your message...\" autocomplete=\"off\" required>\n            <button type=\"submit\">Send</button>\n        </form>\n    </footer>\n\n    <script>\n        // ================= CONFIGURATION =================\n        // Replace this URL with your SECOND n8n Webhook (Method: POST)\n        // This is the webhook that handles the chat logic (OpenAI, etc.)\n        const WEBHOOK_URL = 'https://n8n.srv1051492.hstgr.cloud/webhook/7f4cec3b-9bbb-4c80-9462-fd76f5b04219'; \n        // =================================================\n\n        const chatContainer = document.getElementById('chat-container');\n        const chatForm = document.getElementById('chat-form');\n        const userInput = document.getElementById('user-input');\n        const typingIndicator = document.getElementById('typing-indicator');\n\n        // Function to add message to UI\n        function addMessage(text, sender) {\n            const messageDiv = document.createElement('div');\n            messageDiv.classList.add('message', sender);\n            messageDiv.innerText = text; // Safe innerText prevents HTML injection\n            chatContainer.appendChild(messageDiv);\n            scrollToBottom();\n        }\n\n        // Scroll to bottom helper\n        function scrollToBottom() {\n            chatContainer.scrollTop = chatContainer.scrollHeight;\n        }\n\n        // Handle Form Submit\n        chatForm.addEventListener('submit', async (e) => {\n            e.preventDefault();\n            const message = userInput.value.trim();\n            if (!message) return;\n\n            // 1. Add User Message\n            addMessage(message, 'user');\n            userInput.value = '';\n            userInput.focus();\n\n            // 2. Show Typing Indicator\n            typingIndicator.style.display = 'block';\n            scrollToBottom();\n\n            try {\n                // 3. Send to n8n\n                const response = await fetch(WEBHOOK_URL, {\n                    method: 'POST',\n                    headers: { 'Content-Type': 'application/json' },\n                    body: JSON.stringify({ chatInput: message })\n                });\n\n                const data = await response.json();\n                \n                // 4. Hide Typing Indicator\n                typingIndicator.style.display = 'none';\n\n                // 5. Handle Response\n                // Adjust 'output' to match the JSON key your n8n workflow returns\n                const botReply = data.output || data.text || JSON.stringify(data);\n                addMessage(botReply, 'bot');\n\n            } catch (error) {\n                console.error('Error:', error);\n                typingIndicator.style.display = 'none';\n                addMessage(\"Error connecting to n8n workflow.\", 'bot');\n            }\n        });\n    </script>\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        224,
+        -16
+      ],
+      "id": "b85a61fb-9337-4851-9f89-7bcbb7b80663",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4o-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        176,
+        448
+      ],
+      "id": "50e90275-76e5-47c9-ab33-7990380a20ce",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "PgqwHquDEYK6dlgo",
+          "name": "XIX OpenAI"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "7f4cec3b-9bbb-4c80-9462-fd76f5b04219",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        240
+      ],
+      "id": "a01bfbc8-f68f-4218-981f-73ce758d893e",
+      "name": "Webhook1",
+      "webhookId": "7f4cec3b-9bbb-4c80-9462-fd76f5b04219"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{  \n\"intent\":\"website_build\",\n\"client\":\"client name\",\n\"industry\":\"client industry\"\n }"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        384,
+        448
+      ],
+      "id": "568ad1a0-c8e1-4269-bd48-5d646aa19ec4",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "073c55f6-1f45-4296-9fde-7dd6206aa2f7",
+              "name": "intent",
+              "value": "={{ $json.output.intent }}",
+              "type": "string"
+            },
+            {
+              "id": "2ee9deed-fa99-4697-aee3-efb6c38fe64d",
+              "name": "client",
+              "value": "={{ $json.output.client }}",
+              "type": "string"
+            },
+            {
+              "id": "4309bc98-7a47-4efc-868a-032b4ae8f0fa",
+              "name": "industry",
+              "value": "={{ $json.output.industry }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        560,
+        240
+      ],
+      "id": "5c9f1b8f-01e8-496b-97fe-9684a2933502",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Orchestrator Agent').item.json.output.intent }}",
+                    "rightValue": "website_build",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "f54016d2-e2a2-4ff9-9be4-67d084e6cbf3"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "64875aeb-a785-464c-b5e1-f8014718e437",
+                    "leftValue": "={{ $('Orchestrator Agent').item.json.output.intent }}",
+                    "rightValue": "crm_update",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "4ee2f6b5-f9f2-47d1-9723-7c50795aebdb",
+                    "leftValue": "default",
+                    "rightValue": "website_build || crm_update",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notEquals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        768,
+        240
+      ],
+      "id": "92689c2b-c0d4-4c93-85b0-e8a9b7e84d81",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "ytXyuPaPjH0B17dv",
+          "mode": "id",
+          "cachedResultUrl": "/workflow/ytXyuPaPjH0B17dv"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        1008,
+        112
+      ],
+      "id": "76cc38d4-a843-4905-a8d7-5d3b52c81c64",
+      "name": "Call 'Website Builder Agent'"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.body.chatInput }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are a multi agent orchestrator, the user is going to give you a message and it is your job to decipher which agent workflow to trigger.\n\nClassify the user's intent, client name and industry. Output valid JSON only: \n\n{  \n\"intent\":\"website_build\",\n\"client\":\"client name\",\n\"industry\":\"client industry\"\n }"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        208,
+        240
+      ],
+      "id": "11a59c90-ff5f-47c5-9203-4de4414445b3",
+      "name": "Orchestrator Agent"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-11-21T13:36:58.038Z",
+      "createdAt": "2025-11-21T13:36:58.038Z",
+      "role": "workflow:owner",
+      "workflowId": "JKWl6oiKZANNgA2N",
+      "projectId": "QNfIJ0xZgM3QlqN4"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 2,
+  "updatedAt": "2025-11-21T14:31:12.000Z",
+  "versionId": "3605ee94-d0d8-4545-a931-a205fb5a315b"
+}
