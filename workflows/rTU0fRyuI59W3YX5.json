@@ -1,12 +1,225 @@
 {
   "active": false,
-  "connections": {},
+  "connections": {
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cohere Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
   "createdAt": "2025-11-20T22:15:19.405Z",
   "id": "rTU0fRyuI59W3YX5",
   "isArchived": false,
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "Weekly Pagespeed Insights",
-  "nodes": [],
+  "nodes": [
+    {
+      "parameters": {
+        "content": "1) Run pagespeed insights once a week\n2) Analyze the results\n3) Generate actionable steps\n4) Prioritize tasks based on eisenhower matrix"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -960,
+        -208
+      ],
+      "id": "2d6ecf2e-91cd-4f01-a68c-334e91e30f45",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1ieQRZspWmFlzVYV86Mn5S8Oxqwy6knzwRULrcl8K3_0",
+          "mode": "list",
+          "cachedResultName": "websiteUrls",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ieQRZspWmFlzVYV86Mn5S8Oxqwy6knzwRULrcl8K3_0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ieQRZspWmFlzVYV86Mn5S8Oxqwy6knzwRULrcl8K3_0/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -336,
+        -144
+      ],
+      "id": "d9b06de6-c601-4a9e-ae10-947d280b40a8",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "h35AaTyWKINQe0bE",
+          "name": "chris.smply.me@gmail.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://www.googleapis.com/pagespeedonline/v5/runPagespeed",
+        "sendQuery": true,
+        "specifyQuery": "json",
+        "jsonQuery": "={\n  \"url\":\"{{ $json.websiteUrl }}\",\n  \"key\":\"AIzaSyDzJ3CGy7lb-_R5xizevVJzxeff7VQDVQg\",\n  \"strategy\":\"mobile\",\n  \"category\": [\"performance\", \"seo\"]\n} ",
+        "options": {
+          "batching": {
+            "batch": {
+              "batchSize": 1
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -128,
+        -144
+      ],
+      "id": "fb334d70-e02f-4713-bf71-fa03849af775",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Summary:\n{{ JSON.stringify($json.summary) }}\n\nPrioritized issues:\n{{ JSON.stringify($json.prioritized_issues) }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are a technical SEO specialist. Analyze the PageSpeed Insights analysis provided by the user and generate easy to understand, bite-sized and actionable tasks with prioritization according to the  eisenhower matrix and an estimated time to complete by a developer.\n\nFormat your output in JSON format using the following keys: \"priority\", \"task\", \"description\" and \"timeToComplete\"."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        320,
+        -144
+      ],
+      "id": "a1dc4cf3-fa29-480e-9793-e56eb91fb378",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatCohere",
+      "typeVersion": 1,
+      "position": [
+        288,
+        64
+      ],
+      "id": "0549c877-e5c0-4f49-8706-12f632c9d9a5",
+      "name": "Cohere Chat Model",
+      "credentials": {
+        "cohereApi": {
+          "id": "daMDEKdcOA89D1eG",
+          "name": "CohereApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Get the raw data from the previous node\nconst rawData = items[0].json;\nconst lhr = rawData.lighthouseResult;\n\n// 2. Extract High-Level Metrics (The \"Scorecard\")\nconst metrics = {\n  URL: lhr.finalUrl,\n  Performance_Score: lhr.categories.performance.score * 100,\n  Core_Web_Vitals: {\n    // Field data (Real User Data) - The most important for SEO\n    LCP: rawData.loadingExperience.metrics?.LARGEST_CONTENTFUL_PAINT_MS?.percentile,\n    CLS: rawData.loadingExperience.metrics?.CUMULATIVE_LAYOUT_SHIFT_SCORE?.percentile,\n    INP: rawData.loadingExperience.metrics?.INTERACTION_TO_NEXT_PAINT?.percentile,\n  }\n};\n\n// 3. Filter & Prune Audits (The \"Task List\")\nlet failedAudits = [];\nconst auditRefs = lhr.categories.performance.auditRefs;\n\n// We loop through the performance category refs to respect Google's priority order\nfor (const ref of auditRefs) {\n  const audit = lhr.audits[ref.id];\n  \n  // FILTER: Only keep audits that failed (score < 0.9) and represent a saving opportunity\n  // We exclude 'informative' audits to save tokens\n  if (\n    audit.score !== null && \n    audit.score < 0.9 && \n    audit.scoreDisplayMode !== 'informative' &&\n    audit.scoreDisplayMode !== 'manual'\n  ) {\n    \n    // PRUNE: Create a slim version of the audit object\n    let slimAudit = {\n      title: audit.title,\n      score: audit.score,\n      displayValue: audit.displayValue,\n      description: audit.description.split('[Learn more]')[0], // Remove the generic Google link text\n    };\n\n    // TRUNCATE DETAILS: The 'details' object often contains massive lists of URLs/Elements.\n    // We keep only the top 5 items to give the AI specific examples without bloating the prompt.\n    if (audit.details && audit.details.items) {\n      slimAudit.offending_items = audit.details.items.slice(0, 5).map(item => {\n        // Clean up items to remove unnecessary tech headers\n        let cleanItem = {};\n        if (item.url) cleanItem.url = item.url;\n        if (item.nodeLabel) cleanItem.element = item.nodeLabel;\n        if (item.totalBytes) cleanItem.size_kb = (item.totalBytes / 1024).toFixed(2);\n        if (item.wastedBytes) cleanItem.potential_savings_kb = (item.wastedBytes / 1024).toFixed(2);\n        return cleanItem;\n      });\n    }\n\n    failedAudits.push(slimAudit);\n  }\n}\n\n// 4. Output the clean, token-efficient JSON\nreturn [{\n  json: {\n    summary: metrics,\n    prioritized_issues: failedAudits\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        80,
+        -144
+      ],
+      "id": "de56f118-cf23-4168-9cfd-eba124380a88",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n\"priority\": \"string\",\n\"task\":\"string\",\n\"description\":\"string\",\n\"timeToComplete\":\"string\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        496,
+        64
+      ],
+      "id": "f3539984-8401-4d6e-a7e8-858a085362ad",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -576,
+        -144
+      ],
+      "id": "06c3cb94-348a-40e1-9f3e-a13ecd0482fd",
+      "name": "When clicking ‘Execute workflow’"
+    }
+  ],
   "pinData": {},
   "settings": {
     "executionOrder": "v1"
@@ -23,6 +236,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-11-20T22:15:19.405Z",
-  "versionId": "b1fc1f84-6f73-4378-89c2-f65ea3ff851d"
+  "updatedAt": "2025-11-20T23:02:17.000Z",
+  "versionId": "7462007e-66cb-42c3-92d1-62c8d43cdfcd"
 }
