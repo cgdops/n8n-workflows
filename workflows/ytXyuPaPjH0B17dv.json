@@ -1,0 +1,228 @@
+{
+  "active": false,
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Website Builder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "gpt-4o": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Website Builder",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Website Builder",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Website Builder": {
+      "main": [
+        [
+          {
+            "node": "Create a file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        []
+      ]
+    },
+    "Create a file": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-11-21T13:39:34.360Z",
+  "id": "ytXyuPaPjH0B17dv",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Website Builder Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -128,
+        -16
+      ],
+      "id": "3c9e8dfc-1c92-400d-8ca7-94fe84486fd3",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "gpt-4o"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        16,
+        208
+      ],
+      "id": "1a683f3a-d947-4471-9927-fe365bdfc553",
+      "name": "gpt-4o",
+      "credentials": {
+        "openAiApi": {
+          "id": "PgqwHquDEYK6dlgo",
+          "name": "XIX OpenAI"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Intent: {{ $json.intent }}\nClient: {{ $json.client }}\nIndustry: {{ $json.industry }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are a Website Architect.\nYou will receive a Client Name and Industry.\nGenerate a generic website content JSON structure for them.\n\nStrictly follow this JSON Schema:\n{\n  \"meta\": { \"title\": \"String\", \"description\": \"String\" },\n  \"hero\": { \"headline\": \"String\", \"subheadline\": \"String\", \"ctaText\": \"String\" },\n  \"features\": [ { \"title\": \"String\", \"description\": \"String\", \"icon\": \"String\" } ]\n}\n\nReturn ONLY the JSON. No markdown formatting."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        80,
+        -16
+      ],
+      "id": "73476be1-0741-4ea0-b1ad-0b91b56aec68",
+      "name": "Website Builder"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"meta\": { \"title\": \"String\", \"description\": \"String\" },\n  \"hero\": { \"headline\": \"String\", \"subheadline\": \"String\", \"ctaText\": \"String\" },\n  \"features\": [ { \"title\": \"String\", \"description\": \"String\", \"icon\": \"String\" } ]\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        256,
+        192
+      ],
+      "id": "04460b6d-3f2e-4180-9ade-414e65369c2a",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "259f03d2-c665-4d28-b544-1b0a1dceb308",
+              "name": "response",
+              "value": "=Success! I have generated the architecture for {{ $('When Executed by Another Workflow').item.json.client }} and pushed the code to GitHub. Deployment should be live shortly.",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        864,
+        -16
+      ],
+      "id": "86da6da0-3d47-4d27-9e78-d7df8b4db813",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "owner": {
+          "__rl": true,
+          "value": "cgdops",
+          "mode": "name"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "https://github.com/cgdops/g3z-agency-template-v1",
+          "mode": "url"
+        },
+        "filePath": "src/data/site-content.json",
+        "fileContent": "={{ JSON.stringify($json.output) }}",
+        "commitMessage": "=AI update: {{ $('When Executed by Another Workflow').item.json.client }} site build"
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        496,
+        -16
+      ],
+      "id": "d3b8dda5-28fb-4b2c-b152-62e0959aa9ac",
+      "name": "Create a file",
+      "webhookId": "4ae41706-a823-466d-b421-058ac4581c17",
+      "credentials": {
+        "githubApi": {
+          "id": "jlKEAYuzj6zEc5Hl",
+          "name": "GitHub account"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "When Executed by Another Workflow": [
+      {
+        "json": {
+          "intent": "website_build",
+          "client": "Ancat Media Group",
+          "industry": "Broadcast Media"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-11-21T13:39:34.362Z",
+      "createdAt": "2025-11-21T13:39:34.362Z",
+      "role": "workflow:owner",
+      "workflowId": "ytXyuPaPjH0B17dv",
+      "projectId": "QNfIJ0xZgM3QlqN4"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-11-21T14:43:06.000Z",
+  "versionId": "25758172-2365-432e-8e05-3bf71040f6d9"
+}
