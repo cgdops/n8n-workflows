@@ -5,7 +5,7 @@
       "main": [
         [
           {
-            "node": "Website Builder",
+            "node": "HTTP Request",
             "type": "main",
             "index": 0
           }
@@ -54,6 +54,39 @@
       "main": [
         [
           {
+            "node": "Edit a file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "Website Builder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit a file": {
+      "main": [
+        [
+          {
             "node": "Edit Fields",
             "type": "main",
             "index": 0
@@ -68,7 +101,7 @@
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "Website Builder Agent",
+  "name": "System - Website Builder",
   "nodes": [
     {
       "parameters": {
@@ -97,8 +130,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.3,
       "position": [
-        16,
-        208
+        640,
+        192
       ],
       "id": "1a683f3a-d947-4471-9927-fe365bdfc553",
       "name": "gpt-4o",
@@ -115,13 +148,13 @@
         "text": "=Intent: {{ $json.intent }}\nClient: {{ $json.client }}\nIndustry: {{ $json.industry }}",
         "hasOutputParser": true,
         "options": {
-          "systemMessage": "You are a Website Architect.\nYou will receive a Client Name and Industry.\nGenerate a generic website content JSON structure for them.\n\nStrictly follow this JSON Schema:\n{\n  \"meta\": { \"title\": \"String\", \"description\": \"String\" },\n  \"hero\": { \"headline\": \"String\", \"subheadline\": \"String\", \"ctaText\": \"String\" },\n  \"features\": [ { \"title\": \"String\", \"description\": \"String\", \"icon\": \"String\" } ]\n}\n\nReturn ONLY the JSON. No markdown formatting."
+          "systemMessage": "You are a Website Architect.\n\nYou will receive a Client Name and Industry.\n\nGenerate a generic website content JSON structure for them.\n\nStrictly follow this JSON Schema:\n\n{\n\n  \"meta\": { \"title\": \"String\", \"description\": \"String\" },\n\n  \"hero\": { \"headline\": \"String\", \"subheadline\": \"String\", \"ctaText\": \"String\" },\n\n  \"features\": [ { \"title\": \"String\", \"description\": \"String\", \"icon\": \"String\" } ]\n\n}\n\nReturn ONLY the JSON. No markdown formatting."
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3,
       "position": [
-        80,
+        688,
         -16
       ],
       "id": "73476be1-0741-4ea0-b1ad-0b91b56aec68",
@@ -129,13 +162,13 @@
     },
     {
       "parameters": {
-        "jsonSchemaExample": "{\n  \"meta\": { \"title\": \"String\", \"description\": \"String\" },\n  \"hero\": { \"headline\": \"String\", \"subheadline\": \"String\", \"ctaText\": \"String\" },\n  \"features\": [ { \"title\": \"String\", \"description\": \"String\", \"icon\": \"String\" } ]\n}"
+        "jsonSchemaExample": "{\n\n  \"meta\": { \"title\": \"String\", \"description\": \"String\" },\n\n  \"hero\": { \"headline\": \"String\", \"subheadline\": \"String\", \"ctaText\": \"String\" },\n\n  \"features\": [ { \"title\": \"String\", \"description\": \"String\", \"icon\": \"String\" } ]\n\n}"
       },
       "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
       "typeVersion": 1.3,
       "position": [
-        256,
-        192
+        880,
+        208
       ],
       "id": "04460b6d-3f2e-4180-9ade-414e65369c2a",
       "name": "Structured Output Parser"
@@ -157,7 +190,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        864,
+        1776,
         -16
       ],
       "id": "86da6da0-3d47-4d27-9e78-d7df8b4db813",
@@ -173,8 +206,8 @@
         },
         "repository": {
           "__rl": true,
-          "value": "https://github.com/cgdops/g3z-agency-template-v1",
-          "mode": "url"
+          "value": "={{ $('HTTP Request').item.json.name }}",
+          "mode": "name"
         },
         "filePath": "src/data/site-content.json",
         "fileContent": "={{ JSON.stringify($json.output) }}",
@@ -183,12 +216,97 @@
       "type": "n8n-nodes-base.github",
       "typeVersion": 1.1,
       "position": [
-        496,
+        1168,
         -16
       ],
       "id": "d3b8dda5-28fb-4b2c-b152-62e0959aa9ac",
       "name": "Create a file",
       "webhookId": "4ae41706-a823-466d-b421-058ac4581c17",
+      "credentials": {
+        "githubApi": {
+          "id": "jlKEAYuzj6zEc5Hl",
+          "name": "GitHub account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.github.com/repos/{{$env.AGENCY_GITHUB_OWNER}}/{{$env.AGENCY_TEMPLATE_REPO}}/generate",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "githubApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"owner\": \"{{$env.AGENCY_GITHUB_OWNER}}\",\n  \"name\": \"client-{{ $json.clientName.toLowerCase().replace(/ /g, '-') }}\",\n  \"description\": \"Website for {{ $json.clientName }}\",\n  \"private\": false\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        144,
+        -16
+      ],
+      "id": "1a4cdee2-c91d-468d-8345-4c08d33acf7f",
+      "name": "HTTP Request",
+      "credentials": {
+        "githubApi": {
+          "id": "jlKEAYuzj6zEc5Hl",
+          "name": "GitHub account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.github.com/repos/{{$env.AGENCY_GITHUB_OWNER}}/{{ $json.name }}/pages",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "githubApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"source\": {\n    \"branch\": \"main\",\n    \"path\": \"/\"\n  },\n  \"build_type\": \"workflow\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        352,
+        -16
+      ],
+      "id": "48dfe75d-9feb-49bd-b92c-18eccdd55396",
+      "name": "HTTP Request1",
+      "credentials": {
+        "githubApi": {
+          "id": "jlKEAYuzj6zEc5Hl",
+          "name": "GitHub account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "edit",
+        "owner": {
+          "__rl": true,
+          "value": "={{ $('HTTP Request').item.json.owner.login }}",
+          "mode": "name"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "={{ $('HTTP Request').item.json.name }}",
+          "mode": "url"
+        },
+        "filePath": "astro.config.mjs",
+        "fileContent": "=import { defineConfig } from 'astro/config'; import tailwind from '@astrojs/tailwind';  export default defineConfig({   integrations: [tailwind()],   site: 'https://{{$env.AGENCY_GITHUB_OWNER}}.github.io',   base: '/{{ $('HTTP Request').item.json.name }}', // <--- n8n injects the new repo name here });"
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        1504,
+        -16
+      ],
+      "id": "cc7908c4-f553-46af-9fdb-4c789c6fb691",
+      "name": "Edit a file",
+      "webhookId": "1363ffab-a638-45ef-b8a4-3f752f4ac046",
       "credentials": {
         "githubApi": {
           "id": "jlKEAYuzj6zEc5Hl",
@@ -223,6 +341,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-11-21T14:43:06.000Z",
-  "versionId": "25758172-2365-432e-8e05-3bf71040f6d9"
+  "updatedAt": "2025-11-23T22:59:35.000Z",
+  "versionId": "6a272f8d-9a6d-4509-9d80-0e6cd0364856"
 }
