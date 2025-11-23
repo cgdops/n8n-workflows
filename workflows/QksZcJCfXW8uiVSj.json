@@ -1,0 +1,234 @@
+{
+  "active": false,
+  "connections": {
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Technical Writer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Technical Writer": {
+      "main": [
+        [
+          {
+            "node": "Create a file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Technical Writer",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a file": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-11-23T21:29:42.864Z",
+  "id": "QksZcJCfXW8uiVSj",
+  "isArchived": false,
+  "meta": null,
+  "name": "System - Scribe",
+  "nodes": [
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        1392,
+        896
+      ],
+      "id": "6fec94e4-d0a0-4f3a-b170-499d19ef65bc",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "PgqwHquDEYK6dlgo",
+          "name": "XIX OpenAI"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=http://n8n:5678/api/v1/workflows/{{ $json.workflowId }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1216,
+        672
+      ],
+      "id": "60ae2d15-411d-4213-ba3a-1a2f5cec94a1",
+      "name": "HTTP Request",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "hUbKU1Cayu2TjRND",
+          "name": "X-N8N-API-KEY"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Analyze this workflow data: {{ JSON.stringify($json) }}",
+        "options": {
+          "systemMessage": "You are a Senior Technical Writer.\nI will provide the raw JSON of an n8n automation workflow.\nYour job is to write clear, professional Markdown documentation for it.\n\nStructure your response exactly like this:\n# Workflow Name\n\n## Purpose\n[One sentence summary of what this does]\n\n## Trigger\n[What starts this workflow?]\n\n## Process Flow\n1. [Step 1]\n2. [Step 2]\n...\n\n## Key Integrations\n- [List APIs or Services used, e.g., Supabase, OpenAI]\n\n## Data Output\n[What is the final result?]"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        1424,
+        672
+      ],
+      "id": "b7c3ab5e-01e9-465f-886e-ed774188a6d6",
+      "name": "Technical Writer"
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "owner": {
+          "__rl": true,
+          "value": "cgdops",
+          "mode": "name"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "=g3z-agency-template-v1",
+          "mode": "name"
+        },
+        "filePath": "=docs/workflows/workflow-{{ $('HTTP Request').item.json.id }}.md",
+        "fileContent": "={{ $json.output }}",
+        "commitMessage": "=Docs: Auto-generated for workflow {{ $('HTTP Request').item.json.name }}",
+        "additionalParameters": {
+          "branch": {
+            "branch": "={{ $json.body.branch || 'main' }}"
+          }
+        }
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        1776,
+        672
+      ],
+      "id": "b0d9e028-d015-45bc-b57c-5fafdf2f561c",
+      "name": "Create a file",
+      "webhookId": "2d327ec4-ab48-42d0-9df1-f95031cd7214",
+      "credentials": {
+        "githubApi": {
+          "id": "jlKEAYuzj6zEc5Hl",
+          "name": "GitHub account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "id": "601990e7-e13e-46a5-8591-f18516deb251",
+      "typeVersion": 1.1,
+      "name": "Start",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "position": [
+        1008,
+        672
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "8021a65d-a980-4f20-9ec8-dd74b10e27a2",
+              "name": "response",
+              "value": "=Documented workflow: {{ $('HTTP Request').item.json.id }} ({{ $('HTTP Request').item.json.name }}) successfully! See here: [{{ $json.content.html_url }}]({{ $json.content.html_url }})",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1984,
+        672
+      ],
+      "id": "111def3b-615e-4ec7-b545-15fd3368477a",
+      "name": "Edit Fields"
+    }
+  ],
+  "pinData": {
+    "Start": [
+      {
+        "json": {
+          "intent": "document_workflow",
+          "client": "",
+          "industry": "",
+          "workflowId": "JKWl6oiKZANNgA2N"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-11-23T21:29:42.868Z",
+      "createdAt": "2025-11-23T21:29:42.868Z",
+      "role": "workflow:owner",
+      "workflowId": "QksZcJCfXW8uiVSj",
+      "projectId": "QNfIJ0xZgM3QlqN4"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-11-23T22:03:17.000Z",
+  "versionId": "2b807c45-6aae-4cae-a0b4-3f63525a6fe2"
+}
