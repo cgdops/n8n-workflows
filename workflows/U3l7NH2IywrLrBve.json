@@ -1,0 +1,143 @@
+{
+  "active": false,
+  "connections": {
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-11-23T20:51:03.302Z",
+  "id": "U3l7NH2IywrLrBve",
+  "isArchived": false,
+  "meta": null,
+  "name": "System - List Workflows",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "http://n8n:5678/api/v1/workflows",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "active",
+              "value": "true"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1072,
+        336
+      ],
+      "id": "fc4d2270-0aab-4ced-a596-ab36daf5f9b4",
+      "name": "HTTP Request",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "hUbKU1Cayu2TjRND",
+          "name": "X-N8N-API-KEY"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const data = items[0].json.data;\n\nif (!data || data.length === 0) {\n  return [{ json: { response: \"No active workflows found.\" } }];\n}\n\n// 1. Filter out the current \"Orchestrator\" workflows to reduce noise (Optional)\n// const cleanList = data.filter(w => !w.name.includes('Orchestrator'));\nconst cleanList = data; \n\n// 2. Format: Bullet point -> `ID` -> Bold Name\nconst list = cleanList.map(w => {\n  return `- \\`${w.id}\\` : **${w.name}**`;\n}).join('\\n'); // Single \\n is usually enough for Markdown lists\n\nreturn [{\n  json: {\n    // We do NOT stringify the result here, n8n handles the object structure\n    response: \"Here are your active systems:\\n\\n\" + list\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1280,
+        336
+      ],
+      "id": "0f2628d5-6f96-4044-9588-435af7fb7529",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "id": "8468cb7e-dcf8-44bd-9914-0cbbf9b92e59",
+      "typeVersion": 1.1,
+      "name": "Start",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "position": [
+        864,
+        336
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e5ace9f7-7c98-431f-9bec-3e294acc2ca0",
+              "name": "response",
+              "value": "={{ $json.response }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1488,
+        336
+      ],
+      "id": "8a0b879e-fa9b-41f3-8e12-02dbd83eccc1",
+      "name": "Edit Fields"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-11-23T20:51:03.305Z",
+      "createdAt": "2025-11-23T20:51:03.305Z",
+      "role": "workflow:owner",
+      "workflowId": "U3l7NH2IywrLrBve",
+      "projectId": "QNfIJ0xZgM3QlqN4"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-11-23T21:01:49.000Z",
+  "versionId": "861a0c92-1f18-4846-9d6e-c4b469d6ab50"
+}
