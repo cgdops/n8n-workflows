@@ -1,0 +1,100 @@
+{
+  "active": true,
+  "connections": {
+    "/submit-form": {
+      "main": [
+        [
+          {
+            "node": "Create a row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-11-23T18:42:28.054Z",
+  "id": "HX8sMTxzrHQDseXP",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "System - CRM Ingest",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "submit-form",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -496,
+        -128
+      ],
+      "id": "b31c5421-0431-4d57-bb16-5fe4494fe25b",
+      "name": "/submit-form",
+      "webhookId": "79a1f03d-fb57-47b8-851d-461c77f6c8df"
+    },
+    {
+      "parameters": {
+        "tableId": "leads",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "client_name",
+              "fieldValue": "={{ $json.body.client_name }}"
+            },
+            {
+              "fieldId": "customer_name",
+              "fieldValue": "={{ $json.body.name }}"
+            },
+            {
+              "fieldId": "customer_email",
+              "fieldValue": "={{ $json.body.email }}"
+            },
+            {
+              "fieldId": "message",
+              "fieldValue": "={{ $json.body.message}}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -288,
+        -128
+      ],
+      "id": "d71383c5-60ce-4a68-8d6c-9e2584773460",
+      "name": "Create a row",
+      "credentials": {
+        "supabaseApi": {
+          "id": "1haFUe9NaMdCx1B7",
+          "name": "Supabase account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-11-23T18:42:28.057Z",
+      "createdAt": "2025-11-23T18:42:28.057Z",
+      "role": "workflow:owner",
+      "workflowId": "HX8sMTxzrHQDseXP",
+      "projectId": "QNfIJ0xZgM3QlqN4"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-11-23T19:29:04.000Z",
+  "versionId": "4a41b12b-a5fe-432f-a13e-9c81ea98a627"
+}
