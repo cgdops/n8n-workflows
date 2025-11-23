@@ -1,0 +1,526 @@
+{
+  "active": true,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Orchestrator Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Orchestrator Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Call 'Website Builder Agent'",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [],
+        [
+          {
+            "node": "Call List Workflows",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Call System - Scribe",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Orchestrator Agent": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Orch Webhook": {
+      "main": [
+        [
+          {
+            "node": "Orchestrator Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-11-23T20:36:26.637Z",
+  "id": "MTFir3j1uygcrws4",
+  "isArchived": false,
+  "meta": null,
+  "name": "DEV - Orchestrator",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "917f5a8f-df50-4018-8dd2-94ec377c0ccd",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        -16
+      ],
+      "id": "56c52651-f3b0-49a2-b5f4-8c0ec5628f1e",
+      "name": "Webhook",
+      "webhookId": "917f5a8f-df50-4018-8dd2-94ec377c0ccd"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "=<!DOCTYPE html>\n<html lang=\"en\" data-theme=\"dark\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Autonomous Agency Console</title>\n    <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css\">\n    <script src=\"https://cdn.jsdelivr.net/npm/marked/marked.min.js\"></script>\n    <style>\n        /* ================= THEME CONFIG ================= */\n        :root {\n            --primary: #f42564; /* Brand Pink */\n            --background: #11191f;\n            --surface: #1f2937;\n            --spacing: 1rem;\n            --code-bg: #2d3748;\n        }\n\n        body {\n            display: flex;\n            flex-direction: column;\n            height: 100dvh;\n            margin: 0;\n            background-color: var(--background);\n            font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif;\n        }\n\n        /* ================= HEADER ================= */\n        header {\n            padding: 0 var(--spacing);\n            background-color: var(--surface);\n            border-bottom: 1px solid #374151;\n            display: flex;\n            align-items: center;\n            justify-content: space-between;\n            height: 60px;\n            flex-shrink: 0;\n        }\n\n        header h1 {\n            margin: 0;\n            font-size: 1.1rem;\n            font-weight: 700;\n            color: #fff;\n            letter-spacing: 0.5px;\n        }\n\n        /* ================= CHAT AREA ================= */\n        #chat-container {\n            flex-grow: 1;\n            overflow-y: auto;\n            padding: var(--spacing);\n            display: flex;\n            flex-direction: column;\n            gap: 1.5rem; /* More space between messages */\n            scroll-behavior: smooth;\n        }\n\n        .message {\n            max-width: 85%;\n            padding: 0.5rem 1.2rem;\n            border-radius: 1rem;\n            font-size: 0.95rem;\n            line-height: 1.6;\n            position: relative;\n            word-wrap: break-word;\n            animation: fadeIn 0.3s ease;\n        }\n\n        @keyframes fadeIn {\n            from { opacity: 0; transform: translateY(10px); }\n            to { opacity: 1; transform: translateY(0); }\n        }\n\n        /* Bot Message (Left) */\n        .message.bot {\n            align-self: flex-start;\n            background-color: var(--surface);\n            color: #e5e7eb;\n            border-bottom-left-radius: 2px;\n        }\n\n        /* User Message (Right) */\n        .message.user {\n            align-self: flex-end;\n            background-color: var(--primary);\n            color: #fff;\n            border-bottom-right-radius: 2px;\n        }\n\n        /* ================= MARKDOWN STYLES ================= */\n        /* These styles make the n8n lists look good */\n        .message p { margin-bottom: 0.5rem; }\n        .message p:last-child { margin-bottom: 0; }\n        \n        .message ul { \n            margin: 0.5rem 0; \n            padding-left: 1.5rem; \n        }\n        \n        .message li { margin-bottom: 0.25rem; }\n\n        /* The IDs in code blocks */\n        .message code {\n            background-color: rgba(0,0,0,0.3);\n            padding: 0.2rem 0.4rem;\n            border-radius: 4px;\n            font-family: monospace;\n            font-size: 0.9em;\n            color: #fbbf24; /* Amber color for IDs */\n        }\n\n        .message strong {\n            color: #fff;\n            font-weight: 700;\n        }\n\n        /* ================= FOOTER ================= */\n        .typing {\n            font-style: italic;\n            font-size: 0.75rem;\n            color: #6b7280;\n            margin-left: 1.5rem;\n            margin-bottom: 0.5rem;\n            display: none;\n        }\n\n        footer {\n            padding: var(--spacing);\n            background-color: var(--surface);\n            border-top: 1px solid #374151;\n        }\n\n        form {\n            display: flex;\n            gap: 0.75rem;\n            margin: 0;\n        }\n\n        input[type=\"text\"] {\n            margin-bottom: 0;\n            background-color: var(--background);\n            border: 1px solid #4b5563;\n            color: white;\n            border-radius: 8px;\n            padding-left: 1rem;\n            flex-grow: 1;\n        }\n\n        input[type=\"text\"]:focus {\n            border-color: var(--primary);\n            box-shadow: 0 0 0 1px var(--primary);\n        }\n\n        button {\n            width: auto;\n            margin-bottom: 0;\n            border-radius: 8px;\n            background-color: var(--primary);\n            border: none;\n            padding: 0 1.5rem;\n            font-weight: 600;\n            cursor: pointer;\n            transition: background 0.2s;\n        }\n        \n        button:hover { background-color: #db2777; }\n\n        /* Scrollbar */\n        #chat-container::-webkit-scrollbar { width: 6px; }\n        #chat-container::-webkit-scrollbar-track { background: var(--background); }\n        #chat-container::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 3px; }\n    </style>\n</head>\n<body>\n\n    <header>\n        <h1>Autonomous Agency Orchestrator</h1>\n        <div style=\"width: 10px; height: 10px; background: #10b981; border-radius: 50%; box-shadow: 0 0 10px #10b981;\"></div>\n    </header>\n\n    <div id=\"chat-container\">\n        <div class=\"message bot\">\n            <p><strong>System Online.</strong></p>\n            <p>I am ready to orchestrate. Try asking:</p>\n            <ul>\n                <li>\"Build a website for [Client]\"</li>\n                <li>\"List my workflows\"</li>\n                <li>\"Document workflow [ID]\"</li>\n            </ul>\n        </div>\n    </div>\n    \n    <div id=\"typing-indicator\" class=\"typing\">Agent is thinking...</div>\n\n    <footer>\n        <form id=\"chat-form\">\n            <input type=\"text\" id=\"user-input\" placeholder=\"Enter command...\" autocomplete=\"off\" required>\n            <button type=\"submit\">Execute</button>\n        </form>\n    </footer>\n\n    <script>\n        // ================= CONFIGURATION =================\n        // Replace with your n8n DEV Webhook URL\n        const WEBHOOK_URL = '{{ $env.DEV_WEBHOOK_URL }}'; \n        // =================================================\n\n        const chatContainer = document.getElementById('chat-container');\n        const chatForm = document.getElementById('chat-form');\n        const userInput = document.getElementById('user-input');\n        const typingIndicator = document.getElementById('typing-indicator');\n\n        function scrollToBottom() {\n            chatContainer.scrollTop = chatContainer.scrollHeight;\n        }\n\n        // ADD MESSAGE FUNCTION (Now supports Markdown)\n        function addMessage(text, sender) {\n            const messageDiv = document.createElement('div');\n            messageDiv.classList.add('message', sender);\n            \n            if (sender === 'bot') {\n                // Parse Markdown for the bot\n                // marked.parse comes from the script included in <head>\n                messageDiv.innerHTML = marked.parse(text);\n            } else {\n                // Keep user input as plain text to prevent HTML injection\n                messageDiv.innerText = text;\n            }\n            \n            chatContainer.appendChild(messageDiv);\n            scrollToBottom();\n        }\n\n        chatForm.addEventListener('submit', async (e) => {\n            e.preventDefault();\n            const message = userInput.value.trim();\n            if (!message) return;\n\n            // 1. UI Updates\n            addMessage(message, 'user');\n            userInput.value = '';\n            userInput.focus();\n            typingIndicator.style.display = 'block';\n            scrollToBottom();\n\n            try {\n                // 2. Send to n8n\n                const response = await fetch(WEBHOOK_URL, {\n                    method: 'POST',\n                    headers: { 'Content-Type': 'application/json' },\n                    body: JSON.stringify({ chatInput: message })\n                });\n\n                const data = await response.json();\n                \n                // 3. Handle Response\n                typingIndicator.style.display = 'none';\n\n                // We prioritize 'response' because that is what our Code Node outputs\n                // Fallback to 'output', 'text', or raw JSON if needed\n                const botReply = data.response || data.output || data.text || JSON.stringify(data);\n                \n                addMessage(botReply, 'bot');\n\n            } catch (error) {\n                console.error('Error:', error);\n                typingIndicator.style.display = 'none';\n                addMessage(\"**Error:** Could not connect to the Orchestrator.\", 'bot');\n            }\n        });\n    </script>\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        224,
+        -16
+      ],
+      "id": "f9b9f61a-91a3-4b26-a161-c6a4878bc478",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4o-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        176,
+        448
+      ],
+      "id": "2e487e82-6003-4432-9088-f237eff95bc5",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "PgqwHquDEYK6dlgo",
+          "name": "XIX OpenAI"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{  \n\"intent\":\"website_build\",\n\"client\":\"client name\",\n\"industry\":\"client industry\",\n\"workflowId\":\"workflow id...\"\n }"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        384,
+        448
+      ],
+      "id": "dff136d9-acb5-4594-8809-cac265c050be",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "073c55f6-1f45-4296-9fde-7dd6206aa2f7",
+              "name": "intent",
+              "value": "={{ $json.output.intent }}",
+              "type": "string"
+            },
+            {
+              "id": "2ee9deed-fa99-4697-aee3-efb6c38fe64d",
+              "name": "client",
+              "value": "={{ $json.output.client }}",
+              "type": "string"
+            },
+            {
+              "id": "4309bc98-7a47-4efc-868a-032b4ae8f0fa",
+              "name": "industry",
+              "value": "={{ $json.output.industry }}",
+              "type": "string"
+            },
+            {
+              "id": "ae600bc6-7387-4da2-9336-b40d5a39e711",
+              "name": "workflowId",
+              "value": "={{ $json.output.workflowId }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        560,
+        240
+      ],
+      "id": "56d409ff-5d23-4c1b-a0bf-52cdda368b93",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Orchestrator Agent').item.json.output.intent }}",
+                    "rightValue": "website_build",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "f54016d2-e2a2-4ff9-9be4-67d084e6cbf3"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "website_build"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "64875aeb-a785-464c-b5e1-f8014718e437",
+                    "leftValue": "={{ $('Orchestrator Agent').item.json.output.intent }}",
+                    "rightValue": "crm_update",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "crm_update"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "5dfbe759-4154-40c9-afe4-f0745b72df08",
+                    "leftValue": "={{ $('Orchestrator Agent').item.json.output.intent }}",
+                    "rightValue": "list_workflows",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "list_workflows"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "3bbfe410-afaa-40f8-8207-c14928f9c207",
+                    "leftValue": "={{ $('Orchestrator Agent').item.json.output.intent }}",
+                    "rightValue": "document_workflow",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "document_workflow"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        768,
+        240
+      ],
+      "id": "d53eb998-25ed-4826-8f62-c7dcc2a1dc8e",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "ytXyuPaPjH0B17dv",
+          "mode": "id",
+          "cachedResultUrl": "/workflow/ytXyuPaPjH0B17dv"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        1008,
+        112
+      ],
+      "id": "95d921eb-c447-4e68-9ae6-a23f12f63cdb",
+      "name": "Call 'Website Builder Agent'"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.body.chatInput }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=You are a multi agent orchestrator, the user is going to give you a message and it is your job to decipher which agent workflow to trigger.\n\nClassify the user's intent, client name and industry. Output valid JSON only: \n\n{  \n\"intent\":\"website_build\",\n\"client\":\"client name\",\n\"industry\":\"client industry\",\n\"workflowId\":\"workflow id...\"\n }\n\nIntent categories:\n\n...\nIf the user asks to see available tools, capabilities, or list workflows, return:\n{ \"intent\": \"list_workflows\" }\n...\n\n...\nIf the user wants to document, update docs, or save a workflow, extract the \"workflowId\".\nReturn: { \"intent\": \"document_workflow\", \"workflowId\": \"THE_ID_HERE\" }\n..."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        208,
+        240
+      ],
+      "id": "95281319-e872-49a2-ae22-235b424a66c4",
+      "name": "Orchestrator Agent"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "cb302caa-b121-4d29-aab5-fcf8b59b03f7",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        240
+      ],
+      "id": "1fcfb012-34a0-429f-b1f9-0d1e8723df94",
+      "name": "Orch Webhook",
+      "webhookId": "cb302caa-b121-4d29-aab5-fcf8b59b03f7"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "U3l7NH2IywrLrBve",
+          "mode": "list"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        1008,
+        416
+      ],
+      "name": "Call List Workflows",
+      "id": "d27b29d0-f9da-4fa5-aa77-fd74abb0b3d7"
+    },
+    {
+      "parameters": {
+        "source": "parameter",
+        "workflowJson": "={\n  \"body\": {\n    \"workflowId\": \"{{ $json.workflowId }}\",\n    \"branch\": \"feature/list-workflows\" \n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        1008,
+        640
+      ],
+      "name": "Call System - Scribe",
+      "id": "54d62708-1534-45c5-be9e-1e4267a3a688"
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.srv1051492.hstgr.cloud",
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
+            "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+            "accept-encoding": "gzip, deflate, br, zstd",
+            "accept-language": "en-US,en;q=0.9",
+            "cookie": "rl_page_init_referrer=RudderEncrypt%3AU2FsdGVkX1%2Bfv81PZlL8bqlSYY4BlwahiyKRzzXwLf0DpN7gZDkR1ZL9RCQZ32vE; rl_page_init_referring_domain=RudderEncrypt%3AU2FsdGVkX19MqO3Zb2yYV1Q%2FBp3xJpSEJsG%2BLMpCeTwQlXIGY19QZFo%2F5wlUZzqN; rl_anonymous_id=RudderEncrypt%3AU2FsdGVkX1%2BX2ScgoQTfl6fDUCuY4y%2Fe82zf5qU7J66eJdcaX8bqzYOqH0dkF8qmvtjshtUpNGwqoz7xdAZAaw%3D%3D; rl_user_id=RudderEncrypt%3AU2FsdGVkX1%2BgWTSYY5LoQo7U0fCd6N7Q8aq0FzRxsAjxTnkqpA1WsjKaFqfJyGP%2FzZtFOI%2FgEpqJts1zSQZKLpCoirFvW4qoOU7kJd70NhOSR4m5ZyQfS%2Ba4U%2BTWVtFN%2FNaAiHx81%2FJXM%2BNVzky1u1WzUi12cU1F%2Bq9UCTosWaA%3D; rl_trait=RudderEncrypt%3AU2FsdGVkX19hgtTOUlPAOwXx1BvaGlaAeo2HrfiOczmEruDTTl%2FfSFFetm2f7JFeyZ21ncFS6RYZ2XE0VDl3hYUSerBqJUZUThkioKqzgL5Q1F3XK%2BpruBeohmz4S6CGYNHMFt9NltDaTAkqXOyOVNOIpWXcRWTyOk6A9DXj2Y8%3D; rl_session=RudderEncrypt%3AU2FsdGVkX1%2BUOTaqRjsgj3cbxutJ53SFdJoAseUi%2BgiY3Po9%2B%2F9XFpikpWvwkPdX%2B5CL5MuM0%2B7AUjpu4Lu3Nehr0yWOsPGs%2BJ%2FAL28tYtARpB58FRBPoWGilqcxYVDKlOC3zo0%2Fi0fKt3yxUKFXAA%3D%3D; ph_phc_4URIAm1uYfJO7j8kWSe0J8lc8IqnstRLS7Jx8NcakHo_posthog=%7B%22distinct_id%22%3A%227a7bb42ae01ab03c9a9198677001a82640af683e12d39c410dff8d72175e480a%2328c96dad-499c-4d7b-8841-70f867ff4225%22%2C%22%24sesid%22%3A%5B1763931270090%2C%22019ab1e8-7c81-7d4c-894e-54c475f7b364%22%2C1763921394805%5D%2C%22%24epp%22%3Atrue%2C%22%24initial_person_info%22%3A%7B%22r%22%3A%22https%3A%2F%2Fhpanel.hostinger.com%2F%22%2C%22u%22%3A%22https%3A%2F%2Fn8n.srv1051492.hstgr.cloud%2Fsetup%22%7D%7D",
+            "dnt": "1",
+            "if-none-match": "W/\"1cd8-4TUi1aBLL0klMU4WrXYKsEghlYE\"",
+            "priority": "u=0, i",
+            "sec-ch-ua": "\"Chromium\";v=\"142\", \"Google Chrome\";v=\"142\", \"Not_A Brand\";v=\"99\"",
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": "\"Windows\"",
+            "sec-fetch-dest": "document",
+            "sec-fetch-mode": "navigate",
+            "sec-fetch-site": "none",
+            "sec-fetch-user": "?1",
+            "upgrade-insecure-requests": "1",
+            "x-forwarded-for": "172.18.0.1",
+            "x-forwarded-host": "n8n.srv1051492.hstgr.cloud",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "7fcba91f122c",
+            "x-real-ip": "172.18.0.1"
+          },
+          "params": {},
+          "query": {},
+          "body": {},
+          "webhookUrl": "https://n8n.srv1051492.hstgr.cloud/webhook/917f5a8f-df50-4018-8dd2-94ec377c0ccd",
+          "executionMode": "production"
+        }
+      }
+    ],
+    "Orch Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.srv1051492.hstgr.cloud",
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
+            "content-length": "50",
+            "accept": "*/*",
+            "accept-encoding": "gzip, deflate, br, zstd",
+            "accept-language": "en-US,en;q=0.9",
+            "content-type": "application/json",
+            "dnt": "1",
+            "origin": "null",
+            "priority": "u=1, i",
+            "sec-ch-ua": "\"Chromium\";v=\"142\", \"Google Chrome\";v=\"142\", \"Not_A Brand\";v=\"99\"",
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": "\"Windows\"",
+            "sec-fetch-dest": "empty",
+            "sec-fetch-mode": "cors",
+            "sec-fetch-site": "cross-site",
+            "x-forwarded-for": "172.18.0.1",
+            "x-forwarded-host": "n8n.srv1051492.hstgr.cloud",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "850eb13295af",
+            "x-real-ip": "172.18.0.1"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "chatInput": "Document workflow JKWl6oiKZANNgA2N"
+          },
+          "webhookUrl": "https://n8n.srv1051492.hstgr.cloud/webhook/cb302caa-b121-4d29-aab5-fcf8b59b03f7",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-11-23T20:36:26.642Z",
+      "createdAt": "2025-11-23T20:36:26.642Z",
+      "role": "workflow:owner",
+      "workflowId": "MTFir3j1uygcrws4",
+      "projectId": "QNfIJ0xZgM3QlqN4"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 2,
+  "updatedAt": "2025-11-23T22:14:46.000Z",
+  "versionId": "54c3b5d3-a55d-4f58-a962-625c4b66fc4d"
+}
