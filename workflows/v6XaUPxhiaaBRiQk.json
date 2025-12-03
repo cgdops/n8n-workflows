@@ -1,0 +1,282 @@
+{
+  "active": true,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-12-03T03:30:07.898Z",
+  "id": "v6XaUPxhiaaBRiQk",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Lead Ingest",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "webflow-lead",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -240,
+        32
+      ],
+      "id": "a6a3550f-2fec-42ae-8a26-6e91f5111b40",
+      "name": "Webhook",
+      "webhookId": "aadd46f2-15d1-41ef-a257-014908687fee"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1m_wvW0eXzV3gS4NHa-NCQP9iSDAlKgc1ybowmRJFv1A",
+          "mode": "list",
+          "cachedResultName": "fe_leads",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1m_wvW0eXzV3gS4NHa-NCQP9iSDAlKgc1ybowmRJFv1A/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1m_wvW0eXzV3gS4NHa-NCQP9iSDAlKgc1ybowmRJFv1A/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "date": "={{ $json.date }}",
+            "name": "={{ $json.name }}",
+            "email": "={{ $json.email }}",
+            "phone": "={{ $json.phone }}",
+            "experience_level": "={{ $json.experience }}",
+            "styles_interested": "={{ $json.styles }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "date",
+              "displayName": "date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "phone",
+              "displayName": "phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "experience_level",
+              "displayName": "experience_level",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "styles_interested",
+              "displayName": "styles_interested",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        976,
+        0
+      ],
+      "id": "731370e3-84e5-41e6-8a09-d706123f60df",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "h35AaTyWKINQe0bE",
+          "name": "chris.smply.me@gmail.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const currentTime = Date.now();\nconst loadTime = parseInt(items[0].json.body.loadTime);\nconst duration = currentTime - loadTime;\n\n// If filled in less than 3 seconds (3000ms), it's likely a bot\nif (duration < 3000) {\n    throw new Error(\"Spam detected: Form filled too fast.\");\n}\n\n// 1. Get the incoming form data directly from body\nconst input = items[0].json.body || {};\n\n// 2. Initialize an array to hold selected styles\nlet selectedStyles = [];\n\n// Helper function to safely check if a box is \"on\" or \"true\"\n// (Standard HTML forms send \"on\", Webflow sometimes sends \"true\")\nconst isChecked = (val) => val && (val === 'on' || val === 'true');\n\n// 3. Check each checkbox field.\n// Note: Unchecked boxes often don't appear in the JSON at all, so we check if they exist.\nif (isChecked(input['interest_salsa'])) selectedStyles.push(\"Salsa\");\nif (isChecked(input['interest_bachata'])) selectedStyles.push(\"Bachata\");\nif (isChecked(input['interest_ballroom'])) selectedStyles.push(\"Ballroom\");\nif (isChecked(input['interest_latin_hustle'])) selectedStyles.push(\"Latin Hustle\");\n\n// 4. Join them with a comma\nconst styleString = selectedStyles.join(\", \");\n\n// 5. Return the clean data\nreturn {\n  json: {\n    // Handle potential capitalization differences (name vs Name)\n    name: input['name'] || input['Name'], \n    email: input['Email'] || input['email'], \n    phone: input['Phone'] || input['phone'], \n    // Handle the hyphen in \"Dance-Experience\"\n    experience: input['Dance-Experience'] || input['Dance Experience'], \n    styles: styleString,\n    date: new Date().toLocaleString(\"en-US\", {timeZone: \"America/New_York\"})\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        416,
+        0
+      ],
+      "id": "19ffa42e-0a4b-415a-b278-c1c4e472a0b1",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "09789477-1cd5-4982-a884-ea0886c38885",
+              "leftValue": "={{ $json.body.business_email }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        16,
+        32
+      ],
+      "id": "7faf0e01-b931-4d7d-bbd3-d396723c5126",
+      "name": "If"
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.srv1051492.hstgr.cloud",
+            "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/142.0.7444.148 Mobile/15E148 Safari/604.1",
+            "content-length": "224",
+            "accept": "*/*",
+            "accept-encoding": "gzip, deflate, br",
+            "accept-language": "en-US,en;q=0.9",
+            "content-type": "application/json",
+            "origin": "https://fajardoelite.com",
+            "referer": "https://fajardoelite.com/",
+            "sec-fetch-dest": "empty",
+            "sec-fetch-mode": "cors",
+            "sec-fetch-site": "cross-site",
+            "x-forwarded-for": "172.18.0.1",
+            "x-forwarded-host": "n8n.srv1051492.hstgr.cloud",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "8465fa5812cd",
+            "x-real-ip": "172.18.0.1"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "Dance-Experience": "Beginner",
+            "interest_salsa": "on",
+            "interest_bachata": "on",
+            "interest_latin_hustle": "on",
+            "name": "christian gomez",
+            "business_email": "",
+            "Phone": "7868300833",
+            "Email": "chris@smoly.me",
+            "loadTime": "1764736660270"
+          },
+          "webhookUrl": "https://n8n.srv1051492.hstgr.cloud/webhook/webflow-lead",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-12-03T03:30:07.904Z",
+      "createdAt": "2025-12-03T03:30:07.904Z",
+      "role": "workflow:owner",
+      "workflowId": "v6XaUPxhiaaBRiQk",
+      "projectId": "QNfIJ0xZgM3QlqN4"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-12-03T04:39:19.000Z",
+  "versionId": "0c0ee519-afad-4266-b5b9-9f0f8760aae2"
+}
