@@ -349,6 +349,12 @@
               "name": "industry",
               "value": "={{ $('Edit Fields1').item.json.industry }}",
               "type": "string"
+            },
+            {
+              "id": "0a0b6904-3117-49c1-b8cf-2942da2ca011",
+              "name": "repo_name",
+              "value": "={{ $('Clone Template').item.json.name }}",
+              "type": "string"
             }
           ]
         },
@@ -398,24 +404,9 @@
       {
         "json": {
           "intent": "website_build",
-          "client": "Ancat Media Group",
-          "industry": "Broadcast Media"
-        }
-      }
-    ],
-    "Edit Fields": [
-      {
-        "json": {
-          "client": "Ancat Media Group",
-          "industry": "Broadcast Media"
-        }
-      }
-    ],
-    "Call 'System - Visual Designer'": [
-      {
-        "json": {
-          "client": "Ancat Media Group",
-          "industry": "Broadcast Media"
+          "client": "IQ Guides",
+          "industry": "mobile gaming",
+          "workflowId": "workflow_id_placeholder"
         }
       }
     ]
@@ -435,6 +426,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-11-24T02:11:11.000Z",
-  "versionId": "1c0956a0-9ccf-4d2d-8334-01e2c8400465"
+  "updatedAt": "2025-12-06T19:55:29.000Z",
+  "versionId": "a5cc4cf8-8d6a-495a-bce7-007e2ea69ae0"
 }
