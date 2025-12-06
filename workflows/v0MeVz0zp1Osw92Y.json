@@ -185,7 +185,7 @@
         },
         "repository": {
           "__rl": true,
-          "value": "={{ $('Clone Template').item.json.name }}",
+          "value": "={{ $('When Executed by Another Workflow').item.json.repo_name }}",
           "mode": "name"
         },
         "filePath": "src/data/site-content.json",
@@ -214,16 +214,16 @@
         "operation": "edit",
         "owner": {
           "__rl": true,
-          "value": "={{ $('Clone Template').item.json.owner.login }}",
+          "value": "={{ $json.commit.author.name }}",
           "mode": "name"
         },
         "repository": {
           "__rl": true,
-          "mode": "name",
-          "value": "={{ $('Clone Template').item.json.name }}"
+          "value": "={{ $('When Executed by Another Workflow').item.json.repo_name }}",
+          "mode": "name"
         },
         "filePath": "astro.config.mjs",
-        "fileContent": "=import { defineConfig } from 'astro/config'; import tailwind from '@astrojs/tailwind';  export default defineConfig({   integrations: [tailwind()],   site: 'https://{{$env.AGENCY_GITHUB_OWNER}}.github.io',   base: '/{{ $('Clone Template').item.json.name }}',});",
+        "fileContent": "=import { defineConfig } from 'astro/config'; import tailwind from '@astrojs/tailwind';  export default defineConfig({   integrations: [tailwind()],   site: 'https://{{$env.AGENCY_GITHUB_OWNER}}.github.io',   base: '/{{ $('When Executed by Another Workflow').item.json.repo_name }}',});",
         "commitMessage": "Update to astro.config file"
       },
       "type": "n8n-nodes-base.github",
@@ -243,7 +243,17 @@
       }
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "When Executed by Another Workflow": [
+      {
+        "json": {
+          "client": "IQ Guides",
+          "industry": "mobile gaming",
+          "repo_name": "client-iq-guides"
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1"
   },
@@ -259,6 +269,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-11-24T02:12:00.000Z",
-  "versionId": "085bdd93-08d8-46c0-938e-1b63bdb7cd4e"
+  "updatedAt": "2025-12-06T19:55:36.000Z",
+  "versionId": "b6e14a44-2405-43bc-be92-f97283f00386"
 }
