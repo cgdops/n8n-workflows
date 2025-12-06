@@ -49,7 +49,7 @@
       "main": [
         [
           {
-            "node": "Call 'Website Builder Agent'",
+            "node": "Call 'System - Website Builder'",
             "type": "main",
             "index": 0
           }
@@ -328,33 +328,6 @@
     },
     {
       "parameters": {
-        "workflowId": {
-          "__rl": true,
-          "value": "ytXyuPaPjH0B17dv",
-          "mode": "id",
-          "cachedResultUrl": "/workflow/ytXyuPaPjH0B17dv"
-        },
-        "workflowInputs": {
-          "mappingMode": "defineBelow",
-          "value": {},
-          "matchingColumns": [],
-          "schema": [],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": true
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.executeWorkflow",
-      "typeVersion": 1.3,
-      "position": [
-        1008,
-        112
-      ],
-      "id": "76cc38d4-a843-4905-a8d7-5d3b52c81c64",
-      "name": "Call 'Website Builder Agent'"
-    },
-    {
-      "parameters": {
         "promptType": "define",
         "text": "={{ $json.body.chatInput }}",
         "hasOutputParser": true,
@@ -441,6 +414,34 @@
       ],
       "name": "Call System - Scribe",
       "id": "cd58d98e-f4f6-4750-a3de-2adabc97c9b8"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "ytXyuPaPjH0B17dv",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/ytXyuPaPjH0B17dv",
+          "cachedResultName": "System - Website Builder"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        1008,
+        112
+      ],
+      "id": "76cc38d4-a843-4905-a8d7-5d3b52c81c64",
+      "name": "Call 'System - Website Builder'"
     }
   ],
   "pinData": {
@@ -487,7 +488,7 @@
           "headers": {
             "host": "n8n.srv1051492.hstgr.cloud",
             "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
-            "content-length": "51",
+            "content-length": "101",
             "accept": "*/*",
             "accept-encoding": "gzip, deflate, br, zstd",
             "accept-language": "en-US,en;q=0.9",
@@ -505,13 +506,13 @@
             "x-forwarded-host": "n8n.srv1051492.hstgr.cloud",
             "x-forwarded-port": "443",
             "x-forwarded-proto": "https",
-            "x-forwarded-server": "850eb13295af",
+            "x-forwarded-server": "8465fa5812cd",
             "x-real-ip": "172.18.0.1"
           },
           "params": {},
           "query": {},
           "body": {
-            "chatInput": "Document workflow: JKWl6oiKZANNgA2N"
+            "chatInput": "Build a website for IQ Guides, a strategy guide publisher in the mobile gaming niche."
           },
           "webhookUrl": "https://n8n.srv1051492.hstgr.cloud/webhook/7f4cec3b-9bbb-4c80-9462-fd76f5b04219",
           "executionMode": "production"
@@ -534,6 +535,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2025-11-23T21:51:42.000Z",
-  "versionId": "d6a23781-4ccb-4304-aaa5-8cacbae713fd"
+  "updatedAt": "2025-12-06T19:55:26.000Z",
+  "versionId": "ab073335-7c70-4463-b797-a52ddce34de4"
 }
