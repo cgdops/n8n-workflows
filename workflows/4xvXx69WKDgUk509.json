@@ -1,0 +1,247 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "XML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "XML": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTML": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-12-08T01:15:46.205Z",
+  "id": "4xvXx69WKDgUk509",
+  "isArchived": true,
+  "meta": null,
+  "name": "Docs RAG",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "673ffb31-1354-4561-83d3-e2637962115f",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "url": "https://nextjs.org/sitemap.xml",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "text"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        208,
+        0
+      ],
+      "id": "29b756cf-8e2f-4506-94c3-be69bd170d40",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.xml",
+      "typeVersion": 1,
+      "position": [
+        416,
+        0
+      ],
+      "id": "fd23c778-3327-4a17-bf50-0067b68ebe05",
+      "name": "XML"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Access the previous node's output\nconst xmlData = $input.first().json;\n\n// Navigate to the list of URLs (adjust path based on the specific sitemap structure)\n// Usually it's under 'urlset' -> 'url'\nconst urls = xmlData.urlset.url;\n\n// Filter and map to a clean array\nconst cleanUrls = urls\n  .map(item => item.loc) // Get the URL string\n  .filter(url => url.includes('/docs')) // ONLY keep documentation pages\n  .filter(url => !url.includes('/docs/api-reference/old-version')); // Exclude old versions\n\n// Return as an array of items for the next node\nreturn cleanUrls.map(url => ({ json: { url } }));"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        608,
+        0
+      ],
+      "id": "39999242-acd3-4e67-a675-138035af6034",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "options": {
+          "reset": false
+        }
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        816,
+        0
+      ],
+      "id": "8738fb28-b8d2-4067-b9b5-815fe9e0e2aa",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "text"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1024,
+        96
+      ],
+      "id": "d4dc6e03-9ece-4682-9840-aec41fe362a9",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "operation": "extractHtmlContent",
+        "extractionValues": {
+          "values": [
+            {
+              "key": "content",
+              "cssSelector": ".prose"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        1232,
+        96
+      ],
+      "id": "aef984f9-8cec-4f83-bea8-fcb5cb9fac2c",
+      "name": "HTML"
+    },
+    {
+      "parameters": {
+        "amount": 2
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1440,
+        96
+      ],
+      "id": "a2fc3233-b0d4-419b-816a-5bb5e9083f3b",
+      "name": "Wait",
+      "webhookId": "000bd9e9-b461-4a2a-8f91-dc484faab982"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-12-08T01:15:46.208Z",
+      "createdAt": "2025-12-08T01:15:46.208Z",
+      "role": "workflow:owner",
+      "workflowId": "4xvXx69WKDgUk509",
+      "projectId": "QNfIJ0xZgM3QlqN4"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-12-08T01:31:14.000Z",
+  "versionId": "9ae66a32-9057-4fe7-bfe9-81375ea745ad"
+}
