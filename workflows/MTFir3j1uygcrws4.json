@@ -97,12 +97,15 @@
   "createdAt": "2025-11-23T20:36:26.637Z",
   "id": "MTFir3j1uygcrws4",
   "isArchived": false,
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "DEV - Orchestrator",
   "nodes": [
     {
       "parameters": {
         "path": "917f5a8f-df50-4018-8dd2-94ec377c0ccd",
+        "authentication": "headerAuth",
         "responseMode": "responseNode",
         "options": {}
       },
@@ -114,7 +117,13 @@
       ],
       "id": "56c52651-f3b0-49a2-b5f4-8c0ec5628f1e",
       "name": "Webhook",
-      "webhookId": "917f5a8f-df50-4018-8dd2-94ec377c0ccd"
+      "webhookId": "917f5a8f-df50-4018-8dd2-94ec377c0ccd",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "hUbKU1Cayu2TjRND",
+          "name": "X-N8N-API-KEY"
+        }
+      }
     },
     {
       "parameters": {
@@ -521,6 +530,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2025-11-23T22:14:46.000Z",
-  "versionId": "54c3b5d3-a55d-4f58-a962-625c4b66fc4d"
+  "updatedAt": "2025-12-08T01:01:15.000Z",
+  "versionId": "609f98b1-6b26-4c38-9c1a-3099daac0a9d"
 }
