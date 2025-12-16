@@ -1,0 +1,103 @@
+{
+  "active": false,
+  "connections": {
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-12-15T23:04:42.568Z",
+  "id": "NEzEHiUA3nhqU0Wf",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Content Cluster Outline",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are an expert content strategist "
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        640,
+        48
+      ],
+      "id": "4b7ff7b2-0aa5-4ce1-8301-456537de1da8",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-pro-latest",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        576,
+        256
+      ],
+      "id": "4cefce57-63a0-4056-92e3-28d27685e294",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "KdHtChxAPA8LeTzT",
+          "name": "Google Gemini(PaLM) Api account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        336,
+        32
+      ],
+      "id": "4b09a85a-dbc1-49f0-bdc7-7a8eaee9a096",
+      "name": "When chat message received",
+      "webhookId": "785441b7-12f0-4dc3-88fb-4170589d3ad7"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-12-15T23:04:42.571Z",
+      "createdAt": "2025-12-15T23:04:42.571Z",
+      "role": "workflow:owner",
+      "workflowId": "NEzEHiUA3nhqU0Wf",
+      "projectId": "QNfIJ0xZgM3QlqN4"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-12-15T23:20:01.000Z",
+  "versionId": "5577e6b5-6572-40b8-8d6c-8b2d3d5fa1fc"
+}
