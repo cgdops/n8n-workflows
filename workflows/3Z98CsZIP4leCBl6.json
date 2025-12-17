@@ -243,6 +243,28 @@
           }
         ]
       ]
+    },
+    "n8n Docs AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Create a workflow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a workflow": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-12-08T01:34:07.844Z",
@@ -827,7 +849,7 @@
     {
       "parameters": {
         "options": {
-          "systemMessage": "=<role>\nYou are a specialized AI assistant, an expert in n8n's official documentation. Your sole mission is to help users by providing accurate and factual information extracted exclusively from this documentation. You are meticulous, factual, and never deviate from your knowledge scope.\n</role>\n\n<instructions>\n<goal>\nYour primary goal is to provide precise and factual answers to user questions about the n8n automation platform, based **exclusively** on the excerpts from the official documentation provided in the context.\n</goal>\n\n<context>\nYou operate according to a RAG (Retrieval-Augmented Generation) model. For each user question, use the appropriate tool to retrieve the necessary information from the n8n documentation's vector database.\n\n**Mandatory rules:**\n\n1.  **Single source of truth:** Your answer MUST be entirely and solely derived from the information present in the provided documentation.\n2.  **Accuracy and implicit citation:** Base your answer as literally as possible on the documentation text. Rephrase for clarity and conciseness, but do not add any information not found there. Act as if the documentation is your only knowledge in the world.\n3.  **Do not mention the process:** Never mention your tool or the fact that you are a RAG system in your answer to the user. Respond as an expert who directly consults their documentation.\n</context>\n\n<output_format>\n*   **Clarity:** Provide a clear, concise, and direct answer.\n*   **Structuring:** If the context contains steps, lists, or code examples, use Markdown syntax to format them legibly (bullet points, numbered lists, code blocks for code snippets, JSON, etc.).\n*   **Tone:** Adopt a professional, helpful, and confident tone, that of a technical n8n expert.\n</output_format>\n</instructions>"
+          "systemMessage": "=Create a new n8n workflow based on the users requirements.\n\nOutput your response in STRICTLY JSON ONLY."
         }
       },
       "id": "cbd4f31b-1ae0-4b9a-b479-0ac0598b829a",
@@ -1363,6 +1385,49 @@
       ],
       "typeVersion": 1,
       "notes": "© 2025 Lucas Peyrin"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "requestOptions": {}
+      },
+      "type": "n8n-nodes-base.n8n",
+      "typeVersion": 1,
+      "position": [
+        2224,
+        2816
+      ],
+      "id": "3522dadb-9470-458d-bbe7-f090cb9a5d04",
+      "name": "Create a workflow",
+      "credentials": {
+        "n8nApi": {
+          "id": "ohbmHHnK9kc2OXkM",
+          "name": "n8n account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5a5a56e2-da8e-4fb4-835f-145c6e61b900",
+              "name": "workflow_url",
+              "value": "=https://n8n.srv1051492.hstgr.cloud/workflow/{{ $json.id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2432,
+        2816
+      ],
+      "id": "336c8cd3-70f7-4b0e-a6d8-786cfa02f938",
+      "name": "Edit Fields"
     }
   ],
   "pinData": {},
@@ -1378,11 +1443,13 @@
   ],
   "staticData": {
     "node:Every 6 Days": {
-      "recurrenceRules": []
+      "recurrenceRules": [
+        352
+      ]
     }
   },
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2025-12-16T00:40:00.000Z",
-  "versionId": "0e90f122-a995-4e95-872d-aee567d76554"
+  "updatedAt": "2025-12-17T00:59:23.000Z",
+  "versionId": "11a7061e-371c-4dff-bf70-57dc38a41e08"
 }
