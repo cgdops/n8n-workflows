@@ -1,0 +1,180 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Email Body",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email Body": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2025-12-23T01:02:37.426Z",
+  "id": "Q5hxh90nLVgY8rGm",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Send email list an email",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -320,
+        -32
+      ],
+      "id": "d41d4867-7ac0-48e1-b29a-8c7f2e0acf32",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1o-lo-Kc6Eh2hyv29PRb1Sjij_U92wGkQoh12DB9lX40",
+          "mode": "list",
+          "cachedResultName": "Remember Me Email List",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1o-lo-Kc6Eh2hyv29PRb1Sjij_U92wGkQoh12DB9lX40/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1o-lo-Kc6Eh2hyv29PRb1Sjij_U92wGkQoh12DB9lX40/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -64,
+        -32
+      ],
+      "id": "0e882b63-9cd4-47f4-848e-5510efb02844",
+      "name": "Get row(s) in sheet",
+      "alwaysOutputData": false,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "WoXbHPbfFs6I4Nyw",
+          "name": "RememberMe Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "Email, ['First Name'], ['Last Name']",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        144,
+        -32
+      ],
+      "id": "3ea39474-7fcb-4ae2-bcd6-a375344e720e",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "mode": "markdownToHtml",
+        "markdown": "=In the middle of the lights, the noise, the gatherings, and the gift lists, we wanted to pause and say this:\n\n**Remember Him.**\n\nNot just the baby in the manger —\nbut the Savior who sees us, knows us, and walks with us through every season.\n\nAt Remember Me, we believe the most powerful moments with Jesus don’t always happen in churches or on holidays. They happen in ordinary life — in joy and sorrow, in certainty and doubt, in the good days and the hard ones.\n\nThis Christmas, our prayer is simple:\n\n*That you would remember Jesus not only today,\nbut throughout the year —\nwhen life feels full,\nand when it feels empty.*\n\nThank you for being part of this growing community of stories that still speak.\n\nMay His peace meet you right where you are.\n\nWith gratitude and hope,\n\n**Bill McConnell**\n\nFounder, Remember Me\n\nFollow us on [Facebook](https://www.facebook.com/watchrememberme) or [Instagram](https://www.instagram.com/watchrememberme/)\n\n[Watch online](https://www.remembermeseries.com/)",
+        "destinationKey": "body",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.markdown",
+      "typeVersion": 1,
+      "position": [
+        384,
+        -32
+      ],
+      "id": "aeb4637e-4cc5-4ce2-8370-18064b26ac0a",
+      "name": "Email Body"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.Email }}",
+        "subject": "=A message for you {{ $json['[\\'First Name\\']'] }}",
+        "message": "=<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<body style=\"margin: 0; padding: 0; background-color: #f4f4f4;\">\n    <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff;\">\n        \n        <tr>\n            <td align=\"center\" style=\"padding: 20px 0 20px 0;\">\n                <img src=\"https://remembermeseries.com/images/remember-me-web-logo.png\" alt=\"Remember Me Logo\" width=\"180\" style=\"display: block; width: 180px; max-width: 100%; height: auto;\">\n            </td>\n        </tr>\n        \n        <tr>\n            <td style=\"padding: 20px 30px 40px 30px; color: #333333; font-family: Arial, sans-serif; font-size: 16px; line-height: 1.6;\">\n                <!-- ENTER EMAIL BODY HERE -->\n                {{ $json.body }}\n            </td>\n        </tr>\n        \n        <tr>\n            <td align=\"center\" style=\"padding: 20px 30px; background-color: #eeeeee; color: #888888; font-family: Arial, sans-serif; font-size: 12px;\">\n                <p>You are receiving this email because you signed up on our website.</p>\n            </td>\n        </tr>\n\n    </table>\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        688,
+        -32
+      ],
+      "id": "cbb8ccb4-3b90-4db8-81dc-8be4b3804022",
+      "name": "Send a message",
+      "webhookId": "fe38d7af-6938-4f67-ae54-eec2b180071a",
+      "executeOnce": false,
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "ne8e8o5M3GsIpWyl",
+          "name": "Remember Me Gmail"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-12-23T01:02:37.433Z",
+      "createdAt": "2025-12-23T01:02:37.433Z",
+      "role": "workflow:owner",
+      "workflowId": "Q5hxh90nLVgY8rGm",
+      "projectId": "QNfIJ0xZgM3QlqN4"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-12-23T16:44:46.000Z",
+  "versionId": "4824e704-ecbf-4927-8e5b-2305e581dedd"
+}
