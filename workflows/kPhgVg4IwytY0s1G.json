@@ -1,5 +1,873 @@
 {
   "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-03-18T14:26:29.359Z",
+    "createdAt": "2026-03-18T14:26:29.359Z",
+    "versionId": "c916f1e8-167d-4d0e-bfae-cd09c260f453",
+    "workflowId": "kPhgVg4IwytY0s1G",
+    "nodes": [
+      {
+        "parameters": {
+          "sendTo": "={{ $('Get row(s) in sheet').item.json.Email }}",
+          "subject": "Welcome to Remember Me ✨",
+          "message": "=<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Welcome to Remember Me</title>\n</head>\n<body style=\"margin: 0; padding: 0; background-color: #f4f4f4;\">\n    <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff;\">\n        \n        <tr>\n            <td align=\"center\" style=\"padding: 20px 0 20px 0;\">\n                <img src=\"https://remembermeseries.com/images/remember-me-web-logo.png\" alt=\"Remember Me Logo\" width=\"180\" style=\"display: block; width: 180px; max-width: 100%; height: auto;\">\n            </td>\n        </tr>\n        \n        <tr>\n            <td style=\"padding: 20px 30px 40px 30px; color: #333333; font-family: Arial, sans-serif; font-size: 16px; line-height: 1.6;\">\n                <p>Hi {{ $json['First Name'] }},</p>\n                <p>Thank you for joining the Remember Me community!</p>\n                <p>Starting tomorrow, you’ll receive your first devotional in our 5-day journey — designed to encourage you, inspire you, and remind you that Jesus is never far away.</p>\n                <p>We’re so glad you’re here.</p>\n                <p style=\"margin-top: 25px;\">— The Remember Me Team</p>\n                <p style=\"margin-top: 15px;\">\n                    <a href=\"https://remembermeseries.com\" style=\"color: #007bff; text-decoration: underline;\">remembermeseries.com</a>\n                </p>\n            </td>\n        </tr>\n        \n        <tr>\n            <td align=\"center\" style=\"padding: 20px 30px; background-color: #eeeeee; color: #888888; font-family: Arial, sans-serif; font-size: 12px;\">\n                <p>You are receiving this email because you signed up on our website.</p>\n            </td>\n        </tr>\n\n    </table>\n</body>\n</html>",
+          "options": {
+            "appendAttribution": false
+          }
+        },
+        "type": "n8n-nodes-base.gmail",
+        "typeVersion": 2.1,
+        "position": [
+          480,
+          -1584
+        ],
+        "id": "3bb76ee9-f7b1-4870-8365-738d249b7e33",
+        "name": "Welcome email",
+        "webhookId": "4b68db1c-4e1a-4d1f-bb0e-8614144510ad",
+        "credentials": {
+          "gmailOAuth2": {
+            "id": "ne8e8o5M3GsIpWyl",
+            "name": "Remember Me Gmail"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "sendTo": "={{ $json.Email }}",
+          "subject": "Day 2: Living Water",
+          "message": "=<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Day 2: Living Water</title>\n</head>\n<body style=\"margin: 0; padding: 0; background-color: #f7f7f7; font-family: Arial, sans-serif;\">\n    <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff;\">\n        \n        <tr>\n            <td align=\"center\" style=\"padding: 20px 0 20px 0;\">\n                <img src=\"https://remembermeseries.com/images/remember-me-web-logo.png\" alt=\"Remember Me Logo\" width=\"180\" style=\"display: block; width: 180px; max-width: 100%; height: auto;\">\n            </td>\n        </tr>\n        \n        <tr>\n            <td style=\"padding: 20px 30px 40px 30px; color: #333333; font-size: 16px; line-height: 1.6;\">\n                \n                <h2 style=\"font-size: 24px; color: #222222; margin-top: 0;\">Day 2: Living Water</h2>\n                \n                <p style=\"border-top: 1px solid #dddddd; padding-top: 15px;\">\n                    <strong>Scripture:</strong> <em>John 4:13–14</em>\n                </p>\n\n                <p>The woman came to draw physical water, but Jesus spoke of a deeper thirst. He offered her “living water” — a life not defined by shame, sin, or temporary satisfaction, but by a wellspring that never runs dry. So often, we chase what we think will satisfy: success, relationships, possessions. Yet they leave us thirsty again. Only Jesus offers living water that satisfies the soul forever.</p>\n\n                <p style=\"background-color: #f7f7f7; padding: 15px; border-left: 4px solid #007bff; font-style: italic; margin: 25px 0;\">\n                    <strong>Key Takeaway:</strong> What the world offers leaves us empty; what Jesus offers fills us completely.</p>\n\n                <h3 style=\"font-size: 18px; color: #222222; margin-top: 30px; border-bottom: 1px solid #eeeeee; padding-bottom: 5px;\">Questions for Reflection</h3>\n                <ul style=\"padding-left: 20px; margin-top: 10px;\">\n                    <li style=\"margin-bottom: 10px;\">What “wells” have you gone to that left you thirsty?</li>\n                    <li>What does it mean for you to drink deeply of Jesus’ living water?</li>\n                </ul>\n\n                <h3 style=\"font-size: 18px; color: #222222; margin-top: 30px; border-bottom: 1px solid #eeeeee; padding-bottom: 5px;\">Prayer</h3>\n                <p style=\"font-style: italic;\">Jesus, I confess I’ve chased empty wells. Satisfy me with the water only You provide.</p>\n\n            </td>\n        </tr>\n        \n        <tr>\n            <td align=\"center\" style=\"padding: 20px 30px; background-color: #eeeeee; color: #888888; font-family: Arial, sans-serif; font-size: 12px;\">\n                <p>You are receiving this email as part of the 5-day devotional journey from Remember Me.</p>\n            </td>\n        </tr>\n\n    </table>\n</body>\n</html>",
+          "options": {
+            "appendAttribution": false
+          }
+        },
+        "type": "n8n-nodes-base.gmail",
+        "typeVersion": 2.1,
+        "position": [
+          480,
+          -1136
+        ],
+        "id": "0249b873-c513-4d9a-96e8-b23b4866165a",
+        "name": "Day 2",
+        "webhookId": "4b68db1c-4e1a-4d1f-bb0e-8614144510ad",
+        "credentials": {
+          "gmailOAuth2": {
+            "id": "ne8e8o5M3GsIpWyl",
+            "name": "Remember Me Gmail"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "sendTo": "={{ $json.Email }}",
+          "subject": "Day 1: Seen by God - Daily Devotion",
+          "message": "=<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Day 1: Seen by God</title>\n</head>\n<body style=\"margin: 0; padding: 0; background-color: #f7f7f7; font-family: Arial, sans-serif;\">\n    <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff;\">\n        \n        <tr>\n            <td align=\"center\" style=\"padding: 20px 0 20px 0;\">\n                <img src=\"https://remembermeseries.com/images/remember-me-web-logo.png\" alt=\"Remember Me Logo\" width=\"180\" style=\"display: block; width: 180px; max-width: 100%; height: auto;\">\n            </td>\n        </tr>\n        \n        <tr>\n            <td style=\"padding: 20px 30px 40px 30px; color: #333333; font-size: 16px; line-height: 1.6;\">\n                \n                <h2 style=\"font-size: 24px; color: #222222; margin-top: 0;\">Day 1: Seen by God</h2>\n                \n                <p style=\"border-top: 1px solid #dddddd; padding-top: 15px;\">\n                    <strong>Scripture:</strong> <em>John 4:7–10</em>\n                </p>\n\n                <p>The Samaritan woman came to the well at noon, the hottest part of the day, to avoid the stares and whispers of her neighbors. She expected to remain unseen, unnoticed. But Jesus was there, waiting. His first words were simple: “Will you give me a drink?” In a culture where men avoided women like her, and Jews avoided Samaritans altogether, Jesus broke every barrier with His presence and His request.</p>\n                \n                <p>When we feel overlooked, rejected, or dismissed, we wonder if anyone truly sees us. Jesus shows us that He sees not just our circumstances but our heart. And He doesn’t look away.</p>\n\n                <p style=\"background-color: #f7f7f7; padding: 15px; border-left: 4px solid #007bff; font-style: italic; margin: 25px 0;\">\n                    <strong>Key Takeaway:</strong> Jesus doesn’t avoid your broken places — He meets you there.\n                </p>\n\n                <h3 style=\"font-size: 18px; color: #222222; margin-top: 30px; border-bottom: 1px solid #eeeeee; padding-bottom: 5px;\">Questions for Reflection</h3>\n                <ul style=\"padding-left: 20px; margin-top: 10px;\">\n                    <li style=\"margin-bottom: 10px;\">Where in your life do you feel unseen or overlooked?</li>\n                    <li>How might Jesus be meeting you right in that place?</li>\n                </ul>\n\n                <h3 style=\"font-size: 18px; color: #222222; margin-top: 30px; border-bottom: 1px solid #eeeeee; padding-bottom: 5px;\">Prayer</h3>\n                <p style=\"font-style: italic;\">Lord, thank You for seeing me fully, even in my hidden places. Help me rest in Your gaze today.</p>\n\n            </td>\n        </tr>\n        \n        <tr>\n            <td align=\"center\" style=\"padding: 20px 30px; background-color: #eeeeee; color: #888888; font-family: Arial, sans-serif; font-size: 12px;\">\n                <p>You are receiving this email as part of the 5-day devotional journey from Remember Me.</p>\n            </td>\n        </tr>\n\n    </table>\n</body>\n</html>",
+          "options": {
+            "appendAttribution": false
+          }
+        },
+        "type": "n8n-nodes-base.gmail",
+        "typeVersion": 2.1,
+        "position": [
+          480,
+          -1312
+        ],
+        "id": "d4b03250-6c8a-4464-beb6-650050d6e220",
+        "name": "Day 1",
+        "webhookId": "4b68db1c-4e1a-4d1f-bb0e-8614144510ad",
+        "alwaysOutputData": false,
+        "credentials": {
+          "gmailOAuth2": {
+            "id": "ne8e8o5M3GsIpWyl",
+            "name": "Remember Me Gmail"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "sendTo": "={{ $json.Email }}",
+          "subject": "Day 3: Breaking Barriers",
+          "message": "=<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Day 3: Breaking Barriers</title>\n</head>\n<body style=\"margin: 0; padding: 0; background-color: #f7f7f7; font-family: Arial, sans-serif;\">\n    <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff;\">\n        \n        <tr>\n            <td align=\"center\" style=\"padding: 20px 0 20px 0;\">\n                <img src=\"https://remembermeseries.com/images/remember-me-web-logo.png\" alt=\"Remember Me Logo\" width=\"180\" style=\"display: block; width: 180px; max-width: 100%; height: auto;\">\n            </td>\n        </tr>\n        \n        <tr>\n            <td style=\"padding: 20px 30px 40px 30px; color: #333333; font-size: 16px; line-height: 1.6;\">\n                \n                <h2 style=\"font-size: 24px; color: #222222; margin-top: 0;\">Day 3: Breaking Barriers</h2>\n                \n                <p style=\"border-top: 1px solid #dddddd; padding-top: 15px;\">\n                    <strong>Scripture:</strong> <em>John 4:9-27</em>\n                </p>\n\n                <p>The disciples were shocked to find Jesus talking with this woman. She was the wrong gender, the wrong ethnicity, and carried the wrong reputation. Yet Jesus spoke with her, teaching us that His love crosses every divide — cultural, social, or personal. There is no one too far, too different, or too broken for His love.</p>\n\n                <p style=\"background-color: #f7f7f7; padding: 15px; border-left: 4px solid #007bff; font-style: italic; margin: 25px 0;\">\n                    <strong>Key Takeaway:</strong> Jesus’ love crosses every barrier.</p>\n\n                <h3 style=\"font-size: 18px; color: #222222; margin-top: 30px; border-bottom: 1px solid #eeeeee; padding-bottom: 5px;\">Questions for Reflection</h3>\n                <ul style=\"padding-left: 20px; margin-top: 10px;\">\n                    <li style=\"margin-bottom: 10px;\">What barriers or labels do you let define who you are?</li>\n                    <li>Who in your life might need you to show the barrier-breaking love of Jesus?</li>\n                </ul>\n\n                <h3 style=\"font-size: 18px; color: #222222; margin-top: 30px; border-bottom: 1px solid #eeeeee; padding-bottom: 5px;\">Prayer</h3>\n                <p style=\"font-style: italic;\">Lord, help me see others as You see them — worthy of Your love, no matter what divides us.</p>\n\n            </td>\n        </tr>\n        \n        <tr>\n            <td align=\"center\" style=\"padding: 20px 30px; background-color: #eeeeee; color: #888888; font-family: Arial, sans-serif; font-size: 12px;\">\n                <p>You are receiving this email as part of the 5-day devotional journey from Remember Me.</p>\n            </td>\n        </tr>\n\n    </table>\n</body>\n</html>",
+          "options": {
+            "appendAttribution": false
+          }
+        },
+        "type": "n8n-nodes-base.gmail",
+        "typeVersion": 2.1,
+        "position": [
+          480,
+          -960
+        ],
+        "id": "77b2d352-3693-4ac0-947a-65cf8cec2834",
+        "name": "Day 3",
+        "webhookId": "4b68db1c-4e1a-4d1f-bb0e-8614144510ad",
+        "credentials": {
+          "gmailOAuth2": {
+            "id": "ne8e8o5M3GsIpWyl",
+            "name": "Remember Me Gmail"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "sendTo": "={{ $json.Email }}",
+          "subject": "Day 4: True Worship",
+          "message": "=<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Day 4: True Worship</title>\n</head>\n<body style=\"margin: 0; padding: 0; background-color: #f7f7f7; font-family: Arial, sans-serif;\">\n    <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff;\">\n        \n        <tr>\n            <td align=\"center\" style=\"padding: 20px 0 20px 0;\">\n                <img src=\"https://remembermeseries.com/images/remember-me-web-logo.png\" alt=\"Remember Me Logo\" width=\"180\" style=\"display: block; width: 180px; max-width: 100%; height: auto;\">\n            </td>\n        </tr>\n        \n        <tr>\n            <td style=\"padding: 20px 30px 40px 30px; color: #333333; font-size: 16px; line-height: 1.6;\">\n                \n                <h2 style=\"font-size: 24px; color: #222222; margin-top: 0;\">Day 4: True Worship</h2>\n                \n                <p style=\"border-top: 1px solid #dddddd; padding-top: 15px;\">\n                    <strong>Scripture:</strong> <em>John 4:23–24</em>\n                </p>\n\n                <p>The woman asked Jesus about the “right” place to worship. He answered with a radical truth: true worship isn’t about a mountain or a temple, but about the posture of the heart —worshipping “in spirit and in truth.” We often get caught up in outward appearances, church styles, or rules. But Jesus reminds us that God seeks worshippers who come honestly and wholeheartedly, wherever they are.</p>\n\n                <p style=\"background-color: #f7f7f7; padding: 15px; border-left: 4px solid #007bff; font-style: italic; margin: 25px 0;\">\n                    <strong>Key Takeaway:</strong> Worship is not about a place — it’s about the posture of your heart.\n                </p>\n\n                <h3 style=\"font-size: 18px; color: #222222; margin-top: 30px; border-bottom: 1px solid #eeeeee; padding-bottom: 5px;\">Questions for Reflection</h3>\n                <ul style=\"padding-left: 20px; margin-top: 10px;\">\n                    <li style=\"margin-bottom: 10px;\">What distractions keep you from worshipping in spirit and truth?</li>\n                    <li>How might your daily life become an act of worship?</li>\n                </ul>\n\n                <h3 style=\"font-size: 18px; color: #222222; margin-top: 30px; border-bottom: 1px solid #eeeeee; padding-bottom: 5px;\">Prayer</h3>\n                <p style=\"font-style: italic;\">Father, teach me to worship You with honesty and wholeness, not performance or pretense.</p>\n\n            </td>\n        </tr>\n        \n        <tr>\n            <td align=\"center\" style=\"padding: 20px 30px; background-color: #eeeeee; color: #888888; font-family: Arial, sans-serif; font-size: 12px;\">\n                <p>You are receiving this email as part of the 5-day devotional journey from Remember Me.</p>\n            </td>\n        </tr>\n\n    </table>\n</body>\n</html>",
+          "options": {
+            "appendAttribution": false
+          }
+        },
+        "type": "n8n-nodes-base.gmail",
+        "typeVersion": 2.1,
+        "position": [
+          480,
+          -784
+        ],
+        "id": "71d081af-7801-43bd-81e4-e2e9b003a83a",
+        "name": "Day 4",
+        "webhookId": "4b68db1c-4e1a-4d1f-bb0e-8614144510ad",
+        "credentials": {
+          "gmailOAuth2": {
+            "id": "ne8e8o5M3GsIpWyl",
+            "name": "Remember Me Gmail"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "sendTo": "={{ $json.Email }}",
+          "subject": "Day 5: A Changed Story",
+          "message": "=<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Day 5: A Changed Story</title>\n</head>\n<body style=\"margin: 0; padding: 0; background-color: #f7f7f7; font-family: Arial, sans-serif;\">\n    <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff;\">\n        \n        <tr>\n            <td align=\"center\" style=\"padding: 20px 0 20px 0;\">\n                <img src=\"https://remembermeseries.com/images/remember-me-web-logo.png\" alt=\"Remember Me Logo\" width=\"180\" style=\"display: block; width: 180px; max-width: 100%; height: auto;\">\n            </td>\n        </tr>\n        \n        <tr>\n            <td style=\"padding: 20px 30px 40px 30px; color: #333333; font-size: 16px; line-height: 1.6;\">\n                \n                <h2 style=\"font-size: 24px; color: #222222; margin-top: 0;\">Day 5: A Changed Story</h2>\n                \n                <p style=\"border-top: 1px solid #dddddd; padding-top: 15px;\">\n                    <strong>Scripture:</strong> <em>John 4:28–30, 39</em>\n                </p>\n\n                <p>After her encounter with Jesus, the woman left her water jar behind. The very thing she came for no longer mattered. She ran into the town — the same people she once avoided — and declared, “Come, see a man who told me everything I ever did.” Her shame became her testimony. Because of her, many in that town believed in Jesus.</p>\n                \n                <p>When Jesus rewrites our story, the parts we once hid can become the very places He uses to draw others to Himself.</p>\n\n                <p style=\"background-color: #f7f7f7; padding: 15px; border-left: 4px solid #007bff; font-style: italic; margin: 25px 0;\">\n                    <strong>Key Takeaway:</strong>When Jesus changes your story, your shame becomes your testimony.\n                </p>\n\n                <h3 style=\"font-size: 18px; color: #222222; margin-top: 30px; border-bottom: 1px solid #eeeeee; padding-bottom: 5px;\">Questions for Reflection</h3>\n                <ul style=\"padding-left: 20px; margin-top: 10px;\">\n                    <li style=\"margin-bottom: 10px;\">What “water jar” might Jesus be asking you to leave behind?</li>\n                    <li>How could your story encourage someone else to believe?</li>\n                </ul>\n\n                <h3 style=\"font-size: 18px; color: #222222; margin-top: 30px; border-bottom: 1px solid #eeeeee; padding-bottom: 5px;\">Prayer</h3>\n                <p style=\"font-style: italic;\">Jesus, thank You for rewriting my story. Use even my past to bring hope to others.</p>\n\n            </td>\n        </tr>\n        \n        <tr>\n            <td align=\"center\" style=\"padding: 20px 30px; background-color: #eeeeee; color: #888888; font-family: Arial, sans-serif; font-size: 12px;\">\n                <p>You are receiving this email as part of the 5-day devotional journey from Remember Me.</p>\n            </td>\n        </tr>\n\n    </table>\n</body>\n</html>",
+          "options": {
+            "appendAttribution": false
+          }
+        },
+        "type": "n8n-nodes-base.gmail",
+        "typeVersion": 2.1,
+        "position": [
+          480,
+          -608
+        ],
+        "id": "9375bd09-0fd7-4e94-92d9-9efef937d0ef",
+        "name": "Day 5",
+        "webhookId": "4b68db1c-4e1a-4d1f-bb0e-8614144510ad",
+        "credentials": {
+          "gmailOAuth2": {
+            "id": "ne8e8o5M3GsIpWyl",
+            "name": "Remember Me Gmail"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "sendTo": "={{ $json.Email }}",
+          "subject": "Your Free Verse Art",
+          "message": "=<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Welcome to Remember Me</title>\n</head>\n<body style=\"margin: 0; padding: 0; background-color: #f4f4f4;\">\n    <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff;\">\n        \n        <tr>\n            <td align=\"center\" style=\"padding: 20px 0 20px 0;\">\n                <img src=\"https://remembermeseries.com/images/remember-me-web-logo.png\" alt=\"Remember Me Logo\" width=\"180\" style=\"display: block; width: 180px; max-width: 100%; height: auto;\">\n            </td>\n        </tr>\n        \n        <tr>\n            <td style=\"padding: 20px 30px 40px 30px; color: #333333; font-family: Arial, sans-serif; font-size: 16px; line-height: 1.6;\">\n                <p>Hi {{ $json['First Name'] }},</p>\n                <p>We’re so grateful you’ve walked through these first five days with us.</p>\n<p>Here’s your gift — a verse art design to inspire you daily:</p>\n<p><a href=\"https://cdn.prod.website-files.com/686e85303107e21980ac84f4/68f95dd3fb6d580445285075_001%20Identity%20%26%20Worth.png\" style=\"color: #007bff; text-decoration: underline;\">Download your verse art</a></p>\n<p>We encourage you to set it as your wallpaper or share it with a friend.</p>\n\n                <p style=\"margin-top: 25px;\">— The Remember Me Team</p>\n                <p style=\"margin-top: 15px;\">\n                    <a href=\"https://remembermeseries.com\" style=\"color: #007bff; text-decoration: underline;\">remembermeseries.com</a>\n                </p>\n            </td>\n        </tr>\n        \n        <tr>\n            <td align=\"center\" style=\"padding: 20px 30px; background-color: #eeeeee; color: #888888; font-family: Arial, sans-serif; font-size: 12px;\">\n                <p>You are receiving this email because you signed up on our website.</p>\n            </td>\n        </tr>\n\n    </table>\n</body>\n</html>",
+          "options": {
+            "appendAttribution": false
+          }
+        },
+        "type": "n8n-nodes-base.gmail",
+        "typeVersion": 2.1,
+        "position": [
+          480,
+          -432
+        ],
+        "id": "f4c49b1c-1c9a-4083-b596-85a3d06e8d52",
+        "name": "Verse Art Gift",
+        "webhookId": "4b68db1c-4e1a-4d1f-bb0e-8614144510ad",
+        "credentials": {
+          "gmailOAuth2": {
+            "id": "ne8e8o5M3GsIpWyl",
+            "name": "Remember Me Gmail"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "sendTo": "={{ $json.Email }}",
+          "subject": "Why Remember Me Exists + A Gift",
+          "message": "=<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Welcome to Remember Me</title>\n</head>\n<body style=\"margin: 0; padding: 0; background-color: #f4f4f4;\">\n    <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff;\">\n        \n        <tr>\n            <td align=\"center\" style=\"padding: 20px 0 20px 0;\">\n                <img src=\"https://remembermeseries.com/images/remember-me-web-logo.png\" alt=\"Remember Me Logo\" width=\"180\" style=\"display: block; width: 180px; max-width: 100%; height: auto;\">\n            </td>\n        </tr>\n        \n        <tr>\n            <td style=\"padding: 20px 30px 40px 30px; color: #333333; font-family: Arial, sans-serif; font-size: 16px; line-height: 1.6;\">\n                <p>Hi {{ $json['First Name'] }},</p>\n                <p>At Remember Me, our mission is simple:</p>\n                <p><em>To bring the voices of women in the Bible to life through short, powerful stories — reminding us that Jesus is never far away.</em></p>\n                <p>We want these stories to spread far and wide, and you can help.</p>\n                <p>Know 3 friends who would be encouraged by these devotionals? Share this link with them: </p>\n                <p><a href=\"https://n8n.srv1051492.hstgr.cloud/form/fbd98f8c-bc1c-4703-8c0c-5ebb11ceff98\" style=\"color: #007bff; text-decoration: underline;\">Refer a friend</a></p>\n<p>As a thank-you, we’ll send you an exclusive behind-the-scenes video clip (30–45 seconds) when they sign up.</p>\n                <p>Thank you for being part of this journey — together, we’re sharing stories that still speak.</p>\n                <p style=\"margin-top: 25px;\">— The Remember Me Team</p>\n                <p style=\"margin-top: 15px;\">\n                    <a href=\"https://remembermeseries.com\" style=\"color: #007bff; text-decoration: underline;\">remembermeseries.com</a>\n                </p>\n            </td>\n        </tr>\n        \n        <tr>\n            <td align=\"center\" style=\"padding: 20px 30px; background-color: #eeeeee; color: #888888; font-family: Arial, sans-serif; font-size: 12px;\">\n                <p>You are receiving this email because you signed up on our website.</p>\n            </td>\n        </tr>\n\n    </table>\n</body>\n</html>",
+          "options": {
+            "appendAttribution": false
+          }
+        },
+        "type": "n8n-nodes-base.gmail",
+        "typeVersion": 2.1,
+        "position": [
+          480,
+          -256
+        ],
+        "id": "c4cb8534-a6b4-400c-a83f-900231cbfcd1",
+        "name": "Referral Ask",
+        "webhookId": "4b68db1c-4e1a-4d1f-bb0e-8614144510ad",
+        "credentials": {
+          "gmailOAuth2": {
+            "id": "ne8e8o5M3GsIpWyl",
+            "name": "Remember Me Gmail"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "rule": {
+            "interval": [
+              {
+                "triggerAtHour": 8
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "typeVersion": 1.2,
+        "position": [
+          -880,
+          -800
+        ],
+        "id": "c561c006-273b-41da-8258-f6b131314d8b",
+        "name": "Schedule Trigger"
+      },
+      {
+        "parameters": {
+          "documentId": {
+            "__rl": true,
+            "value": "1o-lo-Kc6Eh2hyv29PRb1Sjij_U92wGkQoh12DB9lX40",
+            "mode": "list",
+            "cachedResultName": "Remember Me Email List",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1o-lo-Kc6Eh2hyv29PRb1Sjij_U92wGkQoh12DB9lX40/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "Sheet1",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1o-lo-Kc6Eh2hyv29PRb1Sjij_U92wGkQoh12DB9lX40/edit#gid=0"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          -624,
+          -800
+        ],
+        "id": "4ccb5b29-e4a6-4114-8efc-6781fa5830bc",
+        "name": "Get row(s) in sheet",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "WoXbHPbfFs6I4Nyw",
+            "name": "RememberMe Google Sheets account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "loose",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $json['Sequence Day'] }}",
+                      "rightValue": "",
+                      "operator": {
+                        "type": "string",
+                        "operation": "empty",
+                        "singleValue": true
+                      },
+                      "id": "b07f86d6-9449-4181-8872-12665573bdec"
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "Welcome (email 1)"
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "loose",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "4aa9a9bd-f907-4bac-98c0-824e41371b86",
+                      "leftValue": "={{ $json['Sequence Day'] }}",
+                      "rightValue": "2",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals",
+                        "name": "filter.operator.equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "Devotion Day 1 (email 2)"
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "loose",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "17ba4eb6-99b8-4411-8532-2b21720afecf",
+                      "leftValue": "={{ $json['Sequence Day'] }}",
+                      "rightValue": "3",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals",
+                        "name": "filter.operator.equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "Devotion Day 2 (email 3)"
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "loose",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "d4c16f1a-9abf-4113-99d9-e992261bbfec",
+                      "leftValue": "={{ $json['Sequence Day'] }}",
+                      "rightValue": "4",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals",
+                        "name": "filter.operator.equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "Devotion Day 3 (email 4)"
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "loose",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "7427fd17-53c8-49f1-a540-0ff78ed0d28c",
+                      "leftValue": "={{ $json['Sequence Day'] }}",
+                      "rightValue": "5",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals",
+                        "name": "filter.operator.equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "Devotion Day 4 (email 5)"
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "loose",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "8cd4b843-a2ac-44c5-9a0c-ea3498485b86",
+                      "leftValue": "={{ $json['Sequence Day'] }}",
+                      "rightValue": "6",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals",
+                        "name": "filter.operator.equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "Devotion Day 5 (email 6)"
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "loose",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "aad7ee39-91ce-4759-8fd6-42b68def5313",
+                      "leftValue": "={{ $json['Sequence Day'] }}",
+                      "rightValue": "7",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals",
+                        "name": "filter.operator.equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "Verse Art (email 7)"
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "loose",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "0bd39418-0077-4592-ad68-f66db235d8d7",
+                      "leftValue": "={{ $json['Sequence Day'] }}",
+                      "rightValue": "8",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals",
+                        "name": "filter.operator.equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "Referral Ask (email 8)"
+              }
+            ]
+          },
+          "looseTypeValidation": true,
+          "options": {
+            "allMatchingOutputs": true
+          }
+        },
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.3,
+        "position": [
+          -144,
+          -896
+        ],
+        "id": "737da0e6-21f8-4c75-bd78-6818e8f45314",
+        "name": "Switch"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "documentId": {
+            "__rl": true,
+            "value": "1o-lo-Kc6Eh2hyv29PRb1Sjij_U92wGkQoh12DB9lX40",
+            "mode": "list",
+            "cachedResultName": "Remember Me Email List",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1o-lo-Kc6Eh2hyv29PRb1Sjij_U92wGkQoh12DB9lX40/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "Sheet1",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1o-lo-Kc6Eh2hyv29PRb1Sjij_U92wGkQoh12DB9lX40/edit#gid=0"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "Email": "={{ $('Switch').item.json.Email }}",
+              "Sequence Day": "=2"
+            },
+            "matchingColumns": [
+              "Email"
+            ],
+            "schema": [
+              {
+                "id": "Email",
+                "displayName": "Email",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "Source",
+                "displayName": "Source",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "First Name",
+                "displayName": "First Name",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Last Name",
+                "displayName": "Last Name",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Sequence Day",
+                "displayName": "Sequence Day",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "row_number",
+                "displayName": "row_number",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "readOnly": true,
+                "removed": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          1232,
+          -1584
+        ],
+        "id": "0d8fd92c-57c7-4331-b8df-1bddafdd6c7d",
+        "name": "Update row in sheet",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "WoXbHPbfFs6I4Nyw",
+            "name": "RememberMe Google Sheets account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "documentId": {
+            "__rl": true,
+            "value": "1o-lo-Kc6Eh2hyv29PRb1Sjij_U92wGkQoh12DB9lX40",
+            "mode": "list",
+            "cachedResultName": "Remember Me Email List",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1o-lo-Kc6Eh2hyv29PRb1Sjij_U92wGkQoh12DB9lX40/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "Sheet1",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1o-lo-Kc6Eh2hyv29PRb1Sjij_U92wGkQoh12DB9lX40/edit#gid=0"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "Email": "={{ $('Switch').item.json.Email }}",
+              "Sequence Day": "={{ $('Switch').item.json['Sequence Day'] + 1 }}"
+            },
+            "matchingColumns": [
+              "Email"
+            ],
+            "schema": [
+              {
+                "id": "Email",
+                "displayName": "Email",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "Source",
+                "displayName": "Source",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "First Name",
+                "displayName": "First Name",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Last Name",
+                "displayName": "Last Name",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Sequence Day",
+                "displayName": "Sequence Day",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "row_number",
+                "displayName": "row_number",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "readOnly": true,
+                "removed": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          1232,
+          -784
+        ],
+        "id": "245f5e49-8332-45cb-a605-ffc14e9f5f19",
+        "name": "Update row in sheet1",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "WoXbHPbfFs6I4Nyw",
+            "name": "RememberMe Google Sheets account"
+          }
+        }
+      }
+    ],
+    "connections": {
+      "Welcome email": {
+        "main": [
+          [
+            {
+              "node": "Update row in sheet",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Day 1": {
+        "main": [
+          [
+            {
+              "node": "Update row in sheet1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Day 2": {
+        "main": [
+          [
+            {
+              "node": "Update row in sheet1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Day 3": {
+        "main": [
+          [
+            {
+              "node": "Update row in sheet1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Day 4": {
+        "main": [
+          [
+            {
+              "node": "Update row in sheet1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Day 5": {
+        "main": [
+          [
+            {
+              "node": "Update row in sheet1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Verse Art Gift": {
+        "main": [
+          [
+            {
+              "node": "Update row in sheet1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Referral Ask": {
+        "main": [
+          [
+            {
+              "node": "Update row in sheet1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Schedule Trigger": {
+        "main": [
+          [
+            {
+              "node": "Get row(s) in sheet",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get row(s) in sheet": {
+        "main": [
+          [
+            {
+              "node": "Switch",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Switch": {
+        "main": [
+          [
+            {
+              "node": "Welcome email",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Day 1",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Day 2",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Day 3",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Day 4",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Day 5",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Verse Art Gift",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Referral Ask",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "system migration",
+    "name": null,
+    "description": null,
+    "autosaved": false
+  },
+  "activeVersionId": "c916f1e8-167d-4d0e-bfae-cd09c260f453",
   "connections": {
     "Welcome email": {
       "main": [
