@@ -1,0 +1,540 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a post": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call '05 - Image Gen & Update Post'": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format for WP": {
+      "main": [
+        [
+          {
+            "node": "Create a post",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Call '05 - Image Gen & Update Post'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-03-18T14:19:45.954Z",
+  "id": "SkwFJnEmBZstpwgX",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "04 Generate an Article",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -128,
+        32
+      ],
+      "id": "5e1c05c7-e9e5-487c-ae6e-4e5b55c47ef0",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8",
+          "mode": "list",
+          "cachedResultName": "tallo_prog_relevant_keywords",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1731860562,
+          "mode": "list",
+          "cachedResultName": "content_brief",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8/edit#gid=1731860562"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "status",
+              "lookupValue": "new"
+            }
+          ]
+        },
+        "options": {
+          "returnFirstMatch": true
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        128,
+        32
+      ],
+      "id": "c493bc43-a267-4c5f-a6e0-30f4555b9490",
+      "name": "Get row(s) in sheet"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1Kf-h1Ua6b2IZj6Qw609yMUCtmKMZcdh8hZcc66JK6NY",
+          "mode": "list",
+          "cachedResultName": "internal_urls",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Kf-h1Ua6b2IZj6Qw609yMUCtmKMZcdh8hZcc66JK6NY/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "1 - Page Titles - All",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Kf-h1Ua6b2IZj6Qw609yMUCtmKMZcdh8hZcc66JK6NY/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        608,
+        240
+      ],
+      "id": "bf47fb10-064c-4d00-8014-cd0ea8d15d08",
+      "name": "Get row(s) in sheet in Google Sheets"
+    },
+    {
+      "parameters": {
+        "title": "={{ $json.title }}",
+        "additionalFields": {
+          "content": "={{ $json.content }}"
+        }
+      },
+      "type": "n8n-nodes-base.wordpress",
+      "typeVersion": 1,
+      "position": [
+        1664,
+        32
+      ],
+      "id": "e383f9ad-b86a-4a40-9427-f1cf0cdaa366",
+      "name": "Create a post"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "DFz0wxzg-6xtRtcKtipku",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/DFz0wxzg-6xtRtcKtipku",
+          "cachedResultName": "05 - Image Gen & Update Post"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        2224,
+        32
+      ],
+      "id": "1537edfa-c4ed-4022-b2d7-57ac0383c432",
+      "name": "Call '05 - Image Gen & Update Post'"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Function to split the raw HTML into a WordPress-friendly JSON object\nfunction formatForWordPress(rawHtml) {\n  let htmlString = String(rawHtml).trim();\n\n  // Find the very first heading to use as the Title\n  const titleMatch = htmlString.match(/<h[1-6]>(.*?)<\\/h[1-6]>/);\n  \n  let postTitle = \"Untitled Draft\";\n  let postContent = htmlString;\n\n  // Extract the title and remove it from the body content\n  if (titleMatch) {\n    postTitle = titleMatch[1].trim(); \n    postContent = htmlString.replace(titleMatch[0], '').trim(); \n  }\n\n  return {\n    title: postTitle,\n    content: postContent,\n    status: 'draft' \n  };\n}\n\n// ==========================================\n// IMPLEMENTATION FOR NESTED API OUTPUT\n// ==========================================\n\n// 1. Grab the raw incoming JSON from the previous node\n// (Assuming n8n syntax here. If the array is sitting at the root of your JSON:)\nconst incomingData = $input.item.json; \n\nlet aiText = \"\";\n\ntry {\n  // 2. Dig through the nested arrays/objects to find the exact text string\n  // If the incoming data is the array itself:\n  if (Array.isArray(incomingData)) {\n    aiText = incomingData[0].content.parts[0].text;\n  } \n  // If the array is wrapped inside another property (e.g., incomingData.message):\n  else if (incomingData.content && incomingData.content.parts) {\n    aiText = incomingData.content.parts[0].text;\n  } \n  // Fallback just in case the structure is slightly different\n  else {\n    throw new Error(\"Unexpected JSON structure.\");\n  }\n} catch (error) {\n  // If it fails to find the path, output an error so the workflow doesn't crash silently\n  return { \n    json: { \n      _error: \"Could not locate the text at content.parts[0].text\", \n      message: error.message \n    } \n  };\n}\n\n// 3. Run the extracted text through the formatting function\nconst wpPayload = formatForWordPress(aiText);\n\n// 4. Return the beautifully formatted WordPress payload!\nreturn { json: wpPayload };"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1360,
+        32
+      ],
+      "id": "23a0a72c-861c-4d20-a549-237234ec5054",
+      "name": "Format for WP"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8",
+          "mode": "list",
+          "cachedResultName": "tallo_prog_relevant_keywords",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 962406146,
+          "mode": "list",
+          "cachedResultName": "articles",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8/edit#gid=962406146"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "post_id": "={{ $json.id }}",
+            "post_title": "={{ $json.title.raw }}",
+            "post_status": "={{ $json.status }}",
+            "post_date": "={{ $json.date }}",
+            "featured_media": "={{ $json.featured_media }}"
+          },
+          "matchingColumns": [
+            "post_id"
+          ],
+          "schema": [
+            {
+              "id": "post_id",
+              "displayName": "post_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "post_title",
+              "displayName": "post_title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "post_date",
+              "displayName": "post_date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "post_status",
+              "displayName": "post_status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "featured_media",
+              "displayName": "featured_media",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1952,
+        32
+      ],
+      "id": "fa48843b-99da-4281-89c8-17664ee54b5e",
+      "name": "Append or update row in sheet"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        912,
+        32
+      ],
+      "id": "9b95cae5-6726-4e9f-82bf-9546547255e3",
+      "name": "3.1 Gemini Writer",
+      "credentials": {}
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        448,
+        32
+      ],
+      "id": "2cbd1490-ee14-444a-8f11-194bc570a6e8",
+      "name": "3.1 Gemini Outliner",
+      "credentials": {}
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8",
+          "mode": "list",
+          "cachedResultName": "tallo_prog_relevant_keywords",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1731860562,
+          "mode": "list",
+          "cachedResultName": "content_brief",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8/edit#gid=1731860562"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "primary_keyword": "={{ $('Get row(s) in sheet').item.json.primary_keyword }}",
+            "status": "post_created",
+            "last_updated": "={{ $now }}"
+          },
+          "matchingColumns": [
+            "primary_keyword"
+          ],
+          "schema": [
+            {
+              "id": "primary_keyword",
+              "displayName": "primary_keyword",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "goal",
+              "displayName": "goal",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "funnel_stage",
+              "displayName": "funnel_stage",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "target_audience",
+              "displayName": "target_audience",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "serp_ai_overview",
+              "displayName": "serp_ai_overview",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "top_serp_urls",
+              "displayName": "top_serp_urls",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "people_also_ask",
+              "displayName": "people_also_ask",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "sub_topics",
+              "displayName": "sub_topics",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "search_intent",
+              "displayName": "search_intent",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "competitor_analysis",
+              "displayName": "competitor_analysis",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "angle_pov",
+              "displayName": "angle_pov",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "recommended_word_count",
+              "displayName": "recommended_word_count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "last_updated",
+              "displayName": "last_updated",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        2496,
+        32
+      ],
+      "id": "1b5a374a-e26c-4bf5-a094-0896bebda14e",
+      "name": "Update row in sheet"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -128,
+        256
+      ],
+      "id": "4123b73f-6e1b-4f19-8e15-91b61d8f8a27",
+      "name": "Schedule Trigger"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-03-18T14:19:45.958Z",
+      "createdAt": "2026-03-18T14:19:45.958Z",
+      "role": "workflow:owner",
+      "workflowId": "SkwFJnEmBZstpwgX",
+      "projectId": "QNfIJ0xZgM3QlqN4"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2026-03-18T14:20:25.000Z",
+  "versionId": "c0d0ee9f-bdfe-4a3f-a571-9f85db12fcc6"
+}
