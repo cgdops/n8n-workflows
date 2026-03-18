@@ -1,0 +1,451 @@
+{
+  "active": false,
+  "connections": {
+    "Build the Binary": {
+      "main": [
+        [
+          {
+            "node": "Edit Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload to WP Media": {
+      "main": [
+        [
+          {
+            "node": "Update Media Alt Text",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Post Feature Image": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Image": {
+      "main": [
+        [
+          {
+            "node": "Upload to WP Media",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Media Alt Text": {
+      "main": [
+        [
+          {
+            "node": "Update Post Feature Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Get the first post without media",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get the first post without media",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "POST to Nano Banana": {
+      "main": [
+        [
+          {
+            "node": "Build the Binary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-03-18T14:20:38.907Z",
+  "id": "4yVekf3Jzb8W7Axl",
+  "isArchived": false,
+  "meta": null,
+  "name": "05 Generate a Feature Image",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        416,
+        -32
+      ],
+      "id": "e8a3a08f-0494-4094-839a-ed2824c17145",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-flash-latest",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        352,
+        176
+      ],
+      "id": "4a386ecc-813f-4dbb-a447-408abbc4f8e9",
+      "name": "Gemini 3 Flash"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get the Base64 string from the new Gemini Image node output\nconst base64String = items[0].json.candidates[0].content.parts[0].inlineData.data;\n\n// Create the binary data object using n8n's helper\nconst binaryData = await this.helpers.prepareBinaryData(\n  Buffer.from(base64String, 'base64'), \n  'featured_image.png', \n  'image/png'\n);\n\nreturn [\n  {\n    json: {\n      fileName: 'featured_image.png'\n    },\n    binary: {\n      data: binaryData // Reference this 'data' key in the WordPress Upload node\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1104,
+        -32
+      ],
+      "id": "b666cfc1-f2e1-418b-a84d-51092b176b38",
+      "name": "Build the Binary"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://tallo.com/wp-json/wp/v2/media",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "wordpressApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Disposition",
+              "value": "attachment; filename=\"featured_image.png\""
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "binaryData",
+        "inputDataFieldName": "data",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1552,
+        -32
+      ],
+      "id": "27688f02-251c-4320-aec4-cf5bb82933cf",
+      "name": "Upload to WP Media"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8",
+          "mode": "list",
+          "cachedResultName": "tallo_prog_relevant_keywords",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 962406146,
+          "mode": "list",
+          "cachedResultName": "articles",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8/edit#gid=962406146"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "post_id": "={{ $json.id }}",
+            "post_status": "post_complete",
+            "featured_media": "={{ $json.featured_media }}"
+          },
+          "matchingColumns": [
+            "post_id"
+          ],
+          "schema": [
+            {
+              "id": "post_id",
+              "displayName": "post_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "post_title",
+              "displayName": "post_title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "post_date",
+              "displayName": "post_date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "post_status",
+              "displayName": "post_status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "featured_media",
+              "displayName": "featured_media",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        2192,
+        -32
+      ],
+      "id": "bd2a8e7f-75ea-46a2-ac72-c96a055ce357",
+      "name": "Update row in sheet"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://tallo.com/wp-json/wp/v2/posts/{{ $('Get the first post without media').item.json.post_id }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "wordpressApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"featured_media\": {{ $json.id }}\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1952,
+        -32
+      ],
+      "id": "f2f539ee-b620-4895-9dd3-5e3a5a05f760",
+      "name": "Update Post Feature Image"
+    },
+    {
+      "parameters": {
+        "operation": "resize",
+        "width": 1200,
+        "height": 675,
+        "resizeOption": "onlyIfLarger",
+        "options": {
+          "fileName": "=tallo_feature_image_{{ $('Get the first post without media').item.json.post_id }}",
+          "format": "jpeg"
+        }
+      },
+      "type": "n8n-nodes-base.editImage",
+      "typeVersion": 1,
+      "position": [
+        1312,
+        -32
+      ],
+      "id": "26298771-5a33-4b51-b2eb-863f0bf80944",
+      "name": "Edit Image"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n\t\"prompt\": \"string\",\n\t\"alt-text\": \"string\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        624,
+        176
+      ],
+      "id": "1d336ba2-d01a-427c-b264-c05fcf064625",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://tallo.com/wp-json/wp/v2/media/{{ $json.id }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "wordpressApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"alt_text\": \"{{ $('AI Agent').item.json.output['alt-text'] }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1744,
+        -32
+      ],
+      "id": "808a65f1-0e0c-4fe3-983b-6c323a347c0c",
+      "name": "Update Media Alt Text"
+    },
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -256,
+        -32
+      ],
+      "id": "088e87dc-6b6a-4a3a-ba85-3b313946a880",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8",
+          "mode": "list",
+          "cachedResultName": "tallo_prog_relevant_keywords",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 962406146,
+          "mode": "list",
+          "cachedResultName": "articles",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8/edit#gid=962406146"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "featured_media",
+              "lookupValue": "=0"
+            }
+          ]
+        },
+        "options": {
+          "returnFirstMatch": true
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        32,
+        -32
+      ],
+      "id": "b03f17d8-ec5a-4ae5-b08b-fd4fc47f390a",
+      "name": "Get the first post without media"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -256,
+        192
+      ],
+      "id": "aa0f9180-a48a-4c61-8077-c448d8f7e775",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://aiplatform.googleapis.com/v1/projects/gen-lang-client-0696638749/locations/global/publishers/google/models/gemini-2.5-flash-image:generateContent",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"contents\": [\n      {\n        \"role\": \"user\",\n        \"parts\": [\n          {\n            \"text\": \"{{ $json.output.prompt }}\"\n          }\n        ]\n      }\n    ],\n    \"generationConfig\": {\n      \"responseModalities\": [\"IMAGE\"],\n      \"imageConfig\": {\n        \"aspectRatio\": \"16:9\",\n        \"imageSize\": \"1K\",\n        \"personGeneration\": \"allow_all\"\n      }\n    }\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        864,
+        -32
+      ],
+      "id": "5f32e3d6-5882-4180-a531-049b5fbccc08",
+      "name": "POST to Nano Banana"
+    }
+  ],
+  "pinData": {
+    "When Executed by Another Workflow": [
+      {
+        "json": {
+          "post_id": 19389759,
+          "post_title": "Breaking Down Lee University Tuition Rates (2025-2027)",
+          "post_status": "draft",
+          "post_date": "2026-03-17T18:02:30",
+          "featured_media": 0
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-03-18T14:20:38.913Z",
+      "createdAt": "2026-03-18T14:20:38.913Z",
+      "role": "workflow:owner",
+      "workflowId": "4yVekf3Jzb8W7Axl",
+      "projectId": "QNfIJ0xZgM3QlqN4"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2026-03-18T14:20:38.907Z",
+  "versionId": "518534a7-b7fe-43a9-b93b-aa89d1da6fa2"
+}
