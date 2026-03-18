@@ -1,5 +1,7 @@
 {
   "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
   "connections": {
     "When clicking ‘Execute workflow’": {
       "main": [
@@ -7,6 +9,17 @@
           {
             "node": "GET SERP Data",
             "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Relevance Filter",
+            "type": "ai_languageModel",
             "index": 0
           }
         ]
@@ -23,6 +36,17 @@
         ]
       ]
     },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Relevance Filter",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "GET SERP Data": {
       "main": [
         [
@@ -33,12 +57,98 @@
           }
         ]
       ]
+    },
+    "Brand Brain": {
+      "main": [
+        [
+          {
+            "node": "Relevance Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "GET SERP Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Generate Content Brief w/ 3.1 Pro",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Content Brief w/ 3.1 Pro": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Generate Content Brief w/ 3.1 Pro",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Update row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser1": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Generate Content Brief w/ 3.1 Pro",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Relevance Filter": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2026-03-18T14:19:22.020Z",
   "id": "34rVdWOresxMw9y9",
   "isArchived": false,
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "03 Generate Content Brief",
   "nodes": [
     {
@@ -46,10 +156,10 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -2304,
-        80
+        -2896,
+        16
       ],
-      "id": "8460470e-7463-4453-b0b0-566584531200",
+      "id": "ed6c8f60-ffb8-4cb8-bf94-4810c1d1a29d",
       "name": "When clicking ‘Execute workflow’"
     },
     {
@@ -59,10 +169,10 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1,
       "position": [
-        -1360,
-        304
+        -1952,
+        240
       ],
-      "id": "913adccf-fad0-4fdd-b6e9-1c515a8d8100",
+      "id": "ab2929a4-edea-4033-a1ad-0ddf15d88cf1",
       "name": "Google Gemini Chat Model"
     },
     {
@@ -253,10 +363,10 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        208,
-        32
+        -384,
+        -32
       ],
-      "id": "69d2f298-3568-44ea-ad78-80b4e01583ef",
+      "id": "5ef30c0b-61c0-4112-a7b7-643e5b833891",
       "name": "Append or update row in sheet"
     },
     {
@@ -266,10 +376,10 @@
       "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
       "typeVersion": 1.3,
       "position": [
-        -1216,
-        304
+        -1808,
+        240
       ],
-      "id": "e19c8bcd-b86a-4007-b553-1d65e435ee42",
+      "id": "ded369a0-f7f3-440f-b8b2-1e6d0c73a62c",
       "name": "Structured Output Parser"
     },
     {
@@ -304,10 +414,10 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -2032,
-        80
+        -2624,
+        16
       ],
-      "id": "a9e45ea4-abd1-4952-95b3-8ede9e6410b7",
+      "id": "d14ee30b-794b-49b1-8deb-d358cf6d8452",
       "name": "GET SERP Data"
     },
     {
@@ -319,10 +429,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -1712,
-        80
+        -2304,
+        16
       ],
-      "id": "7e204e69-5faa-4f5c-95d7-f14d72bef1f6",
+      "id": "842b3fe2-4234-42e1-95c0-57cbfdb1142c",
       "name": "Brand Brain"
     },
     {
@@ -509,21 +619,30 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        592,
-        32
+        0,
+        -32
       ],
-      "id": "6d42ff0f-e736-4121-940a-ef6d705a1f6b",
+      "id": "fa963859-e4b9-4af6-87b8-7b2022ec829d",
       "name": "Update row in sheet"
     },
     {
-      "parameters": {},
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 12
+            }
+          ]
+        }
+      },
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.3,
       "position": [
-        -2320,
-        304
+        -2912,
+        240
       ],
-      "id": "7488c9aa-148a-484f-aa4c-e635c5e94cd2",
+      "id": "5f937f48-4c56-450c-8ba3-761d67118561",
       "name": "Schedule Trigger"
     },
     {
@@ -534,32 +653,98 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1,
       "position": [
-        -400,
-        240
+        -992,
+        176
       ],
-      "id": "2d2905c9-7af4-473e-8218-c1e3bb1ef8fe",
+      "id": "50111f6d-5316-4627-baef-a923123b9b36",
       "name": "Google Gemini Chat Model1"
     },
     {
-      "parameters": {},
+      "parameters": {
+        "promptType": "define",
+        "text": "=Review the following SERP results for the keyword \"{{ $json.output.target_keyword }}\" and identify the Search Intent (Informational, Transactional, Navigational). \n\nThen, analyze what the top competitors are doing and define a unique 'Angle/POV' that will make our article stand out to our target audience of {{ $('Brand Brain').item.json['Target Audience'] }} Include a target word count based on the word counts of the articles by our top competitors.\n\nTop Competitor URLs: {{ $('Brand Brain').item.json['Top Competitor URLs'] }}\n\nSERP AI Overview (if available):\n{{ $('Brand Brain').item.json['SERP Summary'] }}\n\nQuestions People also ask: \n{{ $('GET SERP Data').item.json.faq_questions }}\n\nSub Topics:\n{{ $('GET SERP Data').item.json.sub_topics }}",
+        "hasOutputParser": true,
+        "messages": {
+          "messageValues": [
+            {
+              "message": "=You are a Master SEO Strategist for Tallo.com, analyze the information sent to you by the user and return ONLY your analysis. No additional text or conversational fluff.\n\nExample output:\n{\n  \"target_keyword\":\"string\",\n  \"Search Intent\":\"string\",\n  \"Competitor Analysis\":\"string\",\n  \"Angle/POV\":\"string\",\n  \"Recommended Word Count\":\"number\"\n}\n\n\n\n\n"
+            }
+          ]
+        },
+        "batching": {}
+      },
       "type": "@n8n/n8n-nodes-langchain.chainLlm",
       "typeVersion": 1.9,
       "position": [
-        -352,
-        32
+        -944,
+        -32
       ],
-      "id": "da28ab73-5655-46ad-8cb5-65075db55990",
+      "id": "07a6877f-c934-42af-891b-3a2f63adcc40",
       "name": "Generate Content Brief w/ 3.1 Pro"
     },
     {
-      "parameters": {},
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.output.relevance }}",
+                    "rightValue": "=true",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "d31da3b3-dcc0-4536-875d-1347162e31b3"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "True"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "b75c6872-2f88-4919-84c0-1bfc45e2614a",
+                    "leftValue": "={{ $json.output.relevance }}",
+                    "rightValue": "false",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "False"
+            }
+          ]
+        },
+        "options": {}
+      },
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        -912,
-        80
+        -1504,
+        16
       ],
-      "id": "52ea85c7-85c2-4c22-bbec-255ff8ba0f2c",
+      "id": "503e709d-14a5-4035-8fa0-6fbe3549b378",
       "name": "Switch"
     },
     {
@@ -569,10 +754,10 @@
       "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
       "typeVersion": 1.3,
       "position": [
-        -160,
-        240
+        -752,
+        176
       ],
-      "id": "2ef8b046-e891-420e-8e8c-dcfd8927d96d",
+      "id": "2ed0c14f-c8fd-4052-b339-d6ac00025975",
       "name": "Structured Output Parser1"
     },
     {
@@ -722,27 +907,33 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -656,
-        192
+        -1248,
+        128
       ],
-      "id": "183eee80-90ee-4840-913f-b3b668e4f21e",
+      "id": "4858849d-ff99-4f25-b0f9-6ecd861e0649",
       "name": "Update row in sheet1"
     },
     {
-      "parameters": {},
+      "parameters": {
+        "promptType": "define",
+        "text": "=Review the following SERP results for the keyword \"{{ $json['Primary Keyword'] }}\" to determine whether this keyword is relevant to Tallo.com and our primary audience of {{ $json['Target Audience'] }}\n\nReturn ONLY the \"target keyword\" and true or false for \"relevance\" in JSON format.\n\nSERP AI Overview (if available):\n{{ $json['SERP Summary'] }}\n\nTop Competitor URLs: {{ $json['Top Competitor URLs'] }}\n\nQuestions People also ask: \n{{ $json['FAQ Questions'] }}\n\nSub Topics:\n{{ $json['Sub Topics'] }}",
+        "hasOutputParser": true,
+        "batching": {}
+      },
       "type": "@n8n/n8n-nodes-langchain.chainLlm",
       "typeVersion": 1.9,
       "position": [
-        -1360,
-        80
+        -1952,
+        16
       ],
-      "id": "02a99ca9-bfe5-409f-bd57-08e6aa125279",
+      "id": "b10b4b74-6a77-4cfe-a09b-7d2ae3c354e9",
       "name": "Relevance Filter"
     }
   ],
   "pinData": {},
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "binaryMode": "separate"
   },
   "shared": [
     {
@@ -756,6 +947,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-03-18T14:19:22.020Z",
-  "versionId": "f06d4cd4-7512-4279-9446-c79222779df1"
+  "updatedAt": "2026-03-18T17:38:59.381Z",
+  "versionId": "86aabda2-0712-43d4-9ad2-fb7b2b014cfb"
 }
