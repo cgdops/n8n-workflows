@@ -1,5 +1,313 @@
 {
   "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-03-18T14:26:29.359Z",
+    "createdAt": "2026-03-18T14:26:29.359Z",
+    "versionId": "6d856b73-a0c8-4779-8b81-57718b11fe5c",
+    "workflowId": "X8VFXToHmTkmORAz",
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "rsvp",
+          "responseMode": "responseNode",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -176,
+          0
+        ],
+        "id": "15f75cd5-6eb7-46bb-9789-264572000fd4",
+        "name": "Webhook",
+        "webhookId": "9de86f34-82dc-47bf-af5d-ac6102846216"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "a5358fcc-6510-48d8-8343-6413851b7d18",
+                "leftValue": "={{ $json.body.message }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "string",
+                  "operation": "empty",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          416,
+          0
+        ],
+        "id": "99f0789e-21c6-4053-a5fd-e8336002db3c",
+        "name": "If"
+      },
+      {
+        "parameters": {
+          "operation": "appendOrUpdate",
+          "documentId": {
+            "__rl": true,
+            "value": "1_ii9s5etOJM-IjfuTnQaoXXgHV8eMfPu_ANCNrsbpvw",
+            "mode": "list",
+            "cachedResultName": "wedding-rsvp-list",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_ii9s5etOJM-IjfuTnQaoXXgHV8eMfPu_ANCNrsbpvw/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "Sheet1",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_ii9s5etOJM-IjfuTnQaoXXgHV8eMfPu_ANCNrsbpvw/edit#gid=0"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "email": "={{ $json.email }}",
+              "firstName": "={{ $json.firstName }}",
+              "lastName": "={{ $json.lastName }}",
+              "attending": "={{ $json.attending }}",
+              "bringingGuest": "={{ $json.bringingGuest }}",
+              "guestName": "={{ $json.guestName }}"
+            },
+            "matchingColumns": [
+              "email"
+            ],
+            "schema": [
+              {
+                "id": "firstName",
+                "displayName": "firstName",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "lastName",
+                "displayName": "lastName",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "email",
+                "displayName": "email",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "attending",
+                "displayName": "attending",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "bringingGuest",
+                "displayName": "bringingGuest",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "guestName",
+                "displayName": "guestName",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "message",
+                "displayName": "message",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          800,
+          -112
+        ],
+        "id": "3a9dc923-c5ca-44e8-b4d4-3f0bf978f869",
+        "name": "Append or update row in sheet",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "h35AaTyWKINQe0bE",
+            "name": "chris.smply.me@gmail.com"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "6f22915a-de45-4ae0-a0da-f5a561711fdb",
+                "name": "firstName",
+                "value": "={{ $json.body.firstName }}",
+                "type": "string"
+              },
+              {
+                "id": "6e1aa1da-db30-49d6-91c9-a0861378e605",
+                "name": "lastName",
+                "value": "={{ $json.body.lastName }}",
+                "type": "string"
+              },
+              {
+                "id": "aa7766f8-f139-49a6-ae1c-d483f808fd2c",
+                "name": "email",
+                "value": "={{ $json.body.email }}",
+                "type": "string"
+              },
+              {
+                "id": "f1b86636-25b4-418c-9723-17c673d5524b",
+                "name": "attending",
+                "value": "={{ $json.body.attending }}",
+                "type": "string"
+              },
+              {
+                "id": "e72d9435-8b85-40ef-bf3c-2a3bdcbd61c3",
+                "name": "bringingGuest",
+                "value": "={{ $json.body.bringingGuest }}",
+                "type": "string"
+              },
+              {
+                "id": "a6152476-a298-4208-8c58-4a2a57bc7584",
+                "name": "guestName",
+                "value": "={{ $json.body.guestName }}",
+                "type": "string"
+              },
+              {
+                "id": "d11ad707-ea73-4a15-8a2c-0fbe919dc20c",
+                "name": "message",
+                "value": "={{ $json.body.message }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          112,
+          0
+        ],
+        "id": "52cbf6fd-b576-4490-9a40-1665ccdc37bf",
+        "name": "Edit Fields"
+      },
+      {
+        "parameters": {
+          "respondWith": "allIncomingItems",
+          "options": {
+            "responseCode": 200,
+            "responseKey": "=Thanks for your response {{ $json.firstName }}!"
+          }
+        },
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.4,
+        "position": [
+          1296,
+          -112
+        ],
+        "id": "bffff4c2-37a8-4537-a154-0616544e830f",
+        "name": "Respond to Webhook"
+      }
+    ],
+    "connections": {
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If": {
+        "main": [
+          [
+            {
+              "node": "Append or update row in sheet",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Edit Fields": {
+        "main": [
+          [
+            {
+              "node": "If",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Append or update row in sheet": {
+        "main": [
+          [
+            {
+              "node": "Respond to Webhook",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "system migration",
+    "name": null,
+    "description": null,
+    "autosaved": false
+  },
+  "activeVersionId": "6d856b73-a0c8-4779-8b81-57718b11fe5c",
   "connections": {
     "Webhook": {
       "main": [
