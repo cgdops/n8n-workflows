@@ -1,5 +1,185 @@
 {
   "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-03-18T14:26:29.359Z",
+    "createdAt": "2026-03-18T14:26:29.359Z",
+    "versionId": "8ad8c594-9cf7-4b9b-a022-d902d4840dd5",
+    "workflowId": "RnoRQNdTuCpMicla",
+    "nodes": [
+      {
+        "parameters": {
+          "rule": {
+            "interval": [
+              {
+                "field": "hours"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "typeVersion": 1.2,
+        "position": [
+          -464,
+          0
+        ],
+        "id": "d9e01eeb-fa7a-44bb-be1d-4e51d136a519",
+        "name": "Schedule Trigger"
+      },
+      {
+        "parameters": {
+          "url": "https://discord.com/api/v10/channels/1478482376597311488/messages?limit=5",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpHeaderAuth",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          -256,
+          0
+        ],
+        "id": "ef83bac2-7b3f-4a1f-b36c-5460e5840991",
+        "name": "HTTP Request",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "X1VNTXoMQwhOG45w",
+            "name": "godforge hub discord bot header"
+          },
+          "discordOAuth2Api": {
+            "id": "w8grq40qSEUVk4u8",
+            "name": "GodforgeHub Disc"
+          },
+          "discordBotApi": {
+            "id": "cN7I3JW6UmUNuKdC",
+            "name": "GH Discord Bot account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "// This uses n8n's \"Static Data\" to remember the last message ID processed\nconst staticData = $getWorkflowStaticData('global');\nconst lastMessageId = staticData.lastMessageId;\n\n// Filter the messages from Discord to find only the newest one\nconst newMessages = items.filter(item => item.json.id !== lastMessageId);\n\nif (newMessages.length > 0) {\n    // Update the memory with the ID of the very latest message\n    staticData.lastMessageId = newMessages[0].json.id;\n    return newMessages;\n}\n\n// If no new messages, return nothing (stops the workflow)\nreturn [];"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          0,
+          0
+        ],
+        "id": "33df2f9b-3029-4fc0-a808-d612553478fe",
+        "name": "Code in JavaScript"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://yawfmtkrnewpdxjdypmc.supabase.co/functions/v1/ingest-official-post",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpHeaderAuth",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"author\": \"Dev Name\",\n  \"author_role\": \"Community Manager\",\n  \"source\": \"Discord\",\n  \"title\": {{ JSON.stringify($json.embeds?.[0]?.title || \"New Announcement\") }},\n  \"content\": {{ JSON.stringify($json.content) }},\n  \"region\": \"NA\",\n  \"channel_name\": \"godforge-announcements\",\n  \"message_url\": \"https://discord.com/channels/{{ $json.message_reference.guild_id }}/{{ $json.channel_id }}/{{ $json.id }}\",\n  \"discord_message_id\": \"{{ $json.id }}\",\n  \"image_url\": {{ JSON.stringify($json.embeds?.[0]?.thumbnail?.url || $json.attachments?.[0]?.url || \"\") }},\n  \"timestamp\": \"{{ $json.timestamp }}\",\n  \"is_edited\": false\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          688,
+          0
+        ],
+        "id": "79c7f726-e799-4dba-933a-415246e03118",
+        "name": "HTTP Request1",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "LqvUG3bra9wYpvzH",
+            "name": "godforgehub.com webhook secret"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "4355eaba-8584-4b16-8047-3b81c0b0163d",
+                "leftValue": "={{ $json.type }}",
+                "rightValue": 0,
+                "operator": {
+                  "type": "number",
+                  "operation": "equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.filter",
+        "typeVersion": 2.2,
+        "position": [
+          288,
+          0
+        ],
+        "id": "a5c31eed-c7d8-44d1-be07-0cb4b295f88f",
+        "name": "Filter"
+      }
+    ],
+    "connections": {
+      "Schedule Trigger": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "HTTP Request": {
+        "main": [
+          [
+            {
+              "node": "Code in JavaScript",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in JavaScript": {
+        "main": [
+          [
+            {
+              "node": "Filter",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Filter": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "system migration",
+    "name": null,
+    "description": null,
+    "autosaved": false
+  },
+  "activeVersionId": "8ad8c594-9cf7-4b9b-a022-d902d4840dd5",
   "connections": {
     "Schedule Trigger": {
       "main": [
