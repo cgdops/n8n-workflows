@@ -121,7 +121,7 @@
     {
       "parameters": {
         "mode": "markdownToHtml",
-        "markdown": "=In the middle of the lights, the noise, the gatherings, and the gift lists, we wanted to pause and say this:\n\n**Remember Him.**\n\nNot just the baby in the manger —\nbut the Savior who sees us, knows us, and walks with us through every season.\n\nAt Remember Me, we believe the most powerful moments with Jesus don’t always happen in churches or on holidays. They happen in ordinary life — in joy and sorrow, in certainty and doubt, in the good days and the hard ones.\n\nThis Christmas, our prayer is simple:\n\n*That you would remember Jesus not only today,\nbut throughout the year —\nwhen life feels full,\nand when it feels empty.*\n\nThank you for being part of this growing community of stories that still speak.\n\nMay His peace meet you right where you are.\n\nWith gratitude and hope,\n\n**Bill McConnell**\n\nFounder, Remember Me\n\nFollow us on [Facebook](https://www.facebook.com/watchrememberme) or [Instagram](https://www.instagram.com/watchrememberme/)\n\n[Watch online](https://www.remembermeseries.com/)",
+        "markdown": "=# What's New at Remember Me\n\nWe recently launched the [updated website](https://remembermeseries.com/), we're calling it \"Website V2\"! This new website comes with various improvements and foundational work needed for the future of Remember Me!\n- Media first - the website is now centered on our videos and devotions.\n- Engagement - You can now [sign up for an account](https://remembermeseries.com/auth) to leave comments on our videos.\n- Devotions - Read through our daily devotions\n- Blog - Read through our weekly blog posts\n\nVisit the new [www.RememberMeSeries.com](https://rememebermeseries.com) and let us know what you think!\n\n## Our social media is growing!\n\nThousands of new views, comments and shares are happening right now on our Facebook page!\n\nMake sure you're part of the conversation:\n- Follow us on [Facebook](https://www.facebook.com/watchrememberme)\n- Follow us on [Instagram](https://www.instagram.com/watchrememberme)\n\n## Read Our Latest Blog Posts\n\n- [Why These Stories Exist](https://remembermeseries.com/blog/why-these-stories-exist)\n- [You Don't Have to Know What to Say](https://remembermeseries.com/blog/you-dont-have-to-know-what-to-say)\n\n## Read Our Latest Devotionals\n\n- [Who Touched Me](https://remembermeseries.com/devotions/who-touched-me)\n\n\n### Help us spread the word, share this with a friend!\n\nWe're doing everything we can to keep the Remember Me Project free for everyone. \n\nHowever, this is a small project led solely by Bill McConnell, and a small passionate team. Your support during this early phase is indispensable. \n\nWe humbly ask that you share this with someone you know as we build this project out. Help us spread the word!\n\nThank you,\n\n- *Bill McConnell & the Remember Me Team*",
         "destinationKey": "body",
         "options": {}
       },
@@ -136,15 +136,17 @@
     },
     {
       "parameters": {
-        "sendTo": "={{ $json.Email }}",
+        "sendTo": "=cgomez@xixmia.com",
         "subject": "=A message for you {{ $json['[\\'First Name\\']'] }}",
-        "message": "=<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<body style=\"margin: 0; padding: 0; background-color: #f4f4f4;\">\n    <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff;\">\n        \n        <tr>\n            <td align=\"center\" style=\"padding: 20px 0 20px 0;\">\n                <img src=\"https://remembermeseries.com/images/remember-me-web-logo.png\" alt=\"Remember Me Logo\" width=\"180\" style=\"display: block; width: 180px; max-width: 100%; height: auto;\">\n            </td>\n        </tr>\n        \n        <tr>\n            <td style=\"padding: 20px 30px 40px 30px; color: #333333; font-family: Arial, sans-serif; font-size: 16px; line-height: 1.6;\">\n                <!-- ENTER EMAIL BODY HERE -->\n                {{ $json.body }}\n            </td>\n        </tr>\n        \n        <tr>\n            <td align=\"center\" style=\"padding: 20px 30px; background-color: #eeeeee; color: #888888; font-family: Arial, sans-serif; font-size: 12px;\">\n                <p>You are receiving this email because you signed up on our website.</p>\n            </td>\n        </tr>\n\n    </table>\n</body>\n</html>",
-        "options": {}
+        "message": "=<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<body style=\"margin: 0; padding: 0; background-color: #f4f4f4;\">\n    <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff;\">\n        \n        <tr>\n            <td align=\"center\" style=\"padding: 20px 0 20px 0;\">\n                <img src=\"https://lh3.googleusercontent.com/pw/AP1GczNaf8xl_k-hjQ1n032XjB5Y28ixVaABjVHiae_g8wKH-P7LqPVijdu-_yjLytkdCIqCRJgh2ZUQs57sH_DzwAlJa9ENgfyHFx3nON54BllqIczbOFnWL7yHPndPUJjoBKSQa1EVPHuviBQozZnPsVI=w1919-h429-s-no-gm?authuser=0\" alt=\"Remember Me Logo\" width=\"260px\" style=\"display: block; width: 260px; max-width: 100%; height: auto;\">\n            </td>\n        </tr>\n        \n        <tr>\n            <td style=\"padding: 20px 30px 40px 30px; color: #333333; font-family: Arial, sans-serif; font-size: 16px; line-height: 1.6;\">\n                <!-- ENTER EMAIL BODY HERE -->\n                {{ $json.body }}\n            </td>\n        </tr>\n        \n        <tr>\n            <td align=\"center\" style=\"padding: 20px 30px; background-color: #eeeeee; color: #888888; font-family: Arial, sans-serif; font-size: 12px;\">\n                <p>You are receiving this email because you signed up on our website.</p>\n            </td>\n        </tr>\n\n    </table>\n</body>\n</html>",
+        "options": {
+          "appendAttribution": false
+        }
       },
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.1,
       "position": [
-        688,
+        720,
         -32
       ],
       "id": "cbb8ccb4-3b90-4db8-81dc-8be4b3804022",
@@ -175,6 +177,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-12-23T16:44:46.000Z",
-  "versionId": "4824e704-ecbf-4927-8e5b-2305e581dedd"
+  "updatedAt": "2026-02-01T18:50:41.000Z",
+  "versionId": "ba75be17-33b0-4a30-a3f5-20446599f3ba"
 }
