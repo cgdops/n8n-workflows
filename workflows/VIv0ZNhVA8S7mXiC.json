@@ -54,11 +54,6 @@
         "httpMethod": "POST",
         "path": "7c7c3a5f-978d-43ae-bb5b-b3fbe0ec6e3e",
         "options": {
-          "responseCode": {
-            "values": {
-              "responseCode": 301
-            }
-          },
           "responseHeaders": {
             "entries": [
               {
@@ -92,19 +87,19 @@
             {
               "id": "5ad76577-1824-4325-9fde-317929046e40",
               "name": "email",
-              "value": "={{ $json.body.EMAIL }}",
+              "value": "={{ $('Webhook').item.json.body.email }}",
               "type": "string"
             },
             {
               "id": "61b03c25-3ce3-4297-a095-723eb2413e4e",
               "name": "firstName",
-              "value": "={{ $json.body.FNAME }}",
+              "value": "={{ $json.body.firstName }}",
               "type": "string"
             },
             {
               "id": "71d523d9-6d1d-4b6b-87f9-97e082a324ab",
               "name": "lastName",
-              "value": "={{ $json.body.LNAME }}",
+              "value": "={{ $('Webhook').item.json.body.lastName }}",
               "type": "string"
             }
           ]
@@ -140,10 +135,10 @@
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "Email": "={{ $('Webhook').item.json.body.EMAIL }}",
-            "Source": "={{ $('Webhook').item.json.headers.origin }}",
-            "First Name": "={{ $('Webhook').item.json.body.FNAME }}",
-            "Last Name": "={{ $('Webhook').item.json.body.LNAME }}"
+            "Email": "={{ $json.email }}",
+            "Source": "={{ $json.origin }}",
+            "First Name": "={{ $json.firstName }}",
+            "Last Name": "={{ $json.lastName }}"
           },
           "matchingColumns": [
             "Email"
@@ -259,26 +254,36 @@
         "json": {
           "headers": {
             "host": "n8n.srv1051492.hstgr.cloud",
-            "user-agent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36 Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36",
-            "content-length": "578",
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+            "content-length": "91",
             "accept": "*/*",
-            "content-type": "multipart/form-data; boundary=------------------------d8773e5bcafa6e61",
-            "referer": "https://n8n.srv1051492.hstgr.cloud/webhook/7c7c3a5f-978d-43ae-bb5b-b3fbe0ec6e3e",
-            "x-forwarded-for": "192.42.116.173",
+            "accept-encoding": "gzip, deflate, br, zstd",
+            "accept-language": "en-US,en;q=0.9",
+            "content-type": "application/json",
+            "dnt": "1",
+            "origin": "https://remembermeseries.com",
+            "priority": "u=1, i",
+            "referer": "https://remembermeseries.com/",
+            "sec-ch-ua": "\"Google Chrome\";v=\"143\", \"Chromium\";v=\"143\", \"Not A(Brand\";v=\"24\"",
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": "\"Windows\"",
+            "sec-fetch-dest": "empty",
+            "sec-fetch-mode": "cors",
+            "sec-fetch-site": "cross-site",
+            "x-forwarded-for": "172.18.0.1",
             "x-forwarded-host": "n8n.srv1051492.hstgr.cloud",
             "x-forwarded-port": "443",
             "x-forwarded-proto": "https",
-            "x-forwarded-server": "cfd3624e111f",
-            "x-real-ip": "192.42.116.173",
-            "accept-encoding": "gzip"
+            "x-forwarded-server": "8465fa5812cd",
+            "x-real-ip": "172.18.0.1"
           },
           "params": {},
           "query": {},
           "body": {
-            "website_field": "🔌 2 Messages from Alina. Open - https://yandex.ru/poll/enter/4z8E1bgxisTqVomi4XX2LR?i3y Message № 2463 🔌",
-            "FNAME": "frwsrt",
-            "LNAME": "toh0ro",
-            "EMAIL": "Mopar392dodgem@gmail.com"
+            "firstName": "Christian",
+            "lastName": "Gomez",
+            "email": "cgomez@xixmia.com",
+            "website_field": ""
           },
           "webhookUrl": "https://n8n.srv1051492.hstgr.cloud/webhook/7c7c3a5f-978d-43ae-bb5b-b3fbe0ec6e3e",
           "executionMode": "production"
@@ -301,6 +306,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-11-20T01:58:04.000Z",
-  "versionId": "5b33ad09-00f8-4662-960c-c8976d7f5157"
+  "updatedAt": "2026-01-14T15:40:29.000Z",
+  "versionId": "66be361f-c80b-4f5a-8bc3-1c1069a3e7f6"
 }
