@@ -1,0 +1,405 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Keyword Ideas1": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet1": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet1": {
+      "main": [
+        [
+          {
+            "node": "Generate Keyword Ideas1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-03-18T14:17:49.968Z",
+  "id": "YQkpIRUE0TyvzLtH",
+  "isArchived": false,
+  "meta": null,
+  "name": "00 Discover Keywords",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -672,
+        -32
+      ],
+      "id": "e2ebb54d-a0ef-47ea-b437-01547e2b0517",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.dataforseo.com/v3/dataforseo_labs/google/keyword_ideas/live",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "=[\n  {\n    \"keywords\": [\"{{ $('Get row(s) in sheet1').item.json.seed_keyword }}\"],\n    \"location_name\": \"United States\",\n    \"language_name\": \"English\",\n    \"filters\": [\"keyword_info.search_volume\",\">=\",100],\n    \"order_by\": [\"keyword_info.search_volume,desc\"],\n    \"limit\": 1000\n  }\n]",
+        "options": {}
+      },
+      "id": "8c0154d7-c401-4ac7-a5c0-bee9791a780b",
+      "name": "Generate Keyword Ideas1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        64,
+        -32
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8",
+          "mode": "list",
+          "cachedResultName": "tallo_prog_seed_keywords",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1095195608,
+          "mode": "list",
+          "cachedResultName": "master keyword list",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8/edit#gid=1095195608"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "keyword": "={{ $json.keyword }}",
+            "volume": "={{ $json.search_volume }}",
+            "cpc": "={{ $json.cpc }}",
+            "competition": "={{ $json.competition }}",
+            "category": "={{ $json.categories }}",
+            "status": "new",
+            "last_updated": "={{ $now }}",
+            "keyword_difficulty": "={{ $json.keyword_difficulty }}",
+            "word_count": "={{ $json.word_count }}",
+            "search_intent": "={{ $json.search_intent }}",
+            "competition_level": "={{ $json.competition_level }}"
+          },
+          "matchingColumns": [
+            "keyword"
+          ],
+          "schema": [
+            {
+              "id": "keyword",
+              "displayName": "keyword",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "keyword_difficulty",
+              "displayName": "keyword_difficulty",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "word_count",
+              "displayName": "word_count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "search_intent",
+              "displayName": "search_intent",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "volume",
+              "displayName": "volume",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "cpc",
+              "displayName": "cpc",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "competition",
+              "displayName": "competition",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "competition_level",
+              "displayName": "competition_level",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "category",
+              "displayName": "category",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "last_updated",
+              "displayName": "last_updated",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        656,
+        -32
+      ],
+      "id": "7c060958-0e51-44b3-8892-8d7e73f4df06",
+      "name": "Append or update row in sheet1"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Define the Tallo Dictionary (ID -> Human Readable Name)\nconst categoryMap = {\n  10016: \"Jobs & Education\",\n  10139: \"Jobs & Careers\",\n  10141: \"Education & Training\",\n  10747: \"Career Counseling & Coaching\",\n  10535: \"Scholarships & Study Grants\",\n  10744: \"Career Assessments\",\n  12206: \"Educational Software\",\n  10743: \"Resume Writing\",\n  12022: \"Recent College Graduate Jobs\",\n  10759: \"Vocational & Trade Schools\",\n  10763: \"Colleges & Universities\"\n};\n\nconst targetIds = Object.keys(categoryMap).map(Number);\n\n// 2. Access the items from the DataForSEO response\nconst items = $json.tasks[0].result[0].items || [];\n\n// 3. Process and Filter\nreturn items.filter(item => {\n  const itemCats = item.keyword_info?.categories || [];\n  return itemCats.some(id => targetIds.includes(id));\n}).map(item => {\n  const itemCats = item.keyword_info?.categories || [];\n  \n  // 4. Map the IDs to their Human Readable names\n  // This turns [10743, 10016] into [\"Resume Writing\", \"Jobs & Education\"]\n  const readableCategories = itemCats\n    .filter(id => categoryMap[id]) // Only keep the ones in our Tallo list\n    .map(id => categoryMap[id]);\n\n  return {\n    json: {\n      keyword: item.keyword,\n      search_volume: item.keyword_info.search_volume,\n      cpc: item.keyword_info.cpc,\n      competition: item.keyword_info.competition,\n      competition_level: item.keyword_info.competition_level,\n      categories: readableCategories.join(', '),\n      keyword_difficulty: item.keyword_properties.keyword_difficulty,\n      word_count: item.keyword_properties.words_count,\n      search_intent: item.search_intent_info.main_intent\n    }\n  };\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        336,
+        -32
+      ],
+      "id": "de128a62-9140-4f4a-bf36-38fd91708604",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8",
+          "mode": "list",
+          "cachedResultName": "tallo_prog_relevant_keywords",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1203206897,
+          "mode": "list",
+          "cachedResultName": "seed keywords",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8/edit#gid=1203206897"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "status",
+              "lookupValue": "new"
+            }
+          ]
+        },
+        "options": {
+          "returnFirstMatch": true
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -352,
+        -32
+      ],
+      "id": "4ffa3512-73c9-4c9f-85ad-2d5d69028c07",
+      "name": "Get row(s) in sheet1",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8",
+          "mode": "list",
+          "cachedResultName": "tallo_prog_relevant_keywords",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1203206897,
+          "mode": "list",
+          "cachedResultName": "seed keywords",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8/edit#gid=1203206897"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $('Get row(s) in sheet1').item.json.row_number }}",
+            "status": "processed",
+            "last_updated": "={{ $now }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "seed_keyword",
+              "displayName": "seed_keyword",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "last_updated",
+              "displayName": "last_updated",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        912,
+        -32
+      ],
+      "id": "c0a02327-5b03-43ef-b1cd-80af66c06bcd",
+      "name": "Update row in sheet"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-03-18T14:17:49.972Z",
+      "createdAt": "2026-03-18T14:17:49.972Z",
+      "role": "workflow:owner",
+      "workflowId": "YQkpIRUE0TyvzLtH",
+      "projectId": "QNfIJ0xZgM3QlqN4"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2026-03-18T14:17:49.968Z",
+  "versionId": "e60d343e-0afc-40e0-bcab-ec81d73debab"
+}
