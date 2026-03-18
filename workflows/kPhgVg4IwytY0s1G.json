@@ -312,12 +312,7 @@
         "subject": "Day 5: A Changed Story",
         "message": "=<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Day 5: A Changed Story</title>\n</head>\n<body style=\"margin: 0; padding: 0; background-color: #f7f7f7; font-family: Arial, sans-serif;\">\n    <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff;\">\n        \n        <tr>\n            <td align=\"center\" style=\"padding: 20px 0 20px 0;\">\n                <img src=\"https://remembermeseries.com/images/remember-me-web-logo.png\" alt=\"Remember Me Logo\" width=\"180\" style=\"display: block; width: 180px; max-width: 100%; height: auto;\">\n            </td>\n        </tr>\n        \n        <tr>\n            <td style=\"padding: 20px 30px 40px 30px; color: #333333; font-size: 16px; line-height: 1.6;\">\n                \n                <h2 style=\"font-size: 24px; color: #222222; margin-top: 0;\">Day 5: A Changed Story</h2>\n                \n                <p style=\"border-top: 1px solid #dddddd; padding-top: 15px;\">\n                    <strong>Scripture:</strong> <em>John 4:28–30, 39</em>\n                </p>\n\n                <p>After her encounter with Jesus, the woman left her water jar behind. The very thing she came for no longer mattered. She ran into the town — the same people she once avoided — and declared, “Come, see a man who told me everything I ever did.” Her shame became her testimony. Because of her, many in that town believed in Jesus.</p>\n                \n                <p>When Jesus rewrites our story, the parts we once hid can become the very places He uses to draw others to Himself.</p>\n\n                <p style=\"background-color: #f7f7f7; padding: 15px; border-left: 4px solid #007bff; font-style: italic; margin: 25px 0;\">\n                    <strong>Key Takeaway:</strong>When Jesus changes your story, your shame becomes your testimony.\n                </p>\n\n                <h3 style=\"font-size: 18px; color: #222222; margin-top: 30px; border-bottom: 1px solid #eeeeee; padding-bottom: 5px;\">Questions for Reflection</h3>\n                <ul style=\"padding-left: 20px; margin-top: 10px;\">\n                    <li style=\"margin-bottom: 10px;\">What “water jar” might Jesus be asking you to leave behind?</li>\n                    <li>How could your story encourage someone else to believe?</li>\n                </ul>\n\n                <h3 style=\"font-size: 18px; color: #222222; margin-top: 30px; border-bottom: 1px solid #eeeeee; padding-bottom: 5px;\">Prayer</h3>\n                <p style=\"font-style: italic;\">Jesus, thank You for rewriting my story. Use even my past to bring hope to others.</p>\n\n            </td>\n        </tr>\n        \n        <tr>\n            <td align=\"center\" style=\"padding: 20px 30px; background-color: #eeeeee; color: #888888; font-family: Arial, sans-serif; font-size: 12px;\">\n                <p>You are receiving this email as part of the 5-day devotional journey from Remember Me.</p>\n            </td>\n        </tr>\n\n    </table>\n</body>\n</html>",
         "options": {
-          "appendAttribution": false,
-          "attachmentsUi": {
-            "attachmentsBinary": [
-              {}
-            ]
-          }
+          "appendAttribution": false
         }
       },
       "type": "n8n-nodes-base.gmail",
@@ -870,35 +865,20 @@
     }
   ],
   "pinData": {
-    "Get row(s) in sheet": [
+    "Schedule Trigger": [
       {
         "json": {
-          "row_number": 2,
-          "Email": "chris@g3zcreative.com",
-          "Source": "https://remembermeseries.webflow.io",
-          "First Name": "Christian",
-          "Last Name": "Gomez",
-          "Sequence Day": 2
-        }
-      },
-      {
-        "json": {
-          "row_number": 3,
-          "Email": "billmc01@me.com",
-          "Source": "https://remembermeseries.webflow.io",
-          "First Name": "William",
-          "Last Name": "McConnell",
-          "Sequence Day": 2
-        }
-      },
-      {
-        "json": {
-          "row_number": 4,
-          "Email": "bob@collidemg.com",
-          "Source": "https://remembermeseries.com",
-          "First Name": "Bob",
-          "Last Name": "Elder",
-          "Sequence Day": ""
+          "timestamp": "2026-01-13T08:00:42.033+01:00",
+          "Readable date": "January 13th 2026, 8:00:42 am",
+          "Readable time": "8:00:42 am",
+          "Day of week": "Tuesday",
+          "Year": "2026",
+          "Month": "January",
+          "Day of month": "13",
+          "Hour": "08",
+          "Minute": "00",
+          "Second": "42",
+          "Timezone": "Europe/Berlin (UTC+01:00)"
         }
       }
     ]
@@ -927,6 +907,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-11-20T01:58:01.000Z",
-  "versionId": "f328711a-fbb2-4ece-aa18-c3cf953c7cd5"
+  "updatedAt": "2026-01-14T02:02:10.000Z",
+  "versionId": "c916f1e8-167d-4d0e-bfae-cd09c260f453"
 }
