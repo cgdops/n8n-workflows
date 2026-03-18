@@ -1,0 +1,658 @@
+{
+  "active": false,
+  "connections": {
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Keywords",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Content Brief Engine (Code)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GET Results": {
+      "main": [
+        [
+          {
+            "node": "POST AI Summary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "POST Task": {
+      "main": [
+        [
+          {
+            "node": "Wait 2min",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Keywords": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "POST Task",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait 2min": {
+      "main": [
+        [
+          {
+            "node": "GET Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "POST AI Summary": {
+      "main": [
+        [
+          {
+            "node": "Parse & Extract Response (Code)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse & Extract Response (Code)1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Keywords",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Content Brief Engine (Code)1": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-03-18T14:18:43.115Z",
+  "id": "GS0bTVxBg6726yQ8",
+  "isArchived": false,
+  "meta": null,
+  "name": "02 Analyze SERP",
+  "nodes": [
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8",
+          "mode": "list",
+          "cachedResultName": "tallo_prog_relevant_keywords",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1095195608,
+          "mode": "list",
+          "cachedResultName": "master keyword list",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8/edit#gid=1095195608"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "status",
+              "lookupValue": "approved_for_serp_analysis"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -1728,
+        64
+      ],
+      "id": "7dea6b6a-4a0e-46e0-85e4-6b9f9cf81c3b",
+      "name": "Get row(s) in sheet"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        -880,
+        48
+      ],
+      "id": "61646948-905a-4469-94bb-0951c6353562",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8",
+          "mode": "list",
+          "cachedResultName": "tallo_prog_relevant_keywords",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1468267482,
+          "mode": "list",
+          "cachedResultName": "serp_analysis",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8/edit#gid=1468267482"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "primary_keyword": "={{ $json.primary_keyword }}",
+            "total_volume": "={{ $json.total_volume }}",
+            "keyword_count": "={{ $json.keyword_count }}",
+            "priority_score": "={{ $json.priority_score }}",
+            "keyword_list": "={{ $json.keyword_list }}",
+            "serp_ai_summary": "={{ $json.serp_ai_summary }}",
+            "top_competitors": "={{ $json.top_competitors }}",
+            "faq_questions": "={{ $json.faq_questions }}",
+            "sub_topics": "={{ $json.sub_topics }}",
+            "status": "serp_analysis_complete",
+            "last_updated": "={{ $now }}"
+          },
+          "matchingColumns": [
+            "primary_keyword"
+          ],
+          "schema": [
+            {
+              "id": "primary_keyword",
+              "displayName": "primary_keyword",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "total_volume",
+              "displayName": "total_volume",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "keyword_count",
+              "displayName": "keyword_count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "priority_score",
+              "displayName": "priority_score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "keyword_list",
+              "displayName": "keyword_list",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "serp_ai_summary",
+              "displayName": "serp_ai_summary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "top_competitors",
+              "displayName": "top_competitors",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "faq_questions",
+              "displayName": "faq_questions",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "sub_topics",
+              "displayName": "sub_topics",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "last_updated",
+              "displayName": "last_updated",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -464,
+        48
+      ],
+      "id": "7051e521-1765-44c2-8ce7-033aeb7cc98b",
+      "name": "Append or update row in sheet"
+    },
+    {
+      "parameters": {
+        "url": "=https://api.dataforseo.com/v3/serp/google/organic/task_get/advanced/{{ $('POST Task').item.json.tasks[0].id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -464,
+        224
+      ],
+      "id": "bef9ce66-eb0f-4d3d-9904-a759c41b25b4",
+      "name": "GET Results"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.dataforseo.com/v3/serp/google/organic/task_post",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "=[\n  {\n    \"keyword\": \"{{ $('Loop Over Keywords').item.json.keyword }}\",\n    \"location_code\": 2840,\n    \"language_code\": \"en\",\n    \"tag\": \"{{ $('Loop Over Keywords').item.json.volume }}\",\n    \"depth\": 10\n  }\n]",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -880,
+        224
+      ],
+      "id": "88454dbf-c602-4e02-9a75-36052de10922",
+      "name": "POST Task"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1984,
+        64
+      ],
+      "id": "6772c62b-6866-4d48-8da5-0067e314241f",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "batchSize": 200,
+        "options": {
+          "reset": false
+        }
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -1200,
+        64
+      ],
+      "id": "0b5f77d6-c41f-4cc4-811a-1caea8d54b72",
+      "name": "Loop Over Keywords",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "amount": 2,
+        "unit": "minutes"
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -672,
+        224
+      ],
+      "id": "eb6d3ca7-e866-4a69-9119-73c36cbd2a65",
+      "name": "Wait 2min",
+      "webhookId": "ed561e4c-7d03-49a4-9b54-918c2f614bc5"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8",
+          "mode": "list",
+          "cachedResultName": "tallo_prog_relevant_keywords",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1095195608,
+          "mode": "list",
+          "cachedResultName": "master keyword list",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8/edit#gid=1095195608"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "status": "serp_analysis_complete",
+            "row_number": "=",
+            "last_updated": "={{ $now }}",
+            "keyword": "={{ $json.primary_keyword }}"
+          },
+          "matchingColumns": [
+            "keyword"
+          ],
+          "schema": [
+            {
+              "id": "keyword",
+              "displayName": "keyword",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "keyword_difficulty",
+              "displayName": "keyword_difficulty",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "word_count",
+              "displayName": "word_count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "search_intent",
+              "displayName": "search_intent",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "volume",
+              "displayName": "volume",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "cpc",
+              "displayName": "cpc",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "competition",
+              "displayName": "competition",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "competition_level",
+              "displayName": "competition_level",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "category",
+              "displayName": "category",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "last_updated",
+              "displayName": "last_updated",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -224,
+        16
+      ],
+      "id": "a0cf076e-b60b-4b75-9d4d-f86c8595ac1b",
+      "name": "Update row in sheet"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.dataforseo.com/v3/serp/ai_summary",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "=[\n  {\n    \"task_id\": \"{{ $('POST Task').item.json.tasks[0].id }}\",\n    \"fetch_content\": true,\n    \"include_links\": true\n  }\n]",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -240,
+        224
+      ],
+      "id": "9ea90cc7-0ef7-4bce-a7d4-60afdbc66482",
+      "name": "POST AI Summary"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// 1. Use .item to get the data matching the CURRENT item in the loop\n// This ensures that Item #5 in this node matches Item #5 from the previous nodes.\nconst serpTask = $('GET Results').item.json;\nconst aiTask = $('POST AI Summary').item.json;\n\n// 2. Extract the summary for this specific item\n// Based on your path: tasks[0].result[0].items[0].summary\nconst summaryText = aiTask.tasks?.[0]?.result?.[0]?.items?.[0]?.summary || \"No summary generated.\";\n\n// 3. Extract items from the SERP task\nconst items = serpTask.tasks?.[0]?.result?.[0]?.items || [];\n\n// 4. Extract Organic URLs\nconst topUrls = items\n  .filter(i => i.type === 'organic')\n  .slice(0, 10)\n  .map(i => i.url);\n\n// 5. Extract Questions (People Also Ask)\nconst paaBlock = items.find(i => i.type === 'people_also_ask');\nconst questions = (paaBlock && paaBlock.items) \n  ? paaBlock.items.map(q => q.title) \n  : [];\n\n// 6. Extract Related Searches\nconst relatedBlock = items.find(i => i.type === 'related_searches');\nconst related = (relatedBlock && relatedBlock.items) \n  ? relatedBlock.items \n  : [];\n\nreturn {\n  keyword: serpTask.tasks[0].data.keyword,\n  search_volume: Number(serpTask.tasks[0].data.tag) || 0,\n  ai_summary: summaryText, \n  top_urls: topUrls,\n  paa_questions: questions,\n  related_searches: related\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        0,
+        352
+      ],
+      "id": "8d0f1c4e-d5f8-41ba-a691-eed97862f99b",
+      "name": "Parse & Extract Response (Code)1"
+    },
+    {
+      "parameters": {
+        "jsCode": "const rawInput = $input.all();\nlet allKeywords = (rawInput[0].json.data && Array.isArray(rawInput[0].json.data)) \n                  ? rawInput[0].json.data \n                  : rawInput.map(item => item.json);\n\n// HELPER: Safely extract domain\nconst getDomain = (url) => {\n  if (!url || typeof url !== 'string') return '';\n  let clean = url.trim();\n  try {\n    if (!clean.startsWith('http')) clean = 'https://' + clean; \n    return new URL(clean).hostname.replace(/^www\\./, '');\n  } catch (e) {\n    const match = clean.match(/^(?:https?:\\/\\/)?(?:www\\.)?([^\\/]+)/i);\n    return match ? match[1] : '';\n  }\n};\n\n// HELPER: URL Normalization\nconst normalizeUrl = (url) => {\n  if (!url) return '';\n  try {\n    let clean = url.toLowerCase().replace(/^(?:https?:\\/\\/)?(?:www\\.)?/i, \"\");\n    if (clean.endsWith('/')) clean = clean.slice(0, -1);\n    return clean;\n  } catch (e) {\n    return url;\n  }\n};\n\n// 1. PRE-PROCESS: Normalize URLs once for performance\nallKeywords.forEach(k => {\n  k.norm_urls = Array.isArray(k.top_urls) ? k.top_urls.map(normalizeUrl) : [];\n  k.search_volume = Number(k.search_volume) || 0;\n});\n\n// 2. Sort by search volume (Head Terms first)\nallKeywords.sort((a, b) => b.search_volume - a.search_volume);\n\nlet clusters = [];\nlet assignedKeywords = new Set();\nconst MIN_MATCH = 4; // Configurable threshold\n\nfor (let i = 0; i < allKeywords.length; i++) {\n  const current = allKeywords[i];\n  if (!current.keyword || assignedKeywords.has(current.keyword)) continue;\n\n  // Initialize Cluster with the \"Head Term\"\n  let cluster = {\n    main_topic: current.keyword,\n    total_volume: current.search_volume,\n    keywords: [current.keyword],\n    compare_urls: new Set(current.norm_urls), \n    // Metadata aggregators\n    questions: [...(current.paa_questions || [])],\n    related: [...(current.related_searches || [])],\n    example_urls: current.top_urls,\n    // Store the AI summary from the \"Head Term\" (the most important keyword)\n    ai_summary: current.ai_summary || \"No summary available.\"\n  };\n\n  assignedKeywords.add(current.keyword);\n\n  // Inner Loop: Find Variations\n  for (let j = i + 1; j < allKeywords.length; j++) {\n    const target = allKeywords[j];\n    if (!target.keyword || assignedKeywords.has(target.keyword)) continue;\n\n    const targetNormUrls = target.norm_urls;\n    let matchCount = 0;\n    \n    if (targetNormUrls.length < MIN_MATCH) continue; \n\n    for (let url of targetNormUrls) {\n      if (cluster.compare_urls.has(url)) matchCount++;\n    }\n    \n    if (matchCount >= MIN_MATCH) {\n      cluster.keywords.push(target.keyword);\n      cluster.total_volume += target.search_volume;\n      \n      if (target.paa_questions) cluster.questions.push(...target.paa_questions);\n      if (target.related_searches) cluster.related.push(...target.related_searches);\n      \n      assignedKeywords.add(target.keyword);\n    }\n  }\n\n  // 3. CLEAN UP & BRIEF GENERATION\n  const uniqueQuestions = [...new Set(cluster.questions)].slice(0, 8); \n  const uniqueRelated = [...new Set(cluster.related)].slice(0, 10);\n\n  clusters.push({\n    json: {\n      primary_keyword: cluster.main_topic,\n      total_volume: cluster.total_volume,\n      keyword_count: cluster.keywords.length,\n      priority_score: cluster.total_volume, \n      keyword_list: cluster.keywords.join(', '),\n      \n      // ADDED: The AI Summary for the Cluster\n      // This uses the summary from the highest volume keyword in the group\n      serp_ai_summary: cluster.ai_summary,\n\n      top_competitors: [\n        ...new Set(\n          (cluster.example_urls || []) \n          .map(getDomain)              \n          .filter(d => d.length > 0)   \n        )\n      ].slice(0, 3).join(', '),\n\n      faq_questions: uniqueQuestions.join('\\n'), \n      sub_topics: uniqueRelated.join(', ')\n    }\n  });\n}\n\nreturn clusters;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -672,
+        48
+      ],
+      "id": "64e4d018-132a-496a-8a77-9d135848b40b",
+      "name": "Content Brief Engine (Code)1"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-03-18T14:18:43.117Z",
+      "createdAt": "2026-03-18T14:18:43.117Z",
+      "role": "workflow:owner",
+      "workflowId": "GS0bTVxBg6726yQ8",
+      "projectId": "QNfIJ0xZgM3QlqN4"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2026-03-18T14:18:43.115Z",
+  "versionId": "ede21c5c-e3db-49f2-8057-f859bb609e3a"
+}
