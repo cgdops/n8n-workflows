@@ -1,0 +1,761 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "GET SERP Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GET SERP Data": {
+      "main": [
+        [
+          {
+            "node": "Brand Brain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-03-18T14:19:22.020Z",
+  "id": "34rVdWOresxMw9y9",
+  "isArchived": false,
+  "meta": null,
+  "name": "03 Generate Content Brief",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -2304,
+        80
+      ],
+      "id": "8460470e-7463-4453-b0b0-566584531200",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -1360,
+        304
+      ],
+      "id": "913adccf-fad0-4fdd-b6e9-1c515a8d8100",
+      "name": "Google Gemini Chat Model"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8",
+          "mode": "list",
+          "cachedResultName": "tallo_prog_relevant_keywords",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1731860562,
+          "mode": "list",
+          "cachedResultName": "content_brief",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8/edit#gid=1731860562"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "primary_keyword": "={{ $('Brand Brain').item.json['Primary Keyword'] }}",
+            "goal": "SEO Article",
+            "funnel_stage": "Top of Funnel",
+            "target_audience": "={{ $('Brand Brain').item.json['Target Audience'] }}",
+            "serp_ai_overview": "={{ $('Brand Brain').item.json['SERP Summary'] }}",
+            "top_serp_urls": "={{ $('Brand Brain').item.json['Top Competitor URLs'] }}",
+            "people_also_ask": "={{ $('Brand Brain').item.json['FAQ Questions'] }}",
+            "sub_topics": "={{ $('Brand Brain').item.json['Sub Topics'] }}",
+            "search_intent": "={{ $json.output['Search Intent'] }}",
+            "competitor_analysis": "={{ $json.output['Competitor Analysis'] }}",
+            "angle_pov": "={{ $json.output['Angle/POV'] }}",
+            "recommended_word_count": "={{ $json.output['Recommended Word Count'] }}",
+            "status": "new",
+            "last_updated": "={{ $now }}"
+          },
+          "matchingColumns": [
+            "primary_keyword"
+          ],
+          "schema": [
+            {
+              "id": "primary_keyword",
+              "displayName": "primary_keyword",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "goal",
+              "displayName": "goal",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "funnel_stage",
+              "displayName": "funnel_stage",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "target_audience",
+              "displayName": "target_audience",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "serp_ai_overview",
+              "displayName": "serp_ai_overview",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "top_serp_urls",
+              "displayName": "top_serp_urls",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "people_also_ask",
+              "displayName": "people_also_ask",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "sub_topics",
+              "displayName": "sub_topics",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "search_intent",
+              "displayName": "search_intent",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "competitor_analysis",
+              "displayName": "competitor_analysis",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "angle_pov",
+              "displayName": "angle_pov",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "recommended_word_count",
+              "displayName": "recommended_word_count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "last_updated",
+              "displayName": "last_updated",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        208,
+        32
+      ],
+      "id": "69d2f298-3568-44ea-ad78-80b4e01583ef",
+      "name": "Append or update row in sheet"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"target_keyword\":\"string\",\n  \"relevance\":\"boolean\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        -1216,
+        304
+      ],
+      "id": "e19c8bcd-b86a-4007-b553-1d65e435ee42",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8",
+          "mode": "list",
+          "cachedResultName": "tallo_prog_relevant_keywords",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1468267482,
+          "mode": "list",
+          "cachedResultName": "serp_analysis",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8/edit#gid=1468267482"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "status",
+              "lookupValue": "serp_analysis_complete"
+            }
+          ]
+        },
+        "combineFilters": "OR",
+        "options": {
+          "returnFirstMatch": true
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -2032,
+        80
+      ],
+      "id": "a9e45ea4-abd1-4952-95b3-8ede9e6410b7",
+      "name": "GET SERP Data"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"Brand Voice\":\"Write in a conversational, supportive tone—like a knowledgeable older sibling or favorite teacher giving practical advice. Be clear and direct. Get to the point without excessive introductory fluff. Use accessible language. Explain technical terms when you use them. Be realistic and honest, not aspirational or overly motivational. Use short paragraphs (2-4 sentences typically). Include subheadings to break up content. Use bullet points for lists, but only when genuinely helpful. Lead with the most important information. Provide specific, actionable next steps\",\n  \"Target Audience\":\"Students and job seekers ages 13-30.\",\n  \"Standard CTA\":\"Take our free career interests quiz, Create your free Tallo profile to get started.\",\n  \"Anti Goals\":\"Avoid hype words like amazing, incredible, revolutionary, unlock, empower, transform. Avoid absolute terms like always, never, perfect. Don't talk down to readers. Avoid assuming they know jargon or industry terms. Don't use dream career or dream job language. Don't overuse inspirational/motivational phrases. Don't try to sound cool or use Gen Z/Gen Alpha slang. Don't be overly formal or corporate. Don't use excessive metaphors or clever wordplay. Don't stack adjectives or use flowery language. Avoid phrases like unlock your potential, journey to greatness, achieve your dreams. Key phrases to AVOID: Unlock, Transform, Empower, Your journey, Your path to greatness, Dream career/job, The sky's the limit, Achieve your dreams, You've got this!\",\n  \"Primary Keyword\":{{ JSON.stringify($json.primary_keyword) }},\n  \"SERP Summary\":{{ JSON.stringify($json.serp_ai_summary) }},\n  \"Top Competitor URLs\":{{ JSON.stringify($json.top_competitors) }},\n  \"FAQ Questions\":{{ JSON.stringify($json.faq_questions) }},\n  \"Sub Topics\":{{ JSON.stringify($json.sub_topics) }}\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1712,
+        80
+      ],
+      "id": "7e204e69-5faa-4f5c-95d7-f14d72bef1f6",
+      "name": "Brand Brain"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8",
+          "mode": "list",
+          "cachedResultName": "tallo_prog_relevant_keywords",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1468267482,
+          "mode": "list",
+          "cachedResultName": "serp_analysis",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8/edit#gid=1468267482"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "primary_keyword": "={{ $json.primary_keyword }}",
+            "status": "brief_created",
+            "last_updated": "={{ $now }}"
+          },
+          "matchingColumns": [
+            "primary_keyword"
+          ],
+          "schema": [
+            {
+              "id": "primary_keyword",
+              "displayName": "primary_keyword",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "total_volume",
+              "displayName": "total_volume",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "keyword_count",
+              "displayName": "keyword_count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "priority_score",
+              "displayName": "priority_score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "keyword_list",
+              "displayName": "keyword_list",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "serp_ai_summary",
+              "displayName": "serp_ai_summary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "top_competitors",
+              "displayName": "top_competitors",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "faq_questions",
+              "displayName": "faq_questions",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "sub_topics",
+              "displayName": "sub_topics",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "search_intent",
+              "displayName": "search_intent",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "competitor_analysis",
+              "displayName": "competitor_analysis",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "content_angle",
+              "displayName": "content_angle",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "title_suggestions",
+              "displayName": "title_suggestions",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "last_updated",
+              "displayName": "last_updated",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        592,
+        32
+      ],
+      "id": "6d42ff0f-e736-4121-940a-ef6d705a1f6b",
+      "name": "Update row in sheet"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -2320,
+        304
+      ],
+      "id": "7488c9aa-148a-484f-aa4c-e635c5e94cd2",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-3.1-pro-preview",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -400,
+        240
+      ],
+      "id": "2d2905c9-7af4-473e-8218-c1e3bb1ef8fe",
+      "name": "Google Gemini Chat Model1"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        -352,
+        32
+      ],
+      "id": "da28ab73-5655-46ad-8cb5-65075db55990",
+      "name": "Generate Content Brief w/ 3.1 Pro"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -912,
+        80
+      ],
+      "id": "52ea85c7-85c2-4c22-bbec-255ff8ba0f2c",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"target_keyword\":\"string\",\n  \"Search Intent\":\"string\",\n  \"Competitor Analysis\":\"string\",\n  \"Angle/POV\":\"string\",\n  \"Recommended Word Count\":\"number\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        -160,
+        240
+      ],
+      "id": "2ef8b046-e891-420e-8e8c-dcfd8927d96d",
+      "name": "Structured Output Parser1"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8",
+          "mode": "list",
+          "cachedResultName": "tallo_prog_relevant_keywords",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1468267482,
+          "mode": "list",
+          "cachedResultName": "serp_analysis",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8/edit#gid=1468267482"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $('GET SERP Data').item.json.row_number }}",
+            "last_updated": "={{ $now }}",
+            "status": "rejected_due_to_relevance"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "primary_keyword",
+              "displayName": "primary_keyword",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "total_volume",
+              "displayName": "total_volume",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "keyword_count",
+              "displayName": "keyword_count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "priority_score",
+              "displayName": "priority_score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "keyword_list",
+              "displayName": "keyword_list",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "serp_ai_summary",
+              "displayName": "serp_ai_summary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "top_competitors",
+              "displayName": "top_competitors",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "faq_questions",
+              "displayName": "faq_questions",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "sub_topics",
+              "displayName": "sub_topics",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "last_updated",
+              "displayName": "last_updated",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -656,
+        192
+      ],
+      "id": "183eee80-90ee-4840-913f-b3b668e4f21e",
+      "name": "Update row in sheet1"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        -1360,
+        80
+      ],
+      "id": "02a99ca9-bfe5-409f-bd57-08e6aa125279",
+      "name": "Relevance Filter"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-03-18T14:19:22.022Z",
+      "createdAt": "2026-03-18T14:19:22.022Z",
+      "role": "workflow:owner",
+      "workflowId": "34rVdWOresxMw9y9",
+      "projectId": "QNfIJ0xZgM3QlqN4"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2026-03-18T14:19:22.020Z",
+  "versionId": "f06d4cd4-7512-4279-9446-c79222779df1"
+}
