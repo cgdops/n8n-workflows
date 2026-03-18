@@ -1,5 +1,7 @@
 {
   "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
   "connections": {
     "When clicking ‘Execute workflow’": {
       "main": [
@@ -7,6 +9,28 @@
           {
             "node": "Get row(s) in sheet",
             "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "3.1 Gemini Outliner",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet in Google Sheets": {
+      "ai_tool": [
+        [
+          {
+            "node": "3.1 Gemini Outliner",
+            "type": "ai_tool",
             "index": 0
           }
         ]
@@ -55,6 +79,39 @@
           }
         ]
       ]
+    },
+    "3.1 Gemini Writer": {
+      "main": [
+        [
+          {
+            "node": "Format for WP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "3.1 Gemini Outliner": {
+      "main": [
+        [
+          {
+            "node": "3.1 Gemini Writer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2026-03-18T14:19:45.954Z",
@@ -70,10 +127,10 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -128,
-        32
+        128,
+        -128
       ],
-      "id": "5e1c05c7-e9e5-487c-ae6e-4e5b55c47ef0",
+      "id": "1b16edcc-0e26-41db-ac2b-50d5aef8c89f",
       "name": "When clicking ‘Execute workflow’"
     },
     {
@@ -107,10 +164,10 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        128,
-        32
+        384,
+        -128
       ],
-      "id": "c493bc43-a267-4c5f-a6e0-30f4555b9490",
+      "id": "4bca4000-20ca-4a38-ac7f-316bca32d0f2",
       "name": "Get row(s) in sheet"
     },
     {
@@ -134,10 +191,10 @@
       "type": "n8n-nodes-base.googleSheetsTool",
       "typeVersion": 4.7,
       "position": [
-        608,
-        240
+        864,
+        80
       ],
-      "id": "bf47fb10-064c-4d00-8014-cd0ea8d15d08",
+      "id": "47ebf72e-b15c-4310-a3fd-3b4244e19a7f",
       "name": "Get row(s) in sheet in Google Sheets"
     },
     {
@@ -150,10 +207,10 @@
       "type": "n8n-nodes-base.wordpress",
       "typeVersion": 1,
       "position": [
-        1664,
-        32
+        1920,
+        -128
       ],
-      "id": "e383f9ad-b86a-4a40-9427-f1cf0cdaa366",
+      "id": "340daf88-8345-4165-8069-07439344e9be",
       "name": "Create a post"
     },
     {
@@ -178,10 +235,10 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        2224,
-        32
+        2480,
+        -128
       ],
-      "id": "1537edfa-c4ed-4022-b2d7-57ac0383c432",
+      "id": "2e24f8f7-ce6e-4146-94a1-b686a5c97126",
       "name": "Call '05 - Image Gen & Update Post'"
     },
     {
@@ -191,10 +248,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1360,
-        32
+        1616,
+        -128
       ],
-      "id": "23a0a72c-861c-4d20-a549-237234ec5054",
+      "id": "8f81b599-0369-478e-90ba-58fbb51a124c",
       "name": "Format for WP"
     },
     {
@@ -294,35 +351,70 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        1952,
-        32
+        2208,
+        -128
       ],
-      "id": "fa48843b-99da-4281-89c8-17664ee54b5e",
+      "id": "637fa3fc-9177-40fb-9221-5a69c633bddf",
       "name": "Append or update row in sheet"
     },
     {
-      "parameters": {},
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-3.1-pro-preview",
+          "mode": "list",
+          "cachedResultName": "models/gemini-3.1-pro-preview"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Write a ~{{ $('Get row(s) in sheet').item.json.recommended_word_count }} word article following the guidelines in the system prompt based this outline:\n{{ $json.content.parts[0].text }}"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {
+          "systemMessage": "=You are an expert Content Writer for Tallo, writing engaging, conversational, and highly actionable blog posts for young professionals and students. \n\nInstructions:\n1. Review the Article Title and Outline to understand the context and tone of the piece.\n2. Focus ONLY on writing the content for the \"Section Heading\" provided. \n3. Seamlessly weave the \"Key Talking Points\" into your paragraphs. Do not just list them as bullet points; expand on them with examples.\n4. If an internal URL is provided, organically weave a reference to it into the text and format it as an HTML hyperlink (e.g., <a href=\"...\">text</a>). If it says \"null\", do not invent a source.\n5. Format your output in clean HTML. Start with an <h2> tag for the Section Heading, followed by <p> tags for your paragraphs. Do not wrap the output in markdown code blocks.\n\nBrand Context:\nBrand Identity & Audience\n\nTallo is a digital career platform that moves individuals ages 13-30 from career uncertainty to confident action. With over 2 million users, Tallo helps students and early professionals discover and explore career options, learn and earn valuable credentials, and ultimately, connect directly with employers to get a job that helps them build a better life.\n\nTone & Style:\nWrite in a conversational, supportive tone—like a knowledgeable older sibling or favorite teacher giving practical advice\nBe clear and direct. Get to the point without excessive introductory fluff\nUse accessible language. Explain technical terms when you use them\nBe realistic and honest, not aspirational or overly motivational\nAvoid hype words like \"amazing,\" \"incredible,\" \"revolutionary,\" \"unlock,\" \"empower,\" \"transform\"\nAvoid absolute terms like \"always,\" \"never,\" \"perfect.\" Use \"often,\" \"typically,\" \"rarely,\" \"well-suited\" instead\n \nWhat NOT to do:\nDon't use \"dream career\" or \"dream job\" language\nDon't overuse inspirational/motivational phrases\nDon't try to sound cool or use Gen Z/Gen Alpha slang\nDon't be overly formal or corporate\nDon't use excessive metaphors or clever wordplay\nDon't stack adjectives or use flowery language\nAvoid phrases like \"unlock your potential,\" \"journey to greatness,\" \"achieve your dreams\"\n \nStructure & Format:\nUse short paragraphs (2-4 sentences typically)\nInclude subheadings to break up content\nUse bullet points for lists, but only when genuinely helpful\nLead with the most important information\nProvide specific, actionable next steps\n \nContent Approach:\nBack claims with data when possible\nAcknowledge challenges honestly (e.g., \"this isn't easy\" rather than \"you've got this!\")\nValidate different paths—never position one educational or career route as superior to another\nFocus on practical guidance over inspiration\nUse \"can\" and \"could\" more than \"will\" and \"should\"\nPresent options and let readers decide what fits them\nLink to Tallo product pages when it's natural (don't force it)\nSign up URL with tracking params: https://tallo.com/talent/create-account?utm_source=pseo&utm_medium=blog&utm_campaign=pseo\n \nWriting about careers/education:\nNever suggest one path (4-year degree, trade school, etc.) is better than another\nUse neutral language: \"paths\" or \"routes\" not \"alternatives\"\nAvoid positioning anything as a \"backup plan\"\nDon't use \"just\" or \"only\" with any education type\nConnect all paths directly to career outcomes\n \nKey phrases TO use:\n\"Here's what to know...\"\n\"Let's break this down...\"\n\"This can help you...\"\n\"Worth exploring...\"\n\"Consider...\"\n\"If this interests you...\"\n \nKey phrases to AVOID:\n\"Unlock,\" \"Transform,\" \"Empower\"\n\"Your journey,\" \"Your path to greatness\"\n\"Dream career/job\"\n\"The sky's the limit\"\n\"Achieve your dreams\"\n\"You've got this!\" (overly cheerleader-ish)\n \nSpecific example transformations:\nBad: \"Unlock your potential with these amazing strategies!\"\nGood: \"Here are some strategies that can help you explore your options.\"\nBad: \"Transform your career journey today!\"\nGood: \"Ready to take your next step? Here's where to start.\"\nBad: \"Find your dream job and achieve greatness!\"\nGood: \"Find work that aligns with your skills and interests.\"\n \nCall-to-Action style:\nBe direct and practical\nBad: \"Start your journey to success today!\"\nGood: \"Ready to explore? Create your free Tallo profile to get started.\"\n \nAudience considerations:\nPrimary audience: ages 13-30\nWrite at a level a 13-year-old can understand, but that a 30-year-old finds valuable\nDon't talk down to readers\nAvoid assuming they know jargon or industry terms\n \nData & facts:\nNever fabricate or estimate numbers\nIf salary data is mentioned, use exact figures provided\nCite sources for any specific facts or figures\n\nFormatting & Output Rules Format the body content using clean HTML tags (e.g., <h2>, <p>, <ul>, <strong>)."
+        }
+      },
       "type": "@n8n/n8n-nodes-langchain.googleGemini",
       "typeVersion": 1.1,
       "position": [
-        912,
-        32
+        1168,
+        -128
       ],
-      "id": "9b95cae5-6726-4e9f-82bf-9546547255e3",
-      "name": "3.1 Gemini Writer",
-      "credentials": {}
+      "id": "ce8a1bd5-9cac-4a02-8269-96e57308c75d",
+      "name": "3.1 Gemini Writer"
     },
     {
-      "parameters": {},
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-3.1-pro-preview",
+          "mode": "list",
+          "cachedResultName": "models/gemini-3.1-pro-preview"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Analyze this content brief and create an outline for an article:\n\nArticle Goal: {{ $json.goal }}\nPrimary Keyword: {{ $json.primary_keyword }}\nTarget Audience: {{ $json.target_audience }}\nFunnel Stage: {{ $json.funnel_stage }}\nTarget Intent: {{ $json.search_intent }}\nAngle/Point of View:\"{{ $json.serp_ai_overview }}\"\nSERP AI Overview: \n\"{{ $json.serp_ai_overview }}\"\nTop SERP URLs: {{ $json.top_serp_urls }}\nQuestions people also ask:\"{{ $json.people_also_ask }}\"\nRelated Topics:\"{{ $json.sub_topics }}\"\nCompetitor Analysis: \"{{ $json.competitor_analysis }}\"\nInternal URLs: I included a sheet for you to reference in your tools."
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "builtInTools": {},
+        "options": {
+          "systemMessage": "=You are an expert Content Strategist and SEO Outliner for Tallo.\n\nYour objective is to create highly engaging, structured blog post outlines tailored to our specific audiences: Career Explorers (13-18), Career Starters (18-24), and Career Changers (24-30+).\n\nYou will be provided with a Topic, a specific Angle, the Target Audience, and other research on the primary keyword.\n\nInstructions: \n1. Adhere strictly to the provided \"Angle.\" Do not write a generic outline; lean heavily into the specific perspective requested. \n2. Tailor the tone, examples, and complexity to the specified \"Target Audience.\"\n3. Distribute the internal URLs provided in your tools throughout the outline where they make the most sense. \n4. You must output your response in valid JSON format.\n\nJSON Output Structure: \n{   \"proposed_title\": \"A catchy, click-worthy H1 title\",   \"introduction_hook\": \"A brief summary of the hook and how it addresses the audience's pain point\",   \"sections\": [     {       \"heading\": \"The H2 heading text\",       \"key_talking_points\": [\"Point 1\", \"Point 2\", \"Point 3\"],       \"internal_link\": \"Include a URL from the internal links sheet in your tools if relevant to this section, otherwise output null\"     }   ],   \"conclusion_and_cta\": \"What the user should do next (e.g., build their profile on Tallo, check out a specific tool)\" }"
+        }
+      },
       "type": "@n8n/n8n-nodes-langchain.googleGemini",
       "typeVersion": 1.1,
       "position": [
-        448,
-        32
+        704,
+        -128
       ],
-      "id": "2cbd1490-ee14-444a-8f11-194bc570a6e8",
-      "name": "3.1 Gemini Outliner",
-      "credentials": {}
+      "id": "018e60fe-0662-43ad-bc28-1828695a1130",
+      "name": "3.1 Gemini Outliner"
     },
     {
       "parameters": {
@@ -501,27 +593,36 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        2496,
-        32
+        2752,
+        -128
       ],
-      "id": "1b5a374a-e26c-4bf5-a094-0896bebda14e",
+      "id": "326fbc42-54f6-440a-aab4-bfddba5e6dea",
       "name": "Update row in sheet"
     },
     {
-      "parameters": {},
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 5
+            }
+          ]
+        }
+      },
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.3,
       "position": [
-        -128,
-        256
+        128,
+        96
       ],
-      "id": "4123b73f-6e1b-4f19-8e15-91b61d8f8a27",
+      "id": "8bb21367-0009-4d61-9506-3b26ffdceeb0",
       "name": "Schedule Trigger"
     }
   ],
   "pinData": {},
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "binaryMode": "separate"
   },
   "shared": [
     {
@@ -535,6 +636,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-03-18T14:20:25.000Z",
-  "versionId": "c0d0ee9f-bdfe-4a3f-a571-9f85db12fcc6"
+  "updatedAt": "2026-03-18T17:39:18.196Z",
+  "versionId": "b11a6df6-4d58-462b-b4ed-52daecd3b298"
 }
