@@ -1,7 +1,525 @@
 {
-  "active": false,
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-03-18T17:53:22.000Z",
+    "createdAt": "2026-03-18T17:53:10.968Z",
+    "versionId": "eb41387d-9f68-4373-a5a7-03246b82e8fa",
+    "workflowId": "Pn9Rk4csjfKjCVI3",
+    "nodes": [
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          -624,
+          256
+        ],
+        "id": "91c0d560-2bed-4c21-a9c4-781863f4db6f",
+        "name": "When clicking ‘Execute workflow’"
+      },
+      {
+        "parameters": {
+          "documentId": {
+            "__rl": true,
+            "value": "1nYkR7IRZaQQXlVHM7Gb01zlhoCLquDcxPH_DV1z8jlo",
+            "mode": "list",
+            "cachedResultName": "pSEO",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1nYkR7IRZaQQXlVHM7Gb01zlhoCLquDcxPH_DV1z8jlo/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": 1904026756,
+            "mode": "list",
+            "cachedResultName": "Sheet2",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1nYkR7IRZaQQXlVHM7Gb01zlhoCLquDcxPH_DV1z8jlo/edit#gid=1904026756"
+          },
+          "filtersUI": {
+            "values": [
+              {
+                "lookupColumn": "status",
+                "lookupValue": "new"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          -416,
+          256
+        ],
+        "id": "f4ac281d-b098-467e-87ba-6eec61666273",
+        "name": "Get row(s) in sheet",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "h35AaTyWKINQe0bE",
+            "name": "chris.smply.me@gmail.com"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "mode": "expression",
+          "numberOutputs": 2,
+          "output": "={{\n\n    $json.search_intent.toLowerCase().includes('informational') &&\n    $json.word_count >= 3 &&\n    $json.keyword_difficulty <= 20 &&\n    $json.volume >= 100 &&\n    $json.cpc > 0\n\n}}"
+        },
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.4,
+        "position": [
+          -192,
+          256
+        ],
+        "id": "edb29096-99ea-4a68-8c5f-fb7da7f21c2f",
+        "name": "Switch"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "documentId": {
+            "__rl": true,
+            "value": "1nYkR7IRZaQQXlVHM7Gb01zlhoCLquDcxPH_DV1z8jlo",
+            "mode": "list",
+            "cachedResultName": "pSEO",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1nYkR7IRZaQQXlVHM7Gb01zlhoCLquDcxPH_DV1z8jlo/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": 1904026756,
+            "mode": "list",
+            "cachedResultName": "Sheet2",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1nYkR7IRZaQQXlVHM7Gb01zlhoCLquDcxPH_DV1z8jlo/edit#gid=1904026756"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "row_number": "={{ $json.row_number }}",
+              "status": "disapproved",
+              "last_updated": "={{ $now }}"
+            },
+            "matchingColumns": [
+              "row_number"
+            ],
+            "schema": [
+              {
+                "id": "keyword",
+                "displayName": "keyword",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "keyword_difficulty",
+                "displayName": "keyword_difficulty",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "word_count",
+                "displayName": "word_count",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "search_intent",
+                "displayName": "search_intent",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "volume",
+                "displayName": "volume",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "cpc",
+                "displayName": "cpc",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "competition",
+                "displayName": "competition",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "competition_level",
+                "displayName": "competition_level",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "category",
+                "displayName": "category",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "status",
+                "displayName": "status",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "last_updated",
+                "displayName": "last_updated",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "row_number",
+                "displayName": "row_number",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "readOnly": true,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          16,
+          160
+        ],
+        "id": "17b1db0d-4a38-4bdd-9428-7e31d21435fc",
+        "name": "Update row in sheet",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "h35AaTyWKINQe0bE",
+            "name": "chris.smply.me@gmail.com"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "documentId": {
+            "__rl": true,
+            "value": "1nYkR7IRZaQQXlVHM7Gb01zlhoCLquDcxPH_DV1z8jlo",
+            "mode": "list",
+            "cachedResultName": "pSEO",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1nYkR7IRZaQQXlVHM7Gb01zlhoCLquDcxPH_DV1z8jlo/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": 1904026756,
+            "mode": "list",
+            "cachedResultName": "Sheet2",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1nYkR7IRZaQQXlVHM7Gb01zlhoCLquDcxPH_DV1z8jlo/edit#gid=1904026756"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "row_number": "={{ $json.row_number }}",
+              "status": "approved_for_serp_analysis",
+              "last_updated": "={{ $now }}"
+            },
+            "matchingColumns": [
+              "row_number"
+            ],
+            "schema": [
+              {
+                "id": "keyword",
+                "displayName": "keyword",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "keyword_difficulty",
+                "displayName": "keyword_difficulty",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "word_count",
+                "displayName": "word_count",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "search_intent",
+                "displayName": "search_intent",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "volume",
+                "displayName": "volume",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "cpc",
+                "displayName": "cpc",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "competition",
+                "displayName": "competition",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "competition_level",
+                "displayName": "competition_level",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "category",
+                "displayName": "category",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "status",
+                "displayName": "status",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "last_updated",
+                "displayName": "last_updated",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "row_number",
+                "displayName": "row_number",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "readOnly": true,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          16,
+          336
+        ],
+        "id": "81792dd5-6b73-445d-8b19-2c4afd86e545",
+        "name": "Update row in sheet1",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "h35AaTyWKINQe0bE",
+            "name": "chris.smply.me@gmail.com"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "content": "### Filter High-Value Keywords\n\nintent = informational (TOFU)\nword count >= 3 (long tail)\nvolume > 100\ncpc > $0 (has business value)\n",
+          "height": 208
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -304,
+          0
+        ],
+        "id": "c61fb638-bc9e-4d56-93af-626291b35a12",
+        "name": "Sticky Note1"
+      },
+      {
+        "parameters": {
+          "inputSource": "passthrough"
+        },
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          -624,
+          32
+        ],
+        "id": "e542a0d5-1d67-4ead-b0c1-0545daf582ec",
+        "name": "When Executed by Another Workflow"
+      }
+    ],
+    "connections": {
+      "When clicking ‘Execute workflow’": {
+        "main": [
+          [
+            {
+              "node": "Get row(s) in sheet",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get row(s) in sheet": {
+        "main": [
+          [
+            {
+              "node": "Switch",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Switch": {
+        "main": [
+          [
+            {
+              "node": "Update row in sheet",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Update row in sheet1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "When Executed by Another Workflow": {
+        "main": [
+          [
+            {
+              "node": "Get row(s) in sheet",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Christian Gomez",
+    "name": "Version eb41387d",
+    "description": "",
+    "autosaved": true
+  },
+  "activeVersionId": "eb41387d-9f68-4373-a5a7-03246b82e8fa",
   "connections": {
     "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Update row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
       "main": [
         [
           {
@@ -16,7 +534,9 @@
   "createdAt": "2026-03-18T14:18:19.144Z",
   "id": "Pn9Rk4csjfKjCVI3",
   "isArchived": false,
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "01 Filter Keywords",
   "nodes": [
     {
@@ -25,26 +545,26 @@
       "typeVersion": 1,
       "position": [
         -624,
-        272
+        256
       ],
-      "id": "9c78be82-9529-47f0-b6ca-a35d509940f3",
+      "id": "91c0d560-2bed-4c21-a9c4-781863f4db6f",
       "name": "When clicking ‘Execute workflow’"
     },
     {
       "parameters": {
         "documentId": {
           "__rl": true,
-          "value": "1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8",
+          "value": "1nYkR7IRZaQQXlVHM7Gb01zlhoCLquDcxPH_DV1z8jlo",
           "mode": "list",
-          "cachedResultName": "tallo_prog_relevant_keywords",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8/edit?usp=drivesdk"
+          "cachedResultName": "pSEO",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1nYkR7IRZaQQXlVHM7Gb01zlhoCLquDcxPH_DV1z8jlo/edit?usp=drivesdk"
         },
         "sheetName": {
           "__rl": true,
-          "value": 1095195608,
+          "value": 1904026756,
           "mode": "list",
-          "cachedResultName": "master keyword list",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8/edit#gid=1095195608"
+          "cachedResultName": "Sheet2",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1nYkR7IRZaQQXlVHM7Gb01zlhoCLquDcxPH_DV1z8jlo/edit#gid=1904026756"
         },
         "filtersUI": {
           "values": [
@@ -60,34 +580,30 @@
       "typeVersion": 4.7,
       "position": [
         -416,
-        272
+        256
       ],
-      "id": "ac40ff04-7932-4419-833d-4b3bef333c2e",
-      "name": "Get row(s) in sheet"
+      "id": "f4ac281d-b098-467e-87ba-6eec61666273",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "h35AaTyWKINQe0bE",
+          "name": "chris.smply.me@gmail.com"
+        }
+      }
     },
     {
       "parameters": {
-        "content": "### Filter High-Value Keywords\n\nintent = informational (TOFU)\nword count >= 3 (long tail)\nvolume > 100\ncpc > $0 (has business value)\n",
-        "height": 208
+        "mode": "expression",
+        "numberOutputs": 2,
+        "output": "={{\n\n    $json.search_intent.toLowerCase().includes('informational') &&\n    $json.word_count >= 3 &&\n    $json.keyword_difficulty <= 20 &&\n    $json.volume >= 100 &&\n    $json.cpc > 0\n\n}}"
       },
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        -304,
-        16
-      ],
-      "id": "6d519fa5-70c4-4226-8e47-56c8c5e359f9",
-      "name": "Sticky Note"
-    },
-    {
-      "parameters": {},
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
         -192,
-        272
+        256
       ],
-      "id": "2877a440-7d1f-47d1-ba43-b06d139e592d",
+      "id": "edb29096-99ea-4a68-8c5f-fb7da7f21c2f",
       "name": "Switch"
     },
     {
@@ -95,17 +611,17 @@
         "operation": "update",
         "documentId": {
           "__rl": true,
-          "value": "1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8",
+          "value": "1nYkR7IRZaQQXlVHM7Gb01zlhoCLquDcxPH_DV1z8jlo",
           "mode": "list",
-          "cachedResultName": "tallo_prog_relevant_keywords",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8/edit?usp=drivesdk"
+          "cachedResultName": "pSEO",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1nYkR7IRZaQQXlVHM7Gb01zlhoCLquDcxPH_DV1z8jlo/edit?usp=drivesdk"
         },
         "sheetName": {
           "__rl": true,
-          "value": 1095195608,
+          "value": 1904026756,
           "mode": "list",
-          "cachedResultName": "master keyword list",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8/edit#gid=1095195608"
+          "cachedResultName": "Sheet2",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1nYkR7IRZaQQXlVHM7Gb01zlhoCLquDcxPH_DV1z8jlo/edit#gid=1904026756"
         },
         "columns": {
           "mappingMode": "defineBelow",
@@ -238,27 +754,33 @@
       "typeVersion": 4.7,
       "position": [
         16,
-        176
+        160
       ],
-      "id": "b5ee2246-f57d-4e54-86c4-b0a13165464d",
-      "name": "Update row in sheet"
+      "id": "17b1db0d-4a38-4bdd-9428-7e31d21435fc",
+      "name": "Update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "h35AaTyWKINQe0bE",
+          "name": "chris.smply.me@gmail.com"
+        }
+      }
     },
     {
       "parameters": {
         "operation": "update",
         "documentId": {
           "__rl": true,
-          "value": "1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8",
+          "value": "1nYkR7IRZaQQXlVHM7Gb01zlhoCLquDcxPH_DV1z8jlo",
           "mode": "list",
-          "cachedResultName": "tallo_prog_relevant_keywords",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8/edit?usp=drivesdk"
+          "cachedResultName": "pSEO",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1nYkR7IRZaQQXlVHM7Gb01zlhoCLquDcxPH_DV1z8jlo/edit?usp=drivesdk"
         },
         "sheetName": {
           "__rl": true,
-          "value": 1095195608,
+          "value": 1904026756,
           "mode": "list",
-          "cachedResultName": "master keyword list",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1G4rW4dW32ia3C7lxHsqQtWE5pP8P2CdKE6R3hrG1eO8/edit#gid=1095195608"
+          "cachedResultName": "Sheet2",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1nYkR7IRZaQQXlVHM7Gb01zlhoCLquDcxPH_DV1z8jlo/edit#gid=1904026756"
         },
         "columns": {
           "mappingMode": "defineBelow",
@@ -391,15 +913,49 @@
       "typeVersion": 4.7,
       "position": [
         16,
-        352
+        336
       ],
-      "id": "9a7ee62e-2880-4218-b148-14baad4e9a11",
-      "name": "Update row in sheet1"
+      "id": "81792dd5-6b73-445d-8b19-2c4afd86e545",
+      "name": "Update row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "h35AaTyWKINQe0bE",
+          "name": "chris.smply.me@gmail.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "### Filter High-Value Keywords\n\nintent = informational (TOFU)\nword count >= 3 (long tail)\nvolume > 100\ncpc > $0 (has business value)\n",
+        "height": 208
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -336,
+        -48
+      ],
+      "id": "c61fb638-bc9e-4d56-93af-626291b35a12",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -624,
+        32
+      ],
+      "id": "e542a0d5-1d67-4ead-b0c1-0545daf582ec",
+      "name": "When Executed by Another Workflow"
     }
   ],
   "pinData": {},
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "binaryMode": "separate"
   },
   "shared": [
     {
@@ -413,6 +969,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-03-18T14:18:24.000Z",
-  "versionId": "9f7d05c0-6992-4f1e-80f2-1fb545487978"
+  "updatedAt": "2026-03-18T17:54:39.394Z",
+  "versionId": "aea6e32b-a1af-497b-91fd-007e0485545c"
 }
