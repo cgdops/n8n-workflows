@@ -1,5 +1,7 @@
 {
   "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
   "connections": {
     "Get row(s) in sheet": {
       "main": [
@@ -133,7 +135,9 @@
   "createdAt": "2026-03-18T14:18:43.115Z",
   "id": "GS0bTVxBg6726yQ8",
   "isArchived": false,
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "02 Analyze SERP",
   "nodes": [
     {
@@ -165,10 +169,10 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -1728,
-        64
+        -1264,
+        -64
       ],
-      "id": "7dea6b6a-4a0e-46e0-85e4-6b9f9cf81c3b",
+      "id": "4721ec4e-1562-4fbc-b418-04b89b4d31ad",
       "name": "Get row(s) in sheet"
     },
     {
@@ -179,10 +183,10 @@
       "type": "n8n-nodes-base.aggregate",
       "typeVersion": 1,
       "position": [
-        -880,
-        48
+        -416,
+        -80
       ],
-      "id": "61646948-905a-4469-94bb-0951c6353562",
+      "id": "8b35667e-1fcf-4a0e-a712-18832bc7401e",
       "name": "Aggregate"
     },
     {
@@ -340,10 +344,10 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -464,
-        48
+        0,
+        -80
       ],
-      "id": "7051e521-1765-44c2-8ce7-033aeb7cc98b",
+      "id": "41e00daa-18dd-4a5c-ac7d-15faf9b4ccb4",
       "name": "Append or update row in sheet"
     },
     {
@@ -356,10 +360,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        -464,
-        224
+        0,
+        96
       ],
-      "id": "bef9ce66-eb0f-4d3d-9904-a759c41b25b4",
+      "id": "961092fb-c32a-4afa-b755-ab52c1e06416",
       "name": "GET Results"
     },
     {
@@ -376,10 +380,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        -880,
-        224
+        -416,
+        96
       ],
-      "id": "88454dbf-c602-4e02-9a75-36052de10922",
+      "id": "7353bd03-3baf-4fba-9922-12a5ad0942f1",
       "name": "POST Task"
     },
     {
@@ -387,10 +391,10 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -1984,
-        64
+        -1520,
+        -64
       ],
-      "id": "6772c62b-6866-4d48-8da5-0067e314241f",
+      "id": "7951c73e-892f-41ff-81ba-fd1bc897c2c4",
       "name": "When clicking ‘Execute workflow’"
     },
     {
@@ -403,10 +407,10 @@
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
       "position": [
-        -1200,
-        64
+        -736,
+        -64
       ],
-      "id": "0b5f77d6-c41f-4cc4-811a-1caea8d54b72",
+      "id": "ef916dde-1c01-4ea0-bb11-d3f29baebb6e",
       "name": "Loop Over Keywords",
       "retryOnFail": true
     },
@@ -418,10 +422,10 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        -672,
-        224
+        -208,
+        96
       ],
-      "id": "eb6d3ca7-e866-4a69-9119-73c36cbd2a65",
+      "id": "b72a805e-9789-472d-bd27-52a257642b96",
       "name": "Wait 2min",
       "webhookId": "ed561e4c-7d03-49a4-9b54-918c2f614bc5"
     },
@@ -583,10 +587,10 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -224,
-        16
+        240,
+        -112
       ],
-      "id": "a0cf076e-b60b-4b75-9d4d-f86c8595ac1b",
+      "id": "a598a28b-c1fa-4584-ba5f-a09d34d1d131",
       "name": "Update row in sheet"
     },
     {
@@ -603,10 +607,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        -240,
-        224
+        224,
+        96
       ],
-      "id": "9ea90cc7-0ef7-4bce-a7d4-60afdbc66482",
+      "id": "89d90e73-d4f5-46c0-a8a6-0c8fd9065046",
       "name": "POST AI Summary"
     },
     {
@@ -617,10 +621,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        0,
-        352
+        464,
+        224
       ],
-      "id": "8d0f1c4e-d5f8-41ba-a691-eed97862f99b",
+      "id": "71d9d0e0-7652-490b-b961-7ff12219902d",
       "name": "Parse & Extract Response (Code)1"
     },
     {
@@ -630,16 +634,17 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -672,
-        48
+        -208,
+        -80
       ],
-      "id": "64e4d018-132a-496a-8a77-9d135848b40b",
+      "id": "013af254-1834-40f0-9059-b53357a865de",
       "name": "Content Brief Engine (Code)1"
     }
   ],
   "pinData": {},
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "binaryMode": "separate"
   },
   "shared": [
     {
@@ -653,6 +658,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-03-18T14:18:43.115Z",
-  "versionId": "ede21c5c-e3db-49f2-8057-f859bb609e3a"
+  "updatedAt": "2026-03-18T17:38:40.700Z",
+  "versionId": "01717d7f-f93d-477a-8663-8ef6a7fb0649"
 }
