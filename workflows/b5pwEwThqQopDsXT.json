@@ -1,0 +1,192 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Generate Blog Post",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Blog Post": {
+      "main": [
+        [
+          {
+            "node": "Format for Jekyll",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format for Jekyll": {
+      "main": [
+        [
+          {
+            "node": "Push to GitHub",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Vertex Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Generate Blog Post",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-03-19T03:45:10.889Z",
+  "id": "b5pwEwThqQopDsXT",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "AI Blog Post Publisher → GitHub Pages",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {}
+          ]
+        }
+      },
+      "id": "node1",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -48,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "Write a comprehensive, SEO-friendly blog post about AI, technology, or digital consulting. Pick an interesting angle or trend.\n\nReturn ONLY valid Jekyll markdown with this EXACT format — no extra commentary before or after:\n\n---\nlayout: post\ntitle: \"Your Title Here\"\ndate: TODAY_DATE\ncategories: [AI, Technology]\n---\n\nWrite the full blog post content in markdown after the frontmatter. Use H2 and H3 headings, bullet points where appropriate, and end with a compelling conclusion. Minimum 600 words.",
+        "options": {}
+      },
+      "id": "node2",
+      "name": "Generate Blog Post",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        256,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const raw = $input.first().json;\n\n// AI Agent outputs to $json.output\nlet content = raw.output || '';\n\nif (!content) {\n  throw new Error('No content received from AI Agent. Check model is connected.');\n}\n\nconst today = new Date();\nconst date = today.toISOString().split('T')[0];\n\n// Replace date placeholder\ncontent = content.replace('TODAY_DATE', date);\n\n// Extract title from Jekyll frontmatter\nconst titleMatch = content.match(/title:\\s*[\"']?(.+?)[\"']?\\n/);\nconst title = titleMatch ? titleMatch[1].replace(/[\"']/g, '').trim() : 'New Blog Post';\n\n// Create URL-safe slug\nconst slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');\n\nreturn [{\n  json: {\n    filename: `_posts/${date}-${slug}.md`,\n    content: content,\n    title: title,\n    date: date\n  }\n}];"
+      },
+      "id": "node3",
+      "name": "Format for Jekyll",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        688,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "owner": "cgdops",
+        "repository": {
+          "__rl": true,
+          "value": "jekyll-publishing",
+          "mode": "list",
+          "cachedResultName": "jekyll-publishing",
+          "cachedResultUrl": "https://github.com/cgdops/jekyll-publishing"
+        },
+        "filePath": "={{ $json.filename }}",
+        "fileContent": "={{ $json.content }}",
+        "commitMessage": "={{ 'Add blog post: ' + $json.title }}",
+        "additionalParameters": {
+          "branch": {}
+        }
+      },
+      "id": "node4",
+      "name": "Push to GitHub",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1,
+      "position": [
+        992,
+        304
+      ],
+      "webhookId": "bd70d737-7115-4319-b9c6-56dcb013fe8e",
+      "credentials": {
+        "githubApi": {
+          "id": "jlKEAYuzj6zEc5Hl",
+          "name": "GitHub account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "projectId": {
+          "__rl": true,
+          "value": "gomez-publisher",
+          "mode": "list",
+          "cachedResultName": "gomez-publisher"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleVertex",
+      "typeVersion": 1,
+      "position": [
+        192,
+        528
+      ],
+      "id": "4a853c1e-d79c-41c0-8fb8-4ae976530538",
+      "name": "Google Vertex Chat Model",
+      "credentials": {
+        "googleApi": {
+          "id": "GA4wj0CPn2FQghN6",
+          "name": "Google Vertex AI Service Account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false,
+    "binaryMode": "separate"
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-03-19T03:45:10.902Z",
+      "createdAt": "2026-03-19T03:45:10.902Z",
+      "role": "workflow:owner",
+      "workflowId": "b5pwEwThqQopDsXT",
+      "projectId": "QNfIJ0xZgM3QlqN4"
+    }
+  ],
+  "staticData": null,
+  "tags": [
+    {
+      "updatedAt": "2026-03-19T04:11:51.566Z",
+      "createdAt": "2026-03-19T04:11:51.566Z",
+      "id": "UMLSiPWMRJwzzK7g",
+      "name": "workign"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2026-03-19T04:11:55.485Z",
+  "versionId": "7f96a99b-f897-4901-8e75-179e4f735dc0"
+}
