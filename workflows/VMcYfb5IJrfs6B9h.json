@@ -1,0 +1,196 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "When clicking 'Test workflow'": {
+      "main": [
+        [
+          {
+            "node": "Config",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Config": {
+      "main": [
+        [
+          {
+            "node": "DataForSEO Keyword Ideas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DataForSEO Keyword Ideas": {
+      "main": [
+        [
+          {
+            "node": "Extract Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Results": {
+      "main": [
+        [
+          {
+            "node": "Save to Baserow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-03-19T00:59:27.073Z",
+  "id": "VMcYfb5IJrfs6B9h",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "DataForSEO Keyword Ideas → Baserow",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "a1b2c3d4-0001",
+      "name": "When clicking 'Test workflow'",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        240,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "assign-1",
+              "name": "seed_keyword",
+              "value": "autonomous marketing agency",
+              "type": "string"
+            },
+            {
+              "id": "assign-4",
+              "name": "location_code",
+              "value": 2840,
+              "type": "number"
+            },
+            {
+              "id": "assign-5",
+              "name": "language_code",
+              "value": "en",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a1b2c3d4-0002",
+      "name": "Config",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        464,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.dataforseo.com/v3/keywords_data/google_ads/ke/live",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "options": {}
+      },
+      "id": "a1b2c3d4-0003",
+      "name": "DataForSEO Keyword Ideas",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        688,
+        304
+      ],
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "gGn4mPQ6EO8hvTsJ",
+          "name": "DataForSEO API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const tasks = $input.first().json.tasks;\nconst results = tasks?.[0]?.result ?? [];\nreturn results.map(item => ({ json: item }));"
+      },
+      "id": "a1b2c3d4-0004",
+      "name": "Extract Results",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        912,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "databaseId": 397259,
+        "tableId": 892595,
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldValue": "={{ $json.keyword }}"
+            },
+            {
+              "fieldValue": "={{ $json.search_volume }}"
+            }
+          ]
+        }
+      },
+      "id": "a1b2c3d4-0005",
+      "name": "Save to Baserow",
+      "type": "n8n-nodes-base.baserow",
+      "typeVersion": 1,
+      "position": [
+        1136,
+        304
+      ],
+      "credentials": {
+        "baserowApi": {
+          "id": "LLJeiPzmqw6qOr7W",
+          "name": "Baserow account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false,
+    "binaryMode": "separate"
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-03-19T00:59:27.078Z",
+      "createdAt": "2026-03-19T00:59:27.078Z",
+      "role": "workflow:owner",
+      "workflowId": "VMcYfb5IJrfs6B9h",
+      "projectId": "QNfIJ0xZgM3QlqN4"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2026-03-19T04:12:22.876Z",
+  "versionId": "b9630bdc-000a-4e38-97db-c413a6f8eb41"
+}
