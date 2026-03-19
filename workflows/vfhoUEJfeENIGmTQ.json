@@ -1,0 +1,78 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-03-18T23:35:02.000Z",
+    "createdAt": "2026-03-18T23:34:55.807Z",
+    "versionId": "e71f1ccc-d3e0-4a28-a341-d4876328d133",
+    "workflowId": "vfhoUEJfeENIGmTQ",
+    "nodes": [
+      {
+        "parameters": {
+          "path": "2e1796da-a719-440a-a772-0891ac9ea395",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          0,
+          0
+        ],
+        "id": "886e36bb-3bcf-41c6-b6bf-889497d9e481",
+        "name": "Webhook",
+        "webhookId": "2e1796da-a719-440a-a772-0891ac9ea395"
+      }
+    ],
+    "connections": {},
+    "authors": "Christian Gomez",
+    "name": "Version e71f1ccc",
+    "description": "",
+    "autosaved": true
+  },
+  "activeVersionId": "e71f1ccc-d3e0-4a28-a341-d4876328d133",
+  "connections": {},
+  "createdAt": "2026-03-18T23:32:10.079Z",
+  "id": "vfhoUEJfeENIGmTQ",
+  "isArchived": false,
+  "meta": null,
+  "name": "CLAUDE Keyword Research",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "2e1796da-a719-440a-a772-0891ac9ea395",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "886e36bb-3bcf-41c6-b6bf-889497d9e481",
+      "name": "Webhook",
+      "webhookId": "2e1796da-a719-440a-a772-0891ac9ea395"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": true,
+    "timeSavedMode": "fixed",
+    "timezone": "America/New_York",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-03-18T23:32:10.085Z",
+      "createdAt": "2026-03-18T23:32:10.085Z",
+      "role": "workflow:owner",
+      "workflowId": "vfhoUEJfeENIGmTQ",
+      "projectId": "QNfIJ0xZgM3QlqN4"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2026-03-18T23:35:34.365Z",
+  "versionId": "e71f1ccc-d3e0-4a28-a341-d4876328d133"
+}
