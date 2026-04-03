@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-03-18T14:26:29.359Z",
-    "createdAt": "2026-03-18T14:26:29.359Z",
-    "versionId": "6d856b73-a0c8-4779-8b81-57718b11fe5c",
+    "updatedAt": "2026-04-03T14:28:48.000Z",
+    "createdAt": "2026-04-03T14:27:25.458Z",
+    "versionId": "f88668e9-a518-4add-bc9d-6bbbb1e675ff",
     "workflowId": "X8VFXToHmTkmORAz",
     "nodes": [
       {
@@ -149,14 +149,14 @@
                 "removed": false
               },
               {
-                "id": "message",
-                "displayName": "message",
+                "id": "count",
+                "displayName": "count",
                 "required": false,
                 "defaultMatch": false,
                 "display": true,
                 "type": "string",
                 "canBeUsedToMatch": true,
-                "removed": true
+                "removed": false
               }
             ],
             "attemptToConvertTypes": false,
@@ -302,12 +302,12 @@
         ]
       }
     },
-    "authors": "system migration",
-    "name": null,
-    "description": null,
+    "authors": "Christian Gomez",
+    "name": "Version f88668e9",
+    "description": "",
     "autosaved": false
   },
-  "activeVersionId": "6d856b73-a0c8-4779-8b81-57718b11fe5c",
+  "activeVersionId": "f88668e9-a518-4add-bc9d-6bbbb1e675ff",
   "connections": {
     "Webhook": {
       "main": [
@@ -505,14 +505,14 @@
               "removed": false
             },
             {
-              "id": "message",
-              "displayName": "message",
+              "id": "count",
+              "displayName": "count",
               "required": false,
               "defaultMatch": false,
               "display": true,
               "type": "string",
               "canBeUsedToMatch": true,
-              "removed": true
+              "removed": false
             }
           ],
           "attemptToConvertTypes": false,
@@ -618,19 +618,18 @@
         "json": {
           "headers": {
             "host": "n8n.srv1051492.hstgr.cloud",
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
-            "content-length": "154",
+            "user-agent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Mobile Safari/537.36",
+            "content-length": "158",
             "accept": "application/json",
             "accept-encoding": "gzip, deflate, br, zstd",
-            "accept-language": "en-US,en;q=0.9",
+            "accept-language": "en-US,en;q=0.9,zh-TW;q=0.8,zh;q=0.7,zh-CN;q=0.6",
             "content-type": "application/json",
-            "dnt": "1",
-            "origin": "https://ais-dev-kcn3xp4ai7kjefxnuoy3vv-156186188501.us-east1.run.app",
+            "origin": "https://duquegomez.com",
             "priority": "u=1, i",
-            "referer": "https://ais-dev-kcn3xp4ai7kjefxnuoy3vv-156186188501.us-east1.run.app/",
-            "sec-ch-ua": "\"Not:A-Brand\";v=\"99\", \"Google Chrome\";v=\"145\", \"Chromium\";v=\"145\"",
-            "sec-ch-ua-mobile": "?0",
-            "sec-ch-ua-platform": "\"Windows\"",
+            "referer": "https://duquegomez.com/",
+            "sec-ch-ua": "\"Chromium\";v=\"146\", \"Not-A.Brand\";v=\"24\", \"Google Chrome\";v=\"146\"",
+            "sec-ch-ua-mobile": "?1",
+            "sec-ch-ua-platform": "\"Android\"",
             "sec-fetch-dest": "empty",
             "sec-fetch-mode": "cors",
             "sec-fetch-site": "cross-site",
@@ -638,28 +637,32 @@
             "x-forwarded-host": "n8n.srv1051492.hstgr.cloud",
             "x-forwarded-port": "443",
             "x-forwarded-proto": "https",
-            "x-forwarded-server": "8465fa5812cd",
+            "x-forwarded-server": "f8acc4372a2e",
             "x-real-ip": "172.18.0.1"
           },
           "params": {},
           "query": {},
           "body": {
-            "firstName": "Christian",
-            "lastName": "Gomez",
-            "email": "chris@g3zcreative.com",
+            "firstName": "YuWen",
+            "lastName": "Romero",
+            "email": "alexandsue.r@gmail.com",
             "attending": "yes",
             "bringingGuest": "yes",
-            "guestName": "Leah Duque",
+            "guestName": "Alex and Bryanna",
             "message": ""
           },
           "webhookUrl": "https://n8n.srv1051492.hstgr.cloud/webhook/rsvp",
           "executionMode": "production"
+        },
+        "pairedItem": {
+          "item": 0
         }
       }
     ]
   },
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "binaryMode": "separate"
   },
   "shared": [
     {
@@ -673,6 +676,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-02-23T22:53:03.000Z",
-  "versionId": "6d856b73-a0c8-4779-8b81-57718b11fe5c"
+  "updatedAt": "2026-04-03T14:27:25.950Z",
+  "versionId": "f88668e9-a518-4add-bc9d-6bbbb1e675ff"
 }
