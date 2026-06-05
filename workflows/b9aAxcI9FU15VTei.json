@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-03-18T14:26:29.359Z",
-    "createdAt": "2026-03-18T14:26:29.359Z",
-    "versionId": "22b97de6-9434-4530-b967-5512b580e160",
+    "updatedAt": "2026-06-05T13:23:21.000Z",
+    "createdAt": "2026-06-05T13:03:41.943Z",
+    "versionId": "57bf24c5-1f12-4858-a766-21a1878e9624",
     "workflowId": "b9aAxcI9FU15VTei",
     "nodes": [
       {
@@ -13,11 +13,11 @@
           "formFields": {
             "values": [
               {
-                "fieldLabel": "First Name",
+                "fieldLabel": "Billy",
                 "requiredField": true
               },
               {
-                "fieldLabel": "Last Name",
+                "fieldLabel": "Fajardo",
                 "requiredField": true
               },
               {
@@ -139,6 +139,21 @@
                 "action": "replaceAll",
                 "text": "{{passportNumber}}",
                 "replaceText": "={{ $('Edit Fields').item.json['Passport Number'] }}"
+              },
+              {
+                "action": "replaceAll",
+                "text": "{{eventDate}}",
+                "replaceText": "Jan 30 - Feb 8, 2027"
+              },
+              {
+                "action": "replaceAll",
+                "text": "{{fullAddress}}",
+                "replaceText": "Hilton Parsippany 1 Hilton Ct. Parsippany, New Jersey 07054"
+              },
+              {
+                "action": "replaceAll",
+                "text": "{{cityState}}",
+                "replaceText": "Parsippany, New Jersey"
               }
             ]
           }
@@ -163,10 +178,8 @@
           "operation": "copy",
           "fileId": {
             "__rl": true,
-            "value": "12lSyTzjyNEvkAeE9Qg8GkD5cQg6Jb7SiT7BknPp8Tns",
-            "mode": "list",
-            "cachedResultName": "Visa_letter_template",
-            "cachedResultUrl": "https://docs.google.com/document/d/12lSyTzjyNEvkAeE9Qg8GkD5cQg6Jb7SiT7BknPp8Tns/edit?usp=drivesdk"
+            "value": "=12lSyTzjyNEvkAeE9Qg8GkD5cQg6Jb7SiT7BknPp8Tns",
+            "mode": "id"
           },
           "name": "={{ $json.full_name }} Visa Letter ",
           "sameFolder": false,
@@ -280,12 +293,12 @@
         ]
       }
     },
-    "authors": "system migration",
-    "name": null,
-    "description": null,
-    "autosaved": false
+    "authors": "Christian Gomez",
+    "name": "Version 57bf24c5",
+    "description": "",
+    "autosaved": true
   },
-  "activeVersionId": "22b97de6-9434-4530-b967-5512b580e160",
+  "activeVersionId": "57bf24c5-1f12-4858-a766-21a1878e9624",
   "connections": {
     "On form submission": {
       "main": [
@@ -347,11 +360,11 @@
         "formFields": {
           "values": [
             {
-              "fieldLabel": "First Name",
+              "fieldLabel": "Billy",
               "requiredField": true
             },
             {
-              "fieldLabel": "Last Name",
+              "fieldLabel": "Fajardo",
               "requiredField": true
             },
             {
@@ -473,6 +486,21 @@
               "action": "replaceAll",
               "text": "{{passportNumber}}",
               "replaceText": "={{ $('Edit Fields').item.json['Passport Number'] }}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{eventDate}}",
+              "replaceText": "Jan 30 - Feb 8, 2027"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{fullAddress}}",
+              "replaceText": "Hilton Parsippany 1 Hilton Ct. Parsippany, New Jersey 07054"
+            },
+            {
+              "action": "replaceAll",
+              "text": "{{cityState}}",
+              "replaceText": "Parsippany, New Jersey"
             }
           ]
         }
@@ -497,10 +525,8 @@
         "operation": "copy",
         "fileId": {
           "__rl": true,
-          "value": "12lSyTzjyNEvkAeE9Qg8GkD5cQg6Jb7SiT7BknPp8Tns",
-          "mode": "list",
-          "cachedResultName": "Visa_letter_template",
-          "cachedResultUrl": "https://docs.google.com/document/d/12lSyTzjyNEvkAeE9Qg8GkD5cQg6Jb7SiT7BknPp8Tns/edit?usp=drivesdk"
+          "value": "=12lSyTzjyNEvkAeE9Qg8GkD5cQg6Jb7SiT7BknPp8Tns",
+          "mode": "id"
         },
         "name": "={{ $json.full_name }} Visa Letter ",
         "sameFolder": false,
@@ -568,23 +594,10 @@
       }
     }
   ],
-  "pinData": {
-    "On form submission": [
-      {
-        "json": {
-          "First Name": "Christian",
-          "Last Name": "Gomez",
-          "Date of Birth": "1990-02-12",
-          "Passport Number": "0123456789",
-          "Email": "chris.smply.me@gmail.com",
-          "submittedAt": "2025-11-09T16:19:32.640+01:00",
-          "formMode": "test"
-        }
-      }
-    ]
-  },
+  "pinData": {},
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "binaryMode": "separate"
   },
   "shared": [
     {
@@ -598,6 +611,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-11-09T18:01:17.000Z",
-  "versionId": "22b97de6-9434-4530-b967-5512b580e160"
+  "updatedAt": "2026-06-05T13:03:41.942Z",
+  "versionId": "57bf24c5-1f12-4858-a766-21a1878e9624"
 }
