@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-06-05T13:23:21.000Z",
-    "createdAt": "2026-06-05T13:03:41.943Z",
-    "versionId": "57bf24c5-1f12-4858-a766-21a1878e9624",
+    "updatedAt": "2026-08-18T01:04:43.000Z",
+    "createdAt": "2026-08-18T01:04:36.338Z",
+    "versionId": "a5e6efab-144c-429d-948a-3c7ab62d9463",
     "workflowId": "b9aAxcI9FU15VTei",
     "nodes": [
       {
@@ -13,11 +13,11 @@
           "formFields": {
             "values": [
               {
-                "fieldLabel": "Billy",
+                "fieldLabel": "First Name",
                 "requiredField": true
               },
               {
-                "fieldLabel": "Fajardo",
+                "fieldLabel": "Last Name",
                 "requiredField": true
               },
               {
@@ -294,11 +294,11 @@
       }
     },
     "authors": "Christian Gomez",
-    "name": "Version 57bf24c5",
+    "name": "Version a5e6efab",
     "description": "",
     "autosaved": true
   },
-  "activeVersionId": "57bf24c5-1f12-4858-a766-21a1878e9624",
+  "activeVersionId": "a5e6efab-144c-429d-948a-3c7ab62d9463",
   "connections": {
     "On form submission": {
       "main": [
@@ -360,11 +360,11 @@
         "formFields": {
           "values": [
             {
-              "fieldLabel": "Billy",
+              "fieldLabel": "First Name",
               "requiredField": true
             },
             {
-              "fieldLabel": "Fajardo",
+              "fieldLabel": "Last Name",
               "requiredField": true
             },
             {
@@ -611,6 +611,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-06-05T13:03:41.942Z",
-  "versionId": "57bf24c5-1f12-4858-a766-21a1878e9624"
+  "updatedAt": "2026-08-18T01:05:02.934Z",
+  "versionId": "a5e6efab-144c-429d-948a-3c7ab62d9463"
 }
